@@ -1,0 +1,1003 @@
+{
+  "version": 1,
+  "generatedAt": "2026-11-19",
+  "sources": [
+    {
+      "id": "vibe-knowledge-film",
+      "name": "Vibe Knowledge Film",
+      "author": "HeyChengC",
+      "repo": "https://github.com/HeyChengC/vibe-knowledge-film",
+      "license": "MIT",
+      "usage": "method",
+      "note": "无旁白知识短片的讲解设计方法：句子说到什么，屏上就演出什么。"
+    },
+    {
+      "id": "huashu-art-motion",
+      "name": "Huashu Art Motion",
+      "author": "alchaincyf（花叔）",
+      "repo": "https://github.com/alchaincyf/huashu-art-motion",
+      "license": "MIT",
+      "usage": "styles, palettes, grammars",
+      "note": "36 种实做画风、16 种研究配方、8 套色板、9 种解说动画语法与交付门禁。"
+    },
+    {
+      "id": "mg-styles-15",
+      "name": "MG Styles 15",
+      "author": "Vincentwei1021",
+      "repo": "https://github.com/Vincentwei1021/mg-styles-15",
+      "license": "MIT",
+      "usage": "styles, cue schema",
+      "note": "15 种 10 秒 MG 风格、完整提示词、cue 时间轴与评审 rubric。"
+    }
+  ],
+  "palettes": [
+    {
+      "id": "paper",
+      "name": "纸本",
+      "bestFor": "人文、历史、读书、解释一个道理",
+      "colors": {
+        "bg": "#F3EDE2",
+        "surface": "#FBF8F2",
+        "ink": "#1B1A17",
+        "sub": "#6B655B",
+        "accent": "#C8402F",
+        "accent2": "#2F5D62"
+      },
+      "source": "huashu-art-motion/references/色板.md"
+    },
+    {
+      "id": "poster",
+      "name": "海报黄",
+      "bestFor": "观点、冲突、要一句话砸进去的科普",
+      "colors": {
+        "bg": "#FFD23F",
+        "surface": "#FFF6D6",
+        "ink": "#111111",
+        "sub": "#4A4433",
+        "accent": "#FF5A36",
+        "accent2": "#14213D"
+      },
+      "source": "huashu-art-motion/references/色板.md"
+    },
+    {
+      "id": "ink",
+      "name": "深墨",
+      "bestFor": "科技、夜景、严肃话题",
+      "colors": {
+        "bg": "#121417",
+        "surface": "#1E2226",
+        "ink": "#F2EFE8",
+        "sub": "#A39E93",
+        "accent": "#F2B33D",
+        "accent2": "#5FB3A1"
+      },
+      "source": "huashu-art-motion/references/色板.md"
+    },
+    {
+      "id": "navy",
+      "name": "海军",
+      "bestFor": "产品、数据、手机与电子设备（平涂，不渐变）",
+      "colors": {
+        "bg": "#0D1B2A",
+        "surface": "#16293D",
+        "ink": "#EEF3F6",
+        "sub": "#8FA3B3",
+        "accent": "#5CC8E0",
+        "accent2": "#F2A93B"
+      },
+      "source": "huashu-art-motion/references/色板.md"
+    },
+    {
+      "id": "bauhaus",
+      "name": "包豪斯",
+      "bestFor": "设计、结构、几何、流程",
+      "colors": {
+        "bg": "#EFE9DD",
+        "surface": "#FFFFFF",
+        "ink": "#111111",
+        "sub": "#555555",
+        "accent": "#D62828",
+        "accent2": "#1D4E89"
+      },
+      "source": "huashu-art-motion/references/色板.md"
+    },
+    {
+      "id": "snow",
+      "name": "雪原",
+      "bestFor": "冬天、医疗、清洁、实验室",
+      "colors": {
+        "bg": "#E9EEF0",
+        "surface": "#FFFFFF",
+        "ink": "#1F2A30",
+        "sub": "#5E6B72",
+        "accent": "#D9482B",
+        "accent2": "#3E7C8C"
+      },
+      "source": "huashu-art-motion/references/色板.md"
+    },
+    {
+      "id": "wood",
+      "name": "暖木",
+      "bestFor": "生活、厨房、手作、家里的事",
+      "colors": {
+        "bg": "#EDE3D1",
+        "surface": "#F7F1E6",
+        "ink": "#2B2622",
+        "sub": "#7A6E62",
+        "accent": "#C4552D",
+        "accent2": "#3F5B4B"
+      },
+      "source": "huashu-art-motion/references/色板.md"
+    },
+    {
+      "id": "chalk",
+      "name": "黑板",
+      "bestFor": "课堂、推导、公式、讲题",
+      "colors": {
+        "bg": "#23302B",
+        "surface": "#2E3D37",
+        "ink": "#F1EFE6",
+        "sub": "#A9B3AA",
+        "accent": "#F4D35E",
+        "accent2": "#E87D5A"
+      },
+      "source": "huashu-art-motion/references/色板.md"
+    }
+  ],
+  "styles": [
+    {
+      "id": "mg-05-cel-boil",
+      "name": "逐帧手绘 / 线条沸腾",
+      "english": "Cel Animation / Frame-by-Frame & Line Boil",
+      "family": "mg",
+      "quality": 3,
+      "order": 0,
+      "original": "手作 HAND MADE · 1920×1080 · 24 fps · 10 秒 · AI 评审终评 8.07 / 10",
+      "summary": "(the result is judged against these) 手绘逐帧或在矢量动画上叠加逐帧质感，标志性特征是 line boil——线条每隔几帧轻微抖动，仿佛画面在'呼吸'。Giant Ant、Buck 等工作室大量使用 cel 元素（烟、水花、速度线）点缀主动画，反数字精致感的核心手段。",
+      "visual": "线条持续微抖(boil), 一拍二/一拍三节奏, smear拖影帧, 手绘烟火水花点缀, 纸纹底",
+      "techniques": [
+        "打帧节奏：24fps 下'一拍二'（实际12fps）为主，快动作切'一拍一'，静止镜头'一拍三'",
+        "line boil 伪造法：AE 用 Turbulent Displace（数量2~5、大小50）+ 每 2 帧随机化 evolution + Posterize Time 12fps；真 boil 则画 3~4 张微差线稿循环",
+        "smear frame：快速位移的中间帧把物体拉长 150%~300% 只保留 1 帧",
+        "cel FX 点缀层：烟/水花/闪电用纯手绘逐帧叠在矢量主体上（Buck 式 hybrid）"
+      ],
+      "palette": "paper",
+      "source": "mg-styles-15/prompts/05-cel-boil.md",
+      "demo": "mg-styles-15/demos/05-cel-boil"
+    },
+    {
+      "id": "mg-03-isometric",
+      "name": "等轴 2.5D",
+      "english": "Isometric / 2.5D",
+      "family": "mg",
+      "quality": 3,
+      "order": 1,
+      "original": "ISOPOLIS「让城市自己生长」 · 1920×1080 · 30 fps · 10 秒 · AI 评审终评 8.00 / 10",
+      "summary": "(the result is judged against these) 以 30° 等轴测投影展示微缩世界：小城市、办公室切片、数据机房，无灭点、处处等比。信息密度高又不失可爱，是科技公司架构图动画和 App 功能演示的标配。School of Motion 有专门的 isometric mograph 教程系列。",
+      "visual": "30°等角投影, 无透视灭点, 微缩场景, 楼房生长动画, 平行滑轨式运镜",
+      "techniques": [
+        "SSR 公式造等轴面：Scale 纵向 86.6% → Shear/skew ±30° → Rotate ∓30°，三个面分别做后拼合",
+        "假 3D 靠图层排序：Z 序=画面 y 坐标，物体沿等轴网格移动时保持 2:1 像素斜率",
+        "楼房'生长'：底面先落位，立面用 scaleY 从 0 拉起 + 顶面延迟 2~3 帧盖上",
+        "运镜是整组平移（无旋转），配合前中后景 1:0.8:0.6 的视差速度"
+      ],
+      "palette": "snow",
+      "source": "mg-styles-15/prompts/03-isometric.md",
+      "demo": "mg-styles-15/demos/03-isometric"
+    },
+    {
+      "id": "mg-01-flat-vector",
+      "name": "扁平矢量动画",
+      "english": "Flat / Vector 2D Motion Graphics",
+      "family": "mg",
+      "quality": 3,
+      "order": 2,
+      "original": "popwise「One Dot」一个点的一镜到底 · 1920×1080 · 30 fps · 10 秒 · AI 评审终评 7.64 / 10",
+      "summary": "(the result is judged against these) MG 动画最主流的基本盘风格，源自 Google Material/企业解释视频（explainer）传统。纯色几何化的人物与场景、无描边或极简描边、大色块撞色，一切元素都是矢量形状。常见于 SaaS 产品宣传、科普解说、企业年报视频。",
+      "visual": "纯色大色块, 几何化角色, 无渐变或极少渐变, 干净留白, 高饱和品牌色板, 元素弹性入退场",
+      "techniques": [
+        "AE Shape Layer + 父子级 null 控制层级，人物四肢用锚点旋转做 rig",
+        "弹性缓动是灵魂：overshoot 用 cubic-bezier(0.34,1.56,0.64,1) 或 AE 里 70~85% influence 的贝塞尔手柄；入场'预备-冲出-回弹'三段式",
+        "元素错峰入场（stagger 2~4 帧），同一时刻只让一个主体动",
+        "30fps 居多；位移动画带 10% 左右 squash&stretch 增加弹性"
+      ],
+      "palette": "bauhaus",
+      "source": "mg-styles-15/prompts/01-flat-vector.md",
+      "demo": "mg-styles-15/demos/01-flat-vector"
+    },
+    {
+      "id": "mg-02-line-art",
+      "name": "线条动画",
+      "english": "Line Art / Line Animation",
+      "family": "mg",
+      "quality": 3,
+      "order": 3,
+      "original": "ATELIER LINEA「一笔画 One Line」 · 1920×1080 · 30 fps · 10 秒 · AI 评审终评 7.64 / 10",
+      "summary": "(the result is judged against these) 以单色细线为唯一造型语言，线条自我描绘（draw-on）、延伸、转折并变形为下一个图形，一笔连成整支片子。极简高级感强，常见于奢侈品、金融、建筑类品牌片和 logo 动画。",
+      "visual": "等宽细线, 单色或双色, 大量负空间, 线条连续生长, 线面转换瞬间",
+      "techniques": [
+        "核心是 stroke 描绘：AE 用 Trim Paths 0→100%，Web 端用 SVG stroke-dasharray/dashoffset",
+        "线宽全片恒定（2~4px），转角处让描绘速度略减速，用 easeInOut cubic-bezier(0.65,0,0.35,1)",
+        "'一笔画'叙事：上一图形的尾线即下一图形的起线，路径提前在 Illustrator 里连好",
+        "线转面：描完轮廓后用同路径的 fill 从锚点扩展填充"
+      ],
+      "palette": "snow",
+      "source": "mg-styles-15/prompts/02-line-art.md",
+      "demo": "mg-styles-15/demos/02-line-art"
+    },
+    {
+      "id": "mg-04-3d-render",
+      "name": "3D 渲染系",
+      "english": "3D Render / CGI Motion Design",
+      "family": "mg",
+      "quality": 3,
+      "order": 4,
+      "original": "soft.「Soft Landing 柔软着陆」 · 1920×1080 · 24 fps · 10 秒 · AI 评审终评 7.71 / 10",
+      "summary": "(the result is judged against these) Cinema 4D + Redshift/Octane 或 Blender 渲染的实体质感动画：软胶、玻璃、金属、布料，配合克隆阵列和物理模拟。是高端产品片（手机、饮料、球鞋）和品牌 ident 的主流，Maxon 官方 Demo Reel 就是该风格的年度风向标。",
+      "visual": "PBR真实材质, 浅景深, 柔和棚拍布光, 克隆器阵列, 软体碰撞, 糖果色软胶质感",
+      "techniques": [
+        "MoGraph 核心：Cloner 克隆器 + Random/Plain Effector 做群体波浪式动画",
+        "质感三件套：SSS 次表面散射（软胶感）+ AO + HDRI 三点布光",
+        "运动多用长尾 ease：位移曲线前 20% 完成 80% 路程，收尾极慢，配 motion blur",
+        "24/25fps 电影帧率 + 浅景深（f/1.8 感）区别于 2D 系的 30fps 利落感"
+      ],
+      "palette": "ink",
+      "source": "mg-styles-15/prompts/04-3d-render.md",
+      "demo": "mg-styles-15/demos/04-3d-render"
+    },
+    {
+      "id": "mg-08-morph",
+      "name": "形变动画",
+      "english": "Morphing / Shape Morph",
+      "family": "mg",
+      "quality": 3,
+      "order": 5,
+      "original": "一形万象 One Shape, Every Story · 1920×1080 · 30 fps · 10 秒 · AI 评审终评 7.64 / 10",
+      "summary": "(the result is judged against these) 一个图形丝滑连续地变成另一个图形：手机变成地图钉、咖啡杯变成落日。是图形叙事（visual storytelling）的核心语法，苹果发布会动效和高端 explainer 里最见功力的部分。",
+      "visual": "轮廓连续过渡无跳变, 中介形状桥接, 形变伴随位移旋转, 变形瞬间的挤压拉伸",
+      "techniques": [
+        "路径对齐是前提：两形状顶点数一致、首顶点方位对应（AE 里重设 first vertex），否则会打结",
+        "复杂 A→B 不直接变：先收敛为中介简形（圆/胶囊）再展开，'A→圆→B'两段各 8~12 帧",
+        "形变全程叠加 10~15% squash & stretch 与轻微旋转，掩盖插值的机械感",
+        "速度曲线中段最快 cubic-bezier(0.7,0,0.3,1)：起止各留 3 帧缓冲"
+      ],
+      "palette": "chalk",
+      "source": "mg-styles-15/prompts/08-morph.md",
+      "demo": "mg-styles-15/demos/08-morph"
+    },
+    {
+      "id": "mg-19-paperclip",
+      "name": "粗描边贴纸人科普 MG（回形针/林超风格） Bold-outline Sticker Explainer MG (PaperClip / Lin Chao style)",
+      "english": "",
+      "family": "mg",
+      "quality": 3,
+      "order": 6,
+      "original": "一部手机里，藏着多少种元素？ 70/118 · 1920×1080 · 30 fps · 10 秒 · AI 评审终评 7.71 / 10",
+      "summary": "(the result is judged against these) 回形针 PaperClip 带火的知识区标准包装：实拍图片抠图后加粗白描边变成『贴纸』，与扁平图标、数据图表一起铺在大画布上，镜头平移缩放串联信息点；林超等财经/跨学科 UP 主将其与手写板书、公式卡片结合。至今仍是硬核科普、财经知识区、企业宣传片的主流范式。",
+      "visual": "照片贴纸化（粗白描边）, 蓝灰/米白冷静底色, 扁平图标+精确数据图表, 大画布镜头平移缩放, 信息密度极高的节拍化叙事",
+      "techniques": [
+        "素材照片抠图 + 8~12px 白描边统一质感，消除图片来源差异",
+        "超宽大画布布局，摄像机层做平移/缩放（ease 长曲线），一镜串多个信息点",
+        "图表动效：柱状图生长、数字滚动计数、路径描边生长",
+        "解说词逐句驱动画面元素入场，语速快、每句必有新视觉元素"
+      ],
+      "palette": "snow",
+      "source": "mg-styles-15/prompts/19-paperclip.md",
+      "demo": "mg-styles-15/demos/19-paperclip"
+    },
+    {
+      "id": "mg-22-hud",
+      "name": "赛博朋克 HUD / FUI Cyberpunk HUD / FUI (Fictional UI)",
+      "english": "",
+      "family": "mg",
+      "quality": 3,
+      "order": 7,
+      "original": "隼眼-9 · 目标锁定 KESTREL-9 TARGET ACQUIRED · 1920×1080 · 30 fps · 10 秒 · AI 评审终评 7.93 / 10",
+      "summary": "(the result is judged against these) 模拟科幻电影/游戏界面的抬头显示包装：青橙霓虹线框、目标锁定框、雷达扫描、数据流小字。在科技数码测评、游戏剪辑（赛博朋克2077、EVA 二创）、军事航天科普和 AI 产品演示中作为『科技感』的默认皮肤，B 站 AE HUD 案例教程播放量达 20 万。",
+      "visual": "青色/橙色霓虹线框, 目标锁定框与十字准星, 雷达/环形扫描 loop, 等宽小字数据流与打字机文字, 六边形网格与辉光",
+      "techniques": [
+        "线框生长：SVG stroke-dasharray/dashoffset 描边动画，元素按层级错帧展开",
+        "环形雷达：conic-gradient 扫描扇区旋转 loop + 目标点闪烁",
+        "数字滚动：随机数快速跳变 3~5 帧后落定真实值；文字打字机 + 光标闪烁",
+        "锁定框：四角括号从大到小收缩吸附目标（scale 1.4→1.0 + 快出缓入）"
+      ],
+      "palette": "navy",
+      "source": "mg-styles-15/prompts/22-hud.md",
+      "demo": "mg-styles-15/demos/22-hud"
+    },
+    {
+      "id": "mg-06-collage",
+      "name": "拼贴剪贴",
+      "english": "Collage / Cutout Animation",
+      "family": "mg",
+      "quality": 3,
+      "order": 8,
+      "original": "NOGGIN 脑洞季刊「脑洞大开 The Mind Is a Collage」 · 1920×1080 · 30 fps · 10 秒 · AI 评审终评 8.14 / 10",
+      "summary": "(the result is judged against these) 把老照片、报纸、手撕纸片剪出来重新拼装的复古超现实风格，源头是 Monty Python 和苏联构成主义海报。人物头身比例失衡、嘴巴单独开合、半调网点纹理是标志。近年与'杂志风'合流，成为音乐类、街头潮流类短视频的高频风格。",
+      "visual": "照片剪影白描边, 半调网点, 报纸纹理, 比例失衡的超现实拼装, 定格式抽帧运动",
+      "techniques": [
+        "素材处理：人物/物件抠图后加 2~4px 白描边（剪刀剪出来的感觉）+ 半调 halftone 滤镜",
+        "关节动画：锚点设在肩/肘/颌，做 puppet 式分段旋转，嘴巴用两三张替换帧开合",
+        "刻意降帧：主体运动 12fps 甚至 6fps（stop-motion 感），位置加 ±2px 随机抖动模拟手摆",
+        "图层结构：背景纸纹 → 大形色块 → 照片剪影 → 手写涂鸦/胶带贴纸 → 颗粒调整层"
+      ],
+      "palette": "paper",
+      "source": "mg-styles-15/prompts/06-collage.md",
+      "demo": "mg-styles-15/demos/06-collage"
+    },
+    {
+      "id": "mg-12-aurora-glass",
+      "name": "弥散渐变 / 玻璃拟态 Gradient Blur (Aurora) &",
+      "english": "Glassmorphism",
+      "family": "mg",
+      "quality": 3,
+      "order": 9,
+      "original": "Aurora — think in light「思考，自有光」 · 1920×1080 · 30 fps · 10 秒 · AI 评审终评 8.07 / 10",
+      "summary": "(the result is judged against these) 大面积高斯模糊的彩色光斑（aurora/mesh gradient）缓慢漂移作底，磨砂半透明玻璃卡片浮在其上。苹果 iOS 26 Liquid Glass 与各家 AI 产品发布把这一风格推成 2024-2026 科技品牌片的默认视觉，气质是'慢、透、高级'。",
+      "visual": "大色斑高斯模糊漂移, 磨砂玻璃卡片, 1px高光描边, 邻近色低对比配色, 缓慢呼吸感节奏",
+      "techniques": [
+        "底层 aurora：3~5 个纯色大圆 blur 80~150px，各自沿贝塞尔路径 20~40 秒漂移循环，彼此 blend 出 mesh gradient 感",
+        "玻璃卡片配方：backdrop-filter blur(20~40px) + 白色 5~10% 填充 + 1px 白色 30% 内描边 + 大半径圆角",
+        "配色用邻近色 2~3 色（紫蓝青/橙粉红），撞色会脏；暗底亮斑比亮底更出效果",
+        "全局叠 3~5% 噪点防 banding（与颗粒质感技法交叉）"
+      ],
+      "palette": "navy",
+      "source": "mg-styles-15/prompts/12-aurora-glass.md",
+      "demo": "mg-styles-15/demos/12-aurora-glass"
+    },
+    {
+      "id": "mg-09-bauhaus",
+      "name": "几何构成 / 包豪斯",
+      "english": "Geometric / Bauhaus Motion",
+      "family": "mg",
+      "quality": 3,
+      "order": 10,
+      "original": "KONSTRUKTION · 20 SCHLÄGE「二十拍构成」 · 1920×1080 · 30 fps · 10 秒 · AI 评审终评 7.71 / 10",
+      "summary": "(the result is judged against these) 圆、三角、矩形在严格网格上做精确的平移、旋转、缩放，三原色+黑白的限定色板，机械理性的秩序美。源自包豪斯与瑞士国际主义平面传统（Adobe 曾与 Bauhaus 档案馆合作 Hidden Treasures 项目），也是动态海报（kinetic poster）的主流语言，与音乐节拍天然合拍。",
+      "visual": "基础几何形, 红黄蓝黑限定色, 严格网格对齐, 旋转以几何中心为轴, 节拍驱动的模块化运动",
+      "techniques": [
+        "一切运动锚定网格：位移距离=网格模数整数倍，落点必在网格线上",
+        "缓动克制：easeInOutQuad 或干脆匀速，禁用 overshoot——机械感是特征不是缺陷",
+        "节拍驱动：每个几何元素在节拍点瞬时出现/翻转，一拍一个动作，类似我们已做的卡点逻辑",
+        "旋转轴心玩法：绕自身中心、绕边缘顶点、绕画面中心三种交替制造韵律"
+      ],
+      "palette": "bauhaus",
+      "source": "mg-styles-15/prompts/09-bauhaus.md",
+      "demo": "mg-styles-15/demos/09-bauhaus"
+    },
+    {
+      "id": "mg-10-synthwave",
+      "name": "复古系（80s Synthwave / Y2K 千禧） Retro: 80s",
+      "english": "Synthwave / VHS / Y2K",
+      "family": "mg",
+      "quality": 3,
+      "order": 11,
+      "original": "NEON DRIVE · Midnight「霓虹夜驰 1986」 · 1920×1080 · 30 fps · 10 秒 · AI 评审终评 8.21 / 10",
+      "summary": "(the result is judged against these) 对特定年代媒介美学的整体引用：80s synthwave 是霓虹网格+日落渐变+镀铬字；VHS 是扫描线+色偏+磁带噪声；Y2K 千禧风是液态镀铬金属、酸性绿紫、拟物系统窗口和低保真 3D。近两年 Y2K 在音乐视频与潮流品牌片中强势回潮，B站模板市场大量供应'酸性镀铬'素材。",
+      "visual": "霓虹辉光, 透视网格地平线, 扫描线与RGB色偏, 镀铬金属字, 酸性配色, 拟物窗口UI",
+      "techniques": [
+        "synthwave 三件套：透视网格滚动（一点透视 grid + 纵向位移循环）、日落多层渐变球、双层辉光（内层紧 4px 高亮+外层散 30px 低透明）",
+        "VHS 做旧链：RGB split（红蓝通道各偏 1~2px）→ 扫描线（2px 间隔 10% 黑条）→ 波浪扭曲抖动（每秒 1~2 次随机 glitch 抽帧）→ 4:3 圆角遮罩",
+        "Y2K 镀铬字：极高对比的多段金属渐变 + bevel 高光 + 环境映射感反光，配 lens flare",
+        "Y2K 运动语言：弹窗式 pop 出现、光标点击、窗口拖拽，界面拟物即动画叙事"
+      ],
+      "palette": "ink",
+      "source": "mg-styles-15/prompts/10-synthwave.md",
+      "demo": "mg-styles-15/demos/10-synthwave"
+    },
+    {
+      "id": "mg-20-pixel",
+      "name": "像素风",
+      "english": "Pixel Art / 8-bit",
+      "family": "mg",
+      "quality": 3,
+      "order": 12,
+      "original": "PIXEL QUEST 像素冒险 · 1920×1080 · 30 fps · 10 秒 · AI 评审终评 8.07 / 10",
+      "summary": "(the result is judged against these) 低分辨率大颗粒像素 + 有限色板 + 低帧率精灵动画的复古游戏美学，在 B 站游戏区（MC、泰拉瑞亚、独立游戏）、8-bit 音乐 MV 和品牌怀旧营销中常见；Aseprite 教程在 B 站有 10 万+ 播放的稳定学习生态。",
+      "visual": "大颗粒像素与硬边缘, 有限色板(8~32色), 8~12fps 精灵帧动画, 抖动渐变 dithering, CRT 扫描线滤镜",
+      "techniques": [
+        "Aseprite 绘制精灵表（sprite sheet）+ 序列帧循环（走路 6~8 帧、呼吸 2~4 帧）",
+        "缩放必须最近邻插值（CSS image-rendering: pixelated），杜绝抗锯齿糊边",
+        "动画用 steps() 阶梯时序而非平滑缓动，保持逐帧感",
+        "视差卷轴背景：远中近三层不同速度整像素平移"
+      ],
+      "palette": "ink",
+      "source": "mg-styles-15/prompts/20-pixel.md",
+      "demo": "mg-styles-15/demos/20-pixel"
+    },
+    {
+      "id": "mg-07-liquid",
+      "name": "液态流动",
+      "english": "Liquid Motion",
+      "family": "mg",
+      "quality": 3,
+      "order": 13,
+      "original": "drop.「万物始于一滴」 · 1920×1080 · 30 fps · 10 秒 · AI 评审终评 7.57 / 10",
+      "summary": "(the result is judged against these) 图形像液体一样流动、拉丝、滴落、融合：转场是一泼颜料漫过屏幕，logo 从一滴液体聚合成形。有机、解压、高能量，广泛用于音乐视频、食品饮料广告和转场包装。",
+      "visual": "波浪边缘转场, 拉丝与滴落, metaball融合, 次级液滴跟随, 有机曲线永不直线",
+      "techniques": [
+        "液态转场：遮罩路径手 K 波浪形前沿扫过画面，前沿加 3~5 个错相位的凸起",
+        "metaball 融合的通用伪造法：高斯模糊(20px+) → 提高对比度阈值（AE 用 Levels 收紧、Web 用 feColorMatrix alpha 阈值），两球靠近即自动'粘连'",
+        "拉丝-断裂-回弹：主形离开时留一条细颈，断裂瞬间两端各回弹 2~3 帧",
+        "缓动前快后慢 cubic-bezier(0.22,1,0.36,1)，液体只会被'甩'出去不会匀速"
+      ],
+      "palette": "ink",
+      "source": "mg-styles-15/prompts/07-liquid.md",
+      "demo": "mg-styles-15/demos/07-liquid"
+    },
+    {
+      "id": "mg-18-hanazi",
+      "name": "综艺花字 Variety Show Kinetic Captions (Hanazi)",
+      "english": "",
+      "family": "mg",
+      "quality": 3,
+      "order": 14,
+      "original": "喵呜日记 EP.07「今日份快乐」 · 1080×1920 · 30 fps · 10 秒 · AI 评审终评 7.64 / 10",
+      "summary": "(the result is judged against these) 源自电视综艺后期的情绪化装饰字幕：多层描边圆体字带弹性入场，跟随人物情绪变色变形，配打击音效。现已下沉为 vlog、萌宠、访谈、搞笑二创的通用包装语言，剪映内置大量花字模板，B 站也有免费花字样式包流通。",
+      "visual": "多层描边圆体/胖体字, 高饱和撞色+白边+投影, 弹性 pop 入场, 配合音效出现, 手绘装饰符号（爆炸框/汗滴/闪光）",
+      "techniques": [
+        "字体三层结构：填充色+粗白描边+彩色外描边/投影（CSS 可用多层 text-shadow 或 SVG stroke 模拟）",
+        "入场 overshoot：scale 0→1.15→1.0（约 8 帧），或逐字弹跳错帧 2 帧",
+        "情绪匹配：吐槽用歪斜手写体、惊讶用放射线爆炸框、尴尬用汗滴符号",
+        "出现时机对齐笑点/音效，比语音晚 2~3 帧更自然"
+      ],
+      "palette": "poster",
+      "source": "mg-styles-15/prompts/18-hanazi.md",
+      "demo": "mg-styles-15/demos/18-hanazi"
+    },
+    {
+      "id": "hs-09-postimp",
+      "name": "梵高",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "流场笔触三遍（墙竖长/地透视/其余）＋区域色板＋描边；道具层；visibleLines 补线",
+      "motion": "星空漩涡、灯晕环外扩、方向场火苗般摇曳、漩涡猫",
+      "transition": "星空漩涡卷入",
+      "weakness": "每帧 120ms 最重",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/09_postimp.md"
+    },
+    {
+      "id": "hs-08-impressionism",
+      "name": "印象派",
+      "family": "huashu",
+      "quality": 2,
+      "technique": "区域粉彩色板短笔触（位置固定）、窗景细笔",
+      "motion": "光斑漂移明灭、罂粟摇、云走、丝带飘",
+      "transition": "笔触色点铺满",
+      "weakness": "脸和手被笔触打碎",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/08_impressionism.md"
+    },
+    {
+      "id": "hs-29-seurat",
+      "name": "修拉点彩",
+      "family": "huashu",
+      "quality": 2,
+      "technique": "视觉混色：21 色纯色板按比例并置、补色点、等大点",
+      "motion": "光渗、点在呼吸",
+      "transition": "画面结晶成圆点",
+      "weakness": "偏静；网格规整",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/29_seurat.md"
+    },
+    {
+      "id": "hs-25-ghibli",
+      "name": "吉卜力（既有水彩背景＋整体语言研究）",
+      "family": "huashu",
+      "quality": 2,
+      "technique": "水彩洗染（透明叠色＋水痕边）、赛璐璐月牙影",
+      "motion": "纱帘被风鼓起、草叶成片摆、树影光斑",
+      "transition": "湿纸晕开",
+      "weakness": "人物不如背景",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/25_ghibli.md"
+    },
+    {
+      "id": "hs-17-ink",
+      "name": "中国水墨写意",
+      "family": "huashu",
+      "quality": 2,
+      "technique": "毛笔笔锋飞白、墨晕 blur 洇开、留白、钤印",
+      "motion": "开场笔触自己写出、墨晕扩散、虾须动",
+      "transition": "（速通里开场）",
+      "weakness": "人物不够写意（审片 6/10）",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/17_ink.md"
+    },
+    {
+      "id": "hs-13-pop",
+      "name": "利希滕斯坦波普",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "本戴点 createPattern、粗黑描边",
+      "motion": "沃霍尔四格换色、思考点闪、猫扭臀、拟声框抖",
+      "transition": "闪电＋网点化",
+      "weakness": "—",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/13_pop.md"
+    },
+    {
+      "id": "hs-14-8bit",
+      "name": "8-bit 像素",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "240×135 逐像素、14 色板、部件 1px 黑边",
+      "motion": "尾巴、HUD 心闪、问号块顶金币（15–30fps 步进）",
+      "transition": "像素块放大缩小",
+      "weakness": "猫头压窗台",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/14_8bit.md"
+    },
+    {
+      "id": "hs-26-vaporwave",
+      "name": "蒸汽波/赛博霓虹",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "霓虹双色辉光、透视网格、VHS 通道分离后期、路径画灯管假名",
+      "motion": "落日横条上移、网格前滚、招牌闪、跟踪噪声带",
+      "transition": "VHS 撕裂＋上滚",
+      "weakness": "部件交界也发光",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/26_vaporwave.md"
+    },
+    {
+      "id": "hs-35-shinkai",
+      "name": "新海诚光影",
+      "family": "huashu",
+      "quality": 2,
+      "technique": "积雨云、丁达尔光柱、赛璐珞硬阴影带、光晕",
+      "motion": "光粒飘、云移",
+      "transition": "斜向扫光",
+      "weakness": "室内背景密度不够",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/35_shinkai.md"
+    },
+    {
+      "id": "hs-32-rembrandt",
+      "name": "伦勃朗明暗",
+      "family": "huashu",
+      "quality": 1,
+      "technique": "光照图整幅相乘、窗光＋烛光",
+      "motion": "光柱浮尘、云影让窗光明暗",
+      "transition": "老胶片光圈收放",
+      "weakness": "人物扁平（审片 5/10），最该重做",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/32_rembrandt.md"
+    },
+    {
+      "id": "hs-11-cubism",
+      "name": "分析立体主义",
+      "family": "huashu",
+      "quality": 2,
+      "technique": "半透明渐变面叠空间、切面器（三角不裁剪）、毕加索式双视角脸",
+      "motion": "CAFÉ 字母跳换、窗格碎面滑、报纸颤",
+      "transition": "几何碎片错位拼合",
+      "weakness": "偏亮，深褐大面不够",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/11_cubism.md"
+    },
+    {
+      "id": "hs-30-matisse",
+      "name": "马蒂斯剪纸",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "剪刀边不规则、钉纸投影、饱和平涂",
+      "motion": "纸片飘动、海藻摆",
+      "transition": "钉着剪纸的蓝纸扫过",
+      "weakness": "水粉刷痕偏重",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/30_matisse.md"
+    },
+    {
+      "id": "hs-16-2026",
+      "name": "当代扁平插画",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "颗粒点彩密度函数、无描边色块",
+      "motion": "角色表演（跳/拍杯/碎裂/惊呼/签名）、阻尼二次动作",
+      "transition": "三色同心环光圈",
+      "weakness": "—",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/16_2026.md"
+    },
+    {
+      "id": "hs-22-constructivism",
+      "name": "俄国构成主义（窄用途）",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "灰度照片网点（可变点径 45°）、红楔黑圆、路径画西里尔方块字",
+      "motion": "标语逐字盖章再波浪跳",
+      "transition": "（B 片开场）",
+      "weakness": "缺喇叭形文字锥",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/22_constructivism.md"
+    },
+    {
+      "id": "hs-12-bauhaus",
+      "name": "包豪斯（窄用途）",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "纯几何构成、施莱默人偶关节盘",
+      "motion": "指针杆转陡、蒙德里安格换色、猫拨球",
+      "transition": "红黄蓝几何旋转放大",
+      "weakness": "猫头偏离骨架位",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/12_bauhaus.md"
+    },
+    {
+      "id": "hs-04-roman",
+      "name": "庞贝马赛克（窄用途）",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "距离场沿轮廓排石块、加权 L∞ Voronoi 灰浆、布局一次算颜色每帧流过",
+      "motion": "波浪纹边框顺时针流、维苏威冒烟溅火星",
+      "transition": "马赛克砖从猫处翻面扩散",
+      "weakness": "小尺度下脸部细节少",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/04_roman.md"
+    },
+    {
+      "id": "hs-15-raytrace",
+      "name": "早期光追 CGI（窄用途）",
+      "family": "huashu",
+      "quality": 2,
+      "technique": "统一塑料着色、逐像素棋盘倒影、铬球环境映射",
+      "motion": "紫环旋转、镜头光晕、猫眼绿光",
+      "transition": "绿色线框→扫描线渲染",
+      "weakness": "猫腿直柱、脸像面具",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/15_raytrace.md"
+    },
+    {
+      "id": "hs-01-cave",
+      "name": "洞穴岩画",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "噪声浮雕岩壁＋炭点毛边＋赭石吃进岩面",
+      "motion": "动物两姿态交替奔跑、火光摇曳、余烬",
+      "transition": "（开场）",
+      "weakness": "人形太卡通，不够原始",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/01_cave.md"
+    },
+    {
+      "id": "hs-02-egypt",
+      "name": "埃及墓室壁画",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "侧脸正面眼程式、平涂细勾线、24 个手写象形字",
+      "motion": "圣甲虫推日、阿顿光线小手开合、象形字逐笔重写",
+      "transition": "挂毯竖条落下回弹",
+      "weakness": "端杯肘偏僵",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/02_egypt.md"
+    },
+    {
+      "id": "hs-03-greek",
+      "name": "阿提卡黑绘",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "黑剪影＋陶土色刻线＋紫红带白点",
+      "motion": "回纹带反向滚动、船起伏海豚跃、里拉琴摆",
+      "transition": "陶瓶滚筒转面",
+      "weakness": "裙摆偏厚",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/03_greek.md"
+    },
+    {
+      "id": "hs-05-gothic",
+      "name": "哥特泥金手抄本",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "逐像素金箔（拉丝＋压花错 1px 亮线）、金色度遮罩高光",
+      "motion": "金箔斜向高光扫过、藤蔓摇、蜗牛爬、老鼠跑",
+      "transition": "羊皮纸翻页",
+      "weakness": "金发像兜帽",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/05_gothic.md"
+    },
+    {
+      "id": "hs-06-renaissance",
+      "name": "文艺复兴晕涂",
+      "family": "huashu",
+      "quality": 2,
+      "technique": "整层轻模糊＋高不透明清晰层、龟裂纹/画布纹/黄釉",
+      "motion": "达芬奇扑翼机飞过、河面碎光、浮尘",
+      "transition": "窗口神光",
+      "weakness": "猫偏卡通；整体偏静",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/06_renaissance.md"
+    },
+    {
+      "id": "hs-10-nouveau",
+      "name": "慕夏新艺术",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "可变线宽路径（外粗内细）、剪影错位垫底",
+      "motion": "太阳升起、光环转、花摇、S 形热气、卷发波",
+      "transition": "金边有机形生长",
+      "weakness": "猫姿势僵",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/10_nouveau.md"
+    },
+    {
+      "id": "hs-18-klimt",
+      "name": "克里姆特金色时期",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "复用哥特金箔、螺旋/眼形纹样、写实脸配平面金袍",
+      "motion": "袍上眼形纹轮流眨、金屑飘",
+      "transition": "金箔从头部螺旋铺开",
+      "weakness": "桌上的手没接袖子",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/18_klimt.md"
+    },
+    {
+      "id": "hs-19-munch",
+      "name": "蒙克表现主义",
+      "family": "huashu",
+      "quality": 2,
+      "technique": "长弯流线笔（沿流场走 20–30 步）、按行正弦 warp 整个世界",
+      "motion": "整幅画扭动、血色天空流",
+      "transition": "呐喊色带从上往下压",
+      "weakness": "墙面曾被读成梵高",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/19_munch.md"
+    },
+    {
+      "id": "hs-20-dunhuang",
+      "name": "敦煌壁画",
+      "family": "huashu",
+      "quality": 2,
+      "technique": "土红底矿物色、剥落斑（只在背景）、saturation 褪色",
+      "motion": "飞天飘带、天花飘、灯焰",
+      "transition": "飘带扫过、旧画剥落下落",
+      "weakness": "飞天造型粗",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/20_dunhuang.md"
+    },
+    {
+      "id": "hs-21-kusama",
+      "name": "草间弥生波点",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "手绘不规则圆、六角网格按真实周期取模",
+      "motion": "波点从猫处一圈圈胀缩、南瓜、无限镜屋",
+      "transition": "波点长出 clip 新画",
+      "weakness": "人物与墙同色靠轮廓撑",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/21_kusama.md"
+    },
+    {
+      "id": "hs-23-dali",
+      "name": "达利超现实",
+      "family": "huashu",
+      "quality": 2,
+      "technique": "软钟变形、长影子剪切仿射",
+      "motion": "钟往下流、长腿象走、蚂蚁绕表、影子变长",
+      "transition": "新画带圆头液滴往下流",
+      "weakness": "人物偏矢量插画",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/23_dali.md"
+    },
+    {
+      "id": "hs-24-hopper",
+      "name": "霍珀美国现实主义",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "双版本光影裁切（亮版/暗版按光块 clip）、硬边光斑",
+      "motion": "光斑缓移扫过脸、墙上人影同步喝茶",
+      "transition": "硬边阳光扫过",
+      "weakness": "猫全程在阴影里",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/24_hopper.md"
+    },
+    {
+      "id": "hs-27-kirby",
+      "name": "漫威 Kirby 银河时代",
+      "family": "huashu",
+      "quality": 2,
+      "technique": "四色网点、套色错位、黑块阴影羽化排线、krackle 能量点",
+      "motion": "拟声大字、分格猫眼特写、能量点",
+      "transition": "（C 片开场）",
+      "weakness": "更像利希滕斯坦，缺 Kirby 透视与方块手",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/27_kirby.md"
+    },
+    {
+      "id": "hs-28-monet",
+      "name": "莫奈睡莲与日本桥",
+      "family": "huashu",
+      "quality": 2,
+      "technique": "短笔触水面倒影、光在水面颤动",
+      "motion": "睡莲漂、柳影晃、涟漪扩散",
+      "transition": "水波荡开",
+      "weakness": "墙是池水、地是木头的空间别扭",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/28_monet.md"
+    },
+    {
+      "id": "hs-31-haring",
+      "name": "凯斯·哈林",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "粗黑等宽线、放射动作线",
+      "motion": "小人按 8fps 硬切跳舞、一切跟 BPM 弹跳",
+      "transition": "跳舞小人放大、身体里是新画",
+      "weakness": "少女不够哈林",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/31_haring.md"
+    },
+    {
+      "id": "hs-33-rubberhose",
+      "name": "1930 橡皮管卡通",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "派切眼、面条臂、白手套、12fps 步进、胶片划痕闪烁",
+      "motion": "一切按节拍弹跳",
+      "transition": "（幕后点灯前的老片）",
+      "weakness": "运动大半是胶片噪声",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/33_rubberhose.md"
+    },
+    {
+      "id": "hs-34-shadowpuppet",
+      "name": "中国皮影",
+      "family": "huashu",
+      "quality": 3,
+      "technique": "半透明牛皮镂空、铆钉关节、10fps 步进、幕后油灯",
+      "motion": "杆子操控僵直关节、手腕甩",
+      "transition": "幕后点灯",
+      "weakness": "重叠处相乘发黑；121ms 偏慢",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/34_shadowpuppet.md"
+    },
+    {
+      "id": "hs-36-picasso-blue",
+      "name": "毕加索蓝色时期",
+      "family": "huashu",
+      "quality": 2,
+      "technique": "单色蓝调、宽笔触、普鲁士蓝粗轮廓、人体拉长",
+      "motion": "缓慢呼吸",
+      "transition": "颜色抽成蓝再宽笔刷过",
+      "weakness": "造型不够忧郁",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/36_picasso_blue.md"
+    },
+    {
+      "id": "hs-37-rick-morty",
+      "name": "Rick & Morty",
+      "family": "huashu",
+      "quality": 2,
+      "technique": "SVG圆角深灰细描边、平涂、背景斑驳",
+      "motion": "端杯、眨眼、目光、摆尾",
+      "transition": "按叙事另定",
+      "weakness": "独立SVG预览/渲染，不在旧35种Canvas gallery内；无行走rig",
+      "palette": null,
+      "source": "huashu-art-motion/references/风格配方/37_rick_morty.md"
+    }
+  ],
+  "grammars": [
+    {
+      "id": "t1-3b1b",
+      "name": "3Blue1Brown 式数学／概念可视化",
+      "oneLiner": "黑底上只放「正在讲的那一个东西」，用平滑形变（Transform）把上一个概念直接变成下一个，颜色＝概念的名字，全片几乎不切。",
+      "source": "huashu-art-motion/references/动画语法/t1_3b1b.md"
+    },
+    {
+      "id": "t2-keynote-ui",
+      "name": "发布会式界面与渐变动效",
+      "oneLiner": "一屏一件事，产品本身（截图、录屏、实物）当主角，名词和数字在口播说到时落定；字收紧，弹簧无回弹或轻回弹。",
+      "source": "huashu-art-motion/references/动画语法/t2_keynote_ui.md"
+    },
+    {
+      "id": "t3-finance-chart",
+      "name": "财经数据图表动画",
+      "oneLiner": "先搭坐标系、再让数据「长」出来、最后只标一件事；一个颜色讲主角、其余变灰；数值永远诚实（柱从 0 起、单位和来源写在图上），动画只决定「怎么出现」，不改变「是多少」。",
+      "source": "huashu-art-motion/references/动画语法/t3_finance_chart.md"
+    },
+    {
+      "id": "y1",
+      "name": "Kurzgesagt 扁平科普",
+      "oneLiner": "把一个抽象概念画成一个具体的物，放进能无限缩放的发光世界里，相机在尺度之间穿行；环境层（星、粒子）可以一直轻轻动，主体和信息在口播节点上发生变化，落定后停住。",
+      "source": "huashu-art-motion/references/动画语法/y1_kurzgesagt.md"
+    },
+    {
+      "id": "y2",
+      "name": "Vox 式拼贴解说",
+      "oneLiner": "把论证摆在一张有真实材料的桌面上——剪报、照片、文件，相机像调查记者的眼睛在桌上移动；线和笔一顿一顿地画上去，证据感来自「这些东西是真的被放在这里的」。",
+      "source": "huashu-art-motion/references/动画语法/y2_vox.md"
+    },
+    {
+      "id": "y3",
+      "name": "白板手绘解说（RSA Animate 型）",
+      "oneLiner": "讲者说一句，手就在一张大白板上写一句、画一个图；相机跟着论证在板上移动，最后拉远，观众看到整场论证是一张图。",
+      "source": "huashu-art-motion/references/动画语法/y3_whiteboard.md"
+    },
+    {
+      "id": "y4",
+      "name": "故事型简笔角色动画（YouTube storytime animation）",
+      "oneLiner": "口播是主角，画面是给口播配的「表情包」——角色在几个姿势之间快切（0.1 秒）然后定住，笑点靠切到反应大特写、并在那一下里闭嘴。",
+      "source": "huashu-art-motion/references/动画语法/y4_storytime.md"
+    },
+    {
+      "id": "y5",
+      "name": "动态文字排版 / 信息图动效（kinetic typography）",
+      "oneLiner": "字就是演员——每个关键词踩一个重音砸进来，主词大到一眼读完，其余的字从「槽」里升起给耳朵对位；画面里永远只有一个焦点，镜头和底纹一直在动，字落定后不动。",
+      "source": "huashu-art-motion/references/动画语法/y5_kinetic_type.md"
+    },
+    {
+      "id": "y6",
+      "name": "讲解员式财经科普",
+      "oneLiner": "一个卡通讲解员在纸面、图表和关键词之间串联信息。适合商业史、产品机制和带情绪反应的知识讲解。参考代码在`scripts/engine/reference_films/spacex/spacex_lin/`；这是第9种语法卡，目前没有独立参数化片段，也不附角色sprite。",
+      "source": "huashu-art-motion/references/动画语法/y6_presenter_explainer.md"
+    }
+  ],
+  "cueSchema": {
+    "description": "以帧为单位的节拍表：fps、bpm、段落（build/drop/outro）加具名事件帧。场景只读事件帧，不自己算节奏。",
+    "example": {
+      "fps": 30,
+      "bpm": 120,
+      "key": "F",
+      "mode": "major",
+      "build": 4,
+      "drop": 6,
+      "outro": 8,
+      "frames": {
+        "impact1": 15,
+        "impact2": 24,
+        "antic": 27,
+        "launch": 31,
+        "sunLand": 40,
+        "rays": 41,
+        "farRise": 38,
+        "bldStart": 44,
+        "bldStagger": 3,
+        "bldCount": 9,
+        "clouds": 50,
+        "birds": 56,
+        "trees": 62,
+        "winStart": 64,
+        "winEnd": 82,
+        "heroWin": 84,
+        "camAntic": 86,
+        "push": 90,
+        "glass": 105,
+        "arrive": 112,
+        "blink": 114,
+        "ping": 120,
+        "reactAntic": 126,
+        "headSnap": 129,
+        "exclaim": 135,
+        "bubbleAntic": 144,
+        "wipe": 150,
+        "wipe2": 154,
+        "wipe3": 158,
+        "coreDot": 165,
+        "burst1": 180,
+        "burst2": 195,
+        "burst3": 210,
+        "burst4": 225,
+        "collapseAntic": 233,
+        "merge": 240,
+        "logoWipe": 240,
+        "letters": 243,
+        "letterStagger": 1,
+        "dotLand2": 255,
+        "tagCN": 259,
+        "tagEN": 266,
+        "beatBob1": 270,
+        "beatBob2": 285,
+        "slam": 164,
+        "dotRise": 247,
+        "dotApex": 250,
+        "dotDrop": 251,
+        "cnFlip": 276,
+        "coreHit": 171,
+        "matchStart": 237,
+        "matchEnd": 245
+      }
+    }
+  }
+}

@@ -3,7 +3,10 @@ import {AbsoluteFill, Composition, interpolate, staticFile} from "remotion";
 import {SceneBackground} from "./components/Design";
 import {FullVideo} from "./full/FullVideo";
 import {OpeningAudio, OpeningVisuals} from "./opening/Opening";
+import {StyleLab} from "./library/StyleLab";
 import {PackagingShowcase} from "./packaging/PackagingShowcase";
+import {DEFAULT_PROMO_PROPS} from "./promo/defaultProps";
+import {PromoVideo} from "./promo/PromoVideo";
 import {COLORS} from "./theme";
 
 const OPENING_VOICE_WINDOWS = [
@@ -58,6 +61,23 @@ export const MyComposition: React.FC = () => {
         fps={30}
         width={1920}
         height={1080}
+      />
+      <Composition
+        id="MLStyleLab"
+        component={StyleLab}
+        durationInFrames={300}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="MLProjectPromo"
+        component={PromoVideo}
+        durationInFrames={7200}
+        fps={30}
+        width={1920}
+        height={1080}
+        defaultProps={DEFAULT_PROMO_PROPS}
       />
       <Composition
         id="MLExplainerPreview"

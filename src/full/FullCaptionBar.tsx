@@ -8,7 +8,12 @@ import {
 } from "remotion";
 import {SoundBars} from "../components/Design";
 import {COLORS, FONT} from "../theme";
-import type {VoiceLineTiming} from "./voiceTimeline.generated";
+
+export type CaptionLine = {
+  id: string;
+  text: string;
+  highlights: string[];
+};
 
 const escapeRegExp = (value: string) =>
   value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
@@ -30,7 +35,7 @@ const buildSegments = (text: string, highlights: string[]) => {
 };
 
 export const FullCaptionBar: React.FC<{
-  line: VoiceLineTiming;
+  line: CaptionLine;
   darkScene?: boolean;
 }> = ({line, darkScene = false}) => {
   const frame = useCurrentFrame();

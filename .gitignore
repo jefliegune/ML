@@ -19,6 +19,9 @@ npm-debug.log*
 # Heavy generated audio. Re-create with `npm run audio:full`.
 public/audio/bgm-full.wav
 
+# Promo-specific voiceover and timing data. Keep content private.
+public/audio/promo/
+
 # Editors
 .idea/
 .vscode/

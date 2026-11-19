@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ML Asset Library</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-mark">ML</span>
+        <span class="brand-text">ASSET<br />LIBRARY</span>
+      </div>
+      <nav class="tabs" id="tabs">
+        <button class="tab is-active" data-tab="library">素材库</button>
+        <button class="tab" data-tab="styles">设计资产</button>
+        <button class="tab" data-tab="sources">来源与许可</button>
+      </nav>
+      <div class="top-actions">
+        <label class="search">
+          <span>⌕</span>
+          <input id="search" type="search" placeholder="搜索名称、路径、标签…（/）" autocomplete="off" />
+        </label>
+        <button class="icon-btn" id="refresh" title="重新扫描">↻</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar" id="sidebar"></aside>
+      <main id="main">
+        <div class="skeletons" id="skeleton">
+          <div class="sk-card"></div>
+          <div class="sk-card"></div>
+          <div class="sk-card"></div>
+          <div class="sk-card"></div>
+        </div>
+      </main>
+    </div>
+
+    <div id="drawer-root"></div>
+    <div class="toast" id="toast" role="status"></div>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
