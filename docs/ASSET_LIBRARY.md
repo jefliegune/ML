@@ -2,6 +2,8 @@
 
 素材库只收录会重复使用的视觉、动效和声音资产。一次性画出来的场景元素留在具体 Scene 中，不升级为公共资产。
 
+> 下表中的 `NetworkGraph`、`CatPortrait`、`DogPortrait` 等组件来自内置示例片，只作为“如何封装领域图形”的案例，不代表项目领域。
+
 风格、色板和动画语法的索引在 [参考库与设计资产](REFERENCE_LIBRARY.md)；本文件只记录已经封装成组件的资产。
 
 ## 背景
@@ -9,7 +11,7 @@
 | 资产 | 代码 | 用途 | 约束 |
 |---|---|---|---|
 | 纸张底 | `PackagingBackground tone="paper"` | 解释、对比、数据段 | 默认底色，适合大量文字 |
-| 墨黑底 | `PackagingBackground tone="ink"` | 模型、训练、结论段 | 需要提高亮色面积 |
+| 墨黑底 | `PackagingBackground tone="ink"` | 深色论证、流程、结论段 | 需要提高亮色面积 |
 | 信号蓝底 | `PackagingBackground tone="signal"` | 强转折、章节封面 | 一集最多 1–2 次 |
 | 点阵纹理 | 内置于背景 | 纸感与科技感 | 不额外叠加相同点阵 |
 | 斜线纹理 | 内置于背景 | 编辑设计感 | 只做低对比背景 |
@@ -25,7 +27,7 @@
 | 胶带 | `TapeStrip` | 拼贴细节、卡片固定 |
 | 星爆 | `Burst` | 结果、冲击、庆祝 |
 | 编辑分隔线 | `EditorialRule` | 章节底栏、信息分组 |
-| 进度轨道 | 现有场景内自绘 | 训练、流程、层级 |
+| 进度轨道 | 现有场景内自绘 | 流程、进度、层级 |
 | 印章 | `ImpactStamp` | 错误、命中、结论 |
 
 ## 内容组件
@@ -36,8 +38,8 @@
 | 标签 | `Kicker` | 栏目、章节、资产分类 |
 | 纸卡 | `PaperCard` | 信息卡、对比卡、数据卡 |
 | 字幕条 | `FullCaptionBar` | 逐句旁白、关键词高亮 |
-| 神经元网络 | `NetworkGraph` | 前向传播、反向传播 |
-| 角色 | `CatPortrait` / `DogPortrait` | 系列角色、例子 |
+| 网络图 | `NetworkGraph` | 示例片的节点、传播和连接关系 |
+| 角色 | `CatPortrait` / `DogPortrait` | 示例片的系列角色与例子 |
 | 章节开场 | `ChapterOpener` | 新章节第一屏 |
 | 结尾卡 | `EndSlate` | 结论、系列标识、下期预告 |
 
@@ -61,10 +63,10 @@
 |---|---|---|
 | `whoosh` | `public/sfx/whoosh.wav` | 章节转场 |
 | `pop` | `public/sfx/pop.wav` | 卡片/数字出现 |
-| `click` | `public/sfx/click.wav` | 微交互、训练计数 |
+| `click` | `public/sfx/click.wav` | 微交互、进度计数 |
 | `ding` | `public/sfx/ding.wav` | 成功、命中、确认 |
 | `impact` | `public/sfx/impact.wav` | 错误、盖章、结论 |
-| `riser` | `public/sfx/riser.wav` | 揭示、训练完成前的蓄力 |
+| `riser` | `public/sfx/riser.wav` | 揭示、结论出现前的蓄力 |
 
 ## 使用顺序
 

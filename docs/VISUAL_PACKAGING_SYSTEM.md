@@ -87,7 +87,7 @@
 - `click`：微交互
 - `ding`：确认/成功
 - `impact`：错误/盖章/结论
-- `riser`：训练/揭示前的蓄力
+- `riser`：铺垫/揭示前的蓄力
 
 声音层级：
 
@@ -131,7 +131,7 @@
 - 颜色：语义名，例如 `signal`、`accent`、`ink`，避免 `red2`
 - 动效：动作 + 对象，例如 `RiseIn`、`DrawRule`
 - 声音：事件名，例如 `cut`、`reveal`、`confirm`
-- 场景：`SceneTopic.tsx`，例如 `SceneTraining.tsx`
+- 场景：`SceneTopic.tsx`，例如 `SceneProcess.tsx`
 
 ## 5. 新视频的默认路径
 

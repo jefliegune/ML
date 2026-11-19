@@ -1,7 +1,7 @@
 {
   "name": "ml-explainer",
   "version": "1.0.0",
-  "description": "A 2-minute machine-learning explainer built with Remotion, plus a reusable editorial motion-graphics system.",
+  "description": "A code-driven video production system built with Remotion, React and TypeScript, including reusable motion design, asset management, mastering and QC.",
   "license": "MIT",
   "private": true,
   "engines": {

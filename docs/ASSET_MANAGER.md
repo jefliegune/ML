@@ -89,7 +89,7 @@ local/.cache/asset-meta.json
 
 ```json
 {
-  "local/out/ml-explainer-full-final.mp4": {
+  "local/out/video-project-final.mp4": {
     "favorite": true,
     "tags": ["成片", "待审"],
     "note": "这版语速合适，保留。"
@@ -106,8 +106,8 @@ local/.cache/asset-meta.json
 归档不是删除，而是移动：
 
 ```text
-local/out/ml-explainer-full.mp4
-  → local/archive/2026-11-19T14-03-22/ml-explainer-full.mp4
+local/out/video-project.mp4
+  → local/archive/2026-11-19T14-03-22/video-project.mp4
 ```
 
 时间戳目录保留原相对路径，避免不同版本的 `cover.png` 互相覆盖。需要恢复时，把文件移回原目录即可。

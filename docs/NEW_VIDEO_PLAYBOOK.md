@@ -1,11 +1,13 @@
 # 新视频操作手册
 
+> 本文讲的是如何用这套系统生产一条新视频。仓库内置的 `MLExplainer*` 和《AI 怎么学会认猫？》只是示例；新项目可以使用自己的系列名、Composition ID 和输出文件名。
+
 ## 1. 复制还是继续用当前工程
 
 建议把当前工程复制成新目录，避免旧片和新片互相覆盖：
 
 ```text
-ml-explainer-02/
+video-project-02/
 ```
 
 复制时保留：
@@ -110,7 +112,7 @@ src/full/scenes/SceneXxx.tsx
 编辑 `src/Composition.tsx`：
 
 - 更新 `durationInFrames`
-- 更新 composition id，例如 `MLExplainerFull02`
+- 新建自己的 composition id，例如 `VideoProjectFull02`；仓库内置示例仍使用 `MLExplainerFull`
 
 ## 6. BGM
 
@@ -132,7 +134,8 @@ BGM 的原则：
 先抽帧，再渲染：
 
 ```bash
-npx remotion still MLExplainerFull local/out/qc/frame-0300.png --frame=300 --scale=0.5 --overwrite
+npx remotion still <CompositionId> local/out/qc/frame-0300.png --frame=300 --scale=0.5 --overwrite
+# 示例片可填 MLExplainerFull
 ```
 
 至少检查：
@@ -177,8 +180,8 @@ node scripts/verify-video.mjs local/out/output-final.mp4
 
 最终保留：
 
-- `local/out/ml-explainer-full-final.mp4`
-- `local/out/ml-explainer-full-cover.png`
+- `local/out/video-project-final.mp4`
+- `local/out/video-project-cover.png`
 - `src/`
 - `public/audio/`
 - `public/sfx/`
@@ -187,7 +190,7 @@ node scripts/verify-video.mjs local/out/output-final.mp4
 
 可删除：
 
-- `local/out/ml-explainer-full.mp4`（母带前版本）
+- `local/out/video-project.mp4`（母带前版本）
 - `local/out/qc/`
 - `local/out/frame-*.png`
 - `node_modules/.cache/webpack`

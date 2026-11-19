@@ -116,7 +116,7 @@ const palette = getPalette(style?.palette);
 
 <CameraRig move="push" amount={1.06} durationInFrames={90}>
   <KineticType
-    tokens={["模型", "不是", "记住答案"]}
+    tokens={["风格", "不是", "贴纸"]}
     accent={[2]}
     fontSize={140}
     highlight="marker"
