@@ -1,0 +1,98 @@
+{
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "rate": "+15%",
+  "sections": [
+    {
+      "id": "opening",
+      "targetFrames": 300,
+      "leadFrames": 0,
+      "gapFrames": 0,
+      "lines": [
+        {"id": "v01", "file": "audio/voice_01.mp3", "startFrame": 9, "text": "AI 怎么学会认猫？", "highlights": ["认猫"]},
+        {"id": "v02", "file": "audio/voice_02.mp3", "startFrame": 77, "text": "不靠规则，靠大量例子。", "highlights": ["规则", "大量例子"]},
+        {"id": "v03", "file": "audio/voice_03.mp3", "startFrame": 157, "text": "猜错一次，就修正一点。", "highlights": ["猜错一次", "修正一点"]},
+        {"id": "v04", "file": "audio/voice_04.mp3", "startFrame": 235, "text": "这，就是机器学习。", "highlights": ["机器学习"]}
+      ]
+    },
+    {
+      "id": "rules",
+      "targetFrames": 540,
+      "leadFrames": 10,
+      "gapFrames": 10,
+      "lines": [
+        {"id": "v05", "text": "传统程序，靠人把规则写死。", "highlights": ["规则"]},
+        {"id": "v06", "text": "可猫的耳朵、花纹、姿态，几乎无穷无尽。", "highlights": ["无穷无尽"]},
+        {"id": "v07", "text": "规则越写越多，还是会有漏网之猫。", "highlights": ["漏网之猫"]},
+        {"id": "v08", "text": "于是换个思路：给机器看成千上万的例子，让它在数据里，自己找规律。", "highlights": ["成千上万的例子", "找规律"]}
+      ]
+    },
+    {
+      "id": "pixels",
+      "targetFrames": 480,
+      "leadFrames": 10,
+      "gapFrames": 8,
+      "lines": [
+        {"id": "v09", "text": "一张猫图，在机器眼里，是一大片数字。", "highlights": ["数字"]},
+        {"id": "v10", "text": "每个像素的明暗和颜色，组成输入。", "highlights": ["像素"]},
+        {"id": "v11", "text": "旁边的标签，就是标准答案：这是猫。", "highlights": ["标签", "标准答案"]},
+        {"id": "v12", "text": "模型要从数字里，找出区分猫和狗的特征。", "highlights": ["特征"]}
+      ]
+    },
+    {
+      "id": "features",
+      "targetFrames": 420,
+      "leadFrames": 8,
+      "gapFrames": 8,
+      "lines": [
+        {"id": "v13", "text": "比如边缘、纹理、局部形状。", "highlights": ["边缘", "纹理", "局部形状"]},
+        {"id": "v14", "text": "浅层网络先找到线条，更深的层再把它们组合成耳朵、眼睛和轮廓。", "highlights": ["线条", "耳朵、眼睛和轮廓"]}
+      ]
+    },
+    {
+      "id": "model",
+      "targetFrames": 540,
+      "leadFrames": 10,
+      "gapFrames": 10,
+      "lines": [
+        {"id": "v15", "text": "这些特征，被送进一层层神经元，组成模型。", "highlights": ["特征", "模型"]},
+        {"id": "v16", "text": "每一层，都做一次小小的计算，再把结果传给下一层。", "highlights": ["计算"]},
+        {"id": "v17", "text": "最后，它给出一个概率：这是猫，百分之四十二。", "highlights": ["概率", "四十二"]},
+        {"id": "v18", "text": "第一次，它猜错了。", "highlights": ["猜错"]}
+      ]
+    },
+    {
+      "id": "training",
+      "targetFrames": 600,
+      "leadFrames": 10,
+      "gapFrames": 10,
+      "lines": [
+        {"id": "v19", "text": "误差被算出来，再沿着网络反向传回去。", "highlights": ["误差", "反向传回"]},
+        {"id": "v20", "text": "每一根连接上的权重，都根据误差，调整一点点。", "highlights": ["权重", "调整"]},
+        {"id": "v21", "text": "然后，再猜一次。", "highlights": ["再猜一次"]},
+        {"id": "v22", "text": "重复成千上万次之后，那个百分之四十二，慢慢变成了百分之九十八。", "highlights": ["成千上万次", "四十二", "九十八"]}
+      ]
+    },
+    {
+      "id": "generalize",
+      "targetFrames": 420,
+      "leadFrames": 10,
+      "gapFrames": 10,
+      "lines": [
+        {"id": "v23", "text": "但记住训练样本，还不够。", "highlights": ["还不够"]},
+        {"id": "v24", "text": "真正的考验，是遇到从没见过的新猫。", "highlights": ["没见过的"]},
+        {"id": "v25", "text": "只会背答案的模型，会卡住。", "highlights": ["背答案", "卡住"]},
+        {"id": "v26", "text": "学会规律的模型，才能举一反三。", "highlights": ["规律", "举一反三"]}
+      ]
+    },
+    {
+      "id": "outro",
+      "targetFrames": 300,
+      "leadFrames": 12,
+      "gapFrames": 10,
+      "lines": [
+        {"id": "v27", "text": "AI 不是魔法。", "highlights": ["魔法"]},
+        {"id": "v28", "text": "它只是把从经验中修正，做得非常快。", "highlights": ["经验", "修正"]}
+      ]
+    }
+  ]
+}

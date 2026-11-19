@@ -1,0 +1,47 @@
+{
+  "name": "ml-explainer",
+  "version": "1.0.0",
+  "description": "A 2-minute machine-learning explainer built with Remotion, plus a reusable editorial motion-graphics system.",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": "^20.19.0 || ^22.13.0 || >=24"
+  },
+  "dependencies": {
+    "@remotion/captions": "4.0.545",
+    "@remotion/cli": "4.0.545",
+    "@remotion/media": "4.0.545",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "remotion": "4.0.545"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config-flat": "4.0.545",
+    "@types/react": "19.3.0",
+    "@types/web": "0.0.166",
+    "eslint": "10.12.0",
+    "prettier": "3.8.1",
+    "typescript": "5.9.3"
+  },
+  "scripts": {
+    "dev": "remotion studio",
+    "studio": "remotion studio --no-open",
+    "build": "remotion bundle",
+    "upgrade": "remotion upgrade",
+    "lint": "eslint src && tsc",
+    "audio": "node scripts/generate-audio.mjs",
+    "audio:full": "node scripts/generate-full-bgm.mjs",
+    "voice": "node scripts/generate-full-voiceover.mjs",
+    "render:preview": "remotion render MLExplainerPreview local/out/ml-explainer-preview.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k",
+    "master:preview": "node scripts/master-video.mjs local/out/ml-explainer-preview.mp4 local/out/ml-explainer-preview-final.mp4 -16",
+    "render:full": "remotion render MLExplainerFull local/out/ml-explainer-full.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k --concurrency=4",
+    "master:full": "node scripts/master-video.mjs local/out/ml-explainer-full.mp4 local/out/ml-explainer-full-final.mp4 -15.5",
+    "render:packaging": "remotion render MLPackagingSystem local/out/ml-packaging-system.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k",
+    "master:packaging": "node scripts/master-video.mjs local/out/ml-packaging-system.mp4 local/out/ml-packaging-system-final.mp4 -16",
+    "verify:video": "node scripts/verify-video.mjs local/out/ml-explainer-full-final.mp4",
+    "verify:packaging": "node scripts/verify-video.mjs local/out/ml-packaging-system-final.mp4"
+  },
+  "allowScripts": {
+    "esbuild": false
+  }
+}

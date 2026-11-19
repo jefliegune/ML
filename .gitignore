@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+
+# Local-only production output: renders, covers, QC frames, scratch files.
+# Everything here stays on your machine and never enters the repository.
+local/
+out/
+dist/
+
+# Environment and OS noise
+.env
+.env.*
+!.env.example
+.DS_Store
+Thumbs.db
+*.log
+npm-debug.log*
+
+# Heavy generated audio. Re-create with `npm run audio:full`.
+public/audio/bgm-full.wav
+
+# Editors
+.idea/
+.vscode/
