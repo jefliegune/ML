@@ -66,9 +66,11 @@ npm run lint                # ESLint + TypeScript
 npm run render:packaging    # 渲染包装系统样张
 npm run master:packaging    # loudnorm 母带
 npm run verify:packaging    # 检查编码、分辨率、帧数、响度和峰值
+npm run pipeline:packaging  # 渲染 → 母带 → 质检，一条命令跑完
 
 npm run render:stylelab     # 渲染设计资产样张
 npm run master:stylelab
+npm run pipeline:stylelab    # 渲染 → 母带 → 质检
 
 npm run audio               # 重新生成通用音效与预览 BGM
 npm run voice -- --manifest local/projects/my-video/lines.json  # 用默认音色生成旁白与时间轴
@@ -147,14 +149,68 @@ npm run library:import      # 重新生成设计资产 catalog
 - 项目旁白输出到 `public/projects/<project-name>/`，该目录已被忽略；默认音色示例见 [旁白与语音指南](docs/VOICE_GUIDE.md)。
 - 不要提交 `local/`、`out/`、`dist/` 或任何带具体文案的渲染产物。
 
-## 质量控制
+## 渲染、母带与质检
 
-`npm run verify:packaging` 会检查：
+这三步是固定顺序，后一步依赖前一步的产物：
 
-- H.264 视频流与 AAC 音频流
-- 分辨率、帧率、帧数
-- 48kHz 双声道
-- Integrated Loudness 与 True Peak
+```text
+Remotion render
+  → scripts/master-video.mjs
+  → scripts/verify-video.mjs
+```
+
+| 步骤 | 作用 | 产物 |
+|---|---|---|
+| 渲染 | 逐帧执行 React 组件，编码 H.264 + AAC | `local/out/*.mp4` |
+| 母带 | 两遍 `loudnorm`，把响度拉到约 -16 LUFS，视频流直接复制 | `local/out/*-final.mp4` |
+| 质检 | 检查编码、分辨率、帧数、音频参数、响度和 True Peak | 终端 PASS/FAIL 报告 |
+
+渲染输出的是**完整视频**，不是单帧。需要单帧检查时用 `remotion still`。
+
+### 分步执行
+
+```bash
+npm run render:packaging
+npm run master:packaging
+npm run verify:packaging
+```
+
+每一步结束后再执行下一步。适合调画面、改字幕、只重渲某一段的时候使用。
+
+### 一条命令跑完
+
+```bash
+npm run pipeline:packaging
+```
+
+等价于依次执行：
+
+```text
+render:packaging → master:packaging → verify:packaging
+```
+
+脚本使用 `&&` 串行执行：前一步失败，后续步骤不会继续；质检不通过时命令会以非零状态退出。
+
+`StyleLab` 也有同样的流程：
+
+```bash
+npm run pipeline:stylelab
+```
+
+### 耗时参考
+
+以下是本机 10 秒 `PackagingSystem` 样张的实测值，环境为 1920×1080、30fps、8x 并发：
+
+| 阶段 | 10 秒样张实测 | 2 分钟估算 | 4 分钟估算 |
+|---|---:|---:|---:|
+| 渲染 | 12.6 秒 | 2–5 分钟 | 4–10 分钟 |
+| 母带 | 1.1 秒 | 10–20 秒 | 20–40 秒 |
+| 质检 | 1.3 秒 | 15–30 秒 | 30–60 秒 |
+| 合计 | 约 15 秒 | 2.5–6 分钟 | 5–12 分钟 |
+
+这些是参考值，不是固定承诺。画面越复杂、图片和视频素材越多、并发越低，渲染越慢；母带只处理音频，所以通常很快；质检需要完整解码视频数帧，长视频会明显变慢。
+
+第一次渲染还要额外花约 5–6 秒做 bundle。低清草稿（`--scale=0.5`）不能直接用于最终质检，因为 `verify-video.mjs` 固定检查 1920×1080 和 30fps。
 
 更完整的制作规范见 [新视频操作手册](docs/NEW_VIDEO_PLAYBOOK.md) 和 [生产检查表](docs/PRODUCTION_CHECKLIST.md)。
 

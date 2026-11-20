@@ -36,8 +36,11 @@
     "render:packaging": "remotion render PackagingSystem local/out/packaging-system.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k",
     "master:packaging": "node scripts/master-video.mjs local/out/packaging-system.mp4 local/out/packaging-system-final.mp4 -16",
     "verify:packaging": "node scripts/verify-video.mjs local/out/packaging-system-final.mp4",
+    "pipeline:packaging": "npm run render:packaging && npm run master:packaging && npm run verify:packaging",
     "render:stylelab": "remotion render StyleLab local/out/stylelab.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k",
-    "master:stylelab": "node scripts/master-video.mjs local/out/stylelab.mp4 local/out/stylelab-final.mp4 -16"
+    "master:stylelab": "node scripts/master-video.mjs local/out/stylelab.mp4 local/out/stylelab-final.mp4 -16",
+    "verify:stylelab": "node scripts/verify-video.mjs local/out/stylelab-final.mp4",
+    "pipeline:stylelab": "npm run render:stylelab && npm run master:stylelab && npm run verify:stylelab"
   },
   "allowScripts": {
     "esbuild": false
