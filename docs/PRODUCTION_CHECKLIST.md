@@ -2,6 +2,7 @@
 
 ## A. 立项
 
+- [ ] 已在素材管理器和 `src/packs/` 里检索过现成风格、组件和动效。
 - [ ] 一句话说清楚：这条视频让观众记住什么？
 - [ ] 目标时长和发布平台明确。
 - [ ] 视觉方向能用 3 个关键词描述。
@@ -88,6 +89,20 @@ node scripts/verify-video.mjs local/out/<成片>.mp4
 - [ ] 中间渲染文件与缓存可清理。
 - [ ] 发布前确认字幕在手机端可读。
 
+## J. 沉淀
+
+- [ ] 已列出这次新做的组件、动效、声音和场景结构。
+- [ ] 只保留“换文案、换色板、换项目还能用”的资产。
+- [ ] 可复用部分已放进 `src/packs/<pack-id>/`，不是复制在私有项目里。
+- [ ] `pack.json` 已声明入口、预览 Composition、色板和组件。
+- [ ] `src/library/original-packs.json` 已登记 palette、style 和 pack。
+- [ ] `src/Composition.tsx` 已注册 10 秒预览 Composition。
+- [ ] `docs/ASSET_LIBRARY.md` 已补资产说明。
+- [ ] `npm run pack:check` 通过。
+- [ ] `npm run lint` 通过。
+- [ ] 已抽查预览帧，确认拆包后没有叠层、遮挡或字幕溢出。
+- [ ] 具体文案、配音、时间轴、成片和 QC 帧没有进入 `src/packs/`。
+
 ## 常见返工原因
 
 1. 先做画面再想脚本，导致节奏被视觉拖着走。
@@ -96,3 +111,4 @@ node scripts/verify-video.mjs local/out/<成片>.mp4
 4. 贴纸、印章、星爆同时出现，焦点过多。
 5. 只靠肉眼验收，没有检查峰值、帧数和抽帧。
 6. 转场音效比旁白更抢，导致信息听不清。
+7. 做完就丢，下一条视频重新造同一套组件和动效。

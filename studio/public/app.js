@@ -280,6 +280,7 @@ const renderStyles = () => {
   if (!catalog) return '<div class="empty">catalog 未生成</div>';
   const query = state.query.trim().toLowerCase();
   const palettes = catalog.palettes;
+  const packs = catalog.packs ?? [];
   const paletteById = Object.fromEntries(palettes.map((palette) => [palette.id, palette]));
 
   const styles = catalog.styles.filter((style) => {
@@ -293,11 +294,31 @@ const renderStyles = () => {
   return `
     <div class="view-head">
       <div>
-        <div class="view-kicker">CATALOG / ${catalog.styles.length} STYLES</div>
+        <div class="view-kicker">CATALOG / ${catalog.styles.length} STYLES · ${packs.length} PACKS</div>
         <h1 class="view-title">设计资产</h1>
       </div>
-      <div class="view-note">来自 MG Styles 15 与 Huashu Art Motion 的 MIT 风格目录，已转成可检索、可引用的本地数据。</div>
+      <div class="view-note">来自 MG Styles 15、Huashu Art Motion 与本仓库原创风格包的可检索目录。</div>
     </div>
+
+    <section class="section">
+      <div class="section-head"><h2>风格包</h2><span>${packs.length} PACKS</span></div>
+      <div class="style-grid">
+        ${packs
+          .map((pack) => `
+          <article class="style-card">
+            <div class="style-card-top">
+              <span class="family original">PACK</span>
+              <span class="stars">${esc(pack.status.toUpperCase())}</span>
+            </div>
+            <div class="style-name">${esc(pack.name)}</div>
+            <div class="style-original">${esc(pack.id)}</div>
+            <div class="style-line"><b>预览</b> ${esc(pack.previewComposition)}</div>
+            <div class="style-line"><b>入口</b> ${esc(pack.entry)}</div>
+            <div class="style-line"><b>色板</b> ${esc(pack.palette)}</div>
+          </article>`)
+          .join("")}
+      </div>
+    </section>
 
     <section class="section">
       <div class="section-head"><h2>色板</h2><span>${palettes.length} PALETTES</span></div>
@@ -322,11 +343,17 @@ const renderStyles = () => {
     <section class="section">
       <div class="section-head"><h2>风格</h2><span>${styles.length} MATCHED</span></div>
       <div class="toolbar">
-        ${["all", "mg", "huashu"]
+        ${["all", "original", "mg", "huashu"]
           .map(
             (family) =>
               `<button class="chip ${state.family === family ? "is-active" : ""}" data-family="${family}">${
-                family === "all" ? "全部" : family === "mg" ? "MG / 15" : "花叔 / 36"
+                family === "all"
+                  ? "全部"
+                  : family === "original"
+                    ? "原创"
+                    : family === "mg"
+                      ? "MG / 15"
+                      : "花叔 / 36"
               }</button>`,
           )
           .join("")}
@@ -336,6 +363,8 @@ const renderStyles = () => {
           .map((style) => {
             const link = githubFor(style.source);
             const palette = style.palette ? paletteById[style.palette] : null;
+            const familyLabel =
+              style.family === "mg" ? "MG" : style.family === "original" ? "原创" : "花叔";
             const lineA =
               style.family === "mg"
                 ? `<b>视觉</b> ${esc(style.visual ?? "")}`
@@ -351,7 +380,7 @@ const renderStyles = () => {
             return `
             <article class="style-card">
               <div class="style-card-top">
-                <span class="family ${style.family}">${style.family === "mg" ? "MG" : "花叔"}</span>
+                <span class="family ${style.family}">${familyLabel}</span>
                 <span class="stars">${"★".repeat(style.quality)}</span>
               </div>
               <div class="style-name">${esc(style.name)}</div>
@@ -406,10 +435,10 @@ const renderSources = () => {
   return `
     <div class="view-head">
       <div>
-        <div class="view-kicker">THIRD PARTY / MIT</div>
+        <div class="view-kicker">SOURCES / LICENSES</div>
         <h1 class="view-title">来源与许可</h1>
       </div>
-      <div class="view-note">只取用方法、目录与可检验的参数；没有把对方的成片、角色或样片素材搬进本仓库。</div>
+      <div class="view-note">包含原创风格包，以及三个 MIT 项目的设计与方法来源；不搬运第三方成片、角色或样片素材。</div>
     </div>
     <div class="source-grid">
       ${catalog.sources
@@ -420,7 +449,11 @@ const renderSources = () => {
           <h3>${esc(source.name)}</h3>
           <div class="source-meta">${esc(source.author)} · ${esc(source.usage)}</div>
           <div class="style-line">${esc(source.note)}</div>
-          <a class="src-link" href="${source.repo}" target="_blank" rel="noreferrer">${esc(source.repo)} ↗</a>
+          ${
+            /^https?:\/\//.test(source.repo)
+              ? `<a class="src-link" href="${source.repo}" target="_blank" rel="noreferrer">${esc(source.repo)} ↗</a>`
+              : `<div class="src-link">${esc(source.repo)}</div>`
+          }
         </article>`,
         )
         .join("")}

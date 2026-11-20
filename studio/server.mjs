@@ -344,6 +344,17 @@ const server = http.createServer(async (req, res) => {
     if (url.pathname === "/api/bootstrap") {
       const assets = scan();
       const catalog = readJson(path.join(ROOT, "src", "library", "catalog.json"), null);
+      const original = readJson(path.join(ROOT, "src", "library", "original-packs.json"), null);
+      const mergedCatalog = catalog
+        ? {
+            ...catalog,
+            sources: [...(catalog.sources ?? []), ...(original?.sources ?? [])],
+            palettes: [...(catalog.palettes ?? []), ...(original?.palettes ?? [])],
+            styles: [...(catalog.styles ?? []), ...(original?.styles ?? [])],
+            grammars: [...(catalog.grammars ?? []), ...(original?.grammars ?? [])],
+            packs: [...(catalog.packs ?? []), ...(original?.packs ?? [])],
+          }
+        : original;
       const totals = GROUPS.map((group) => {
         const items = assets.filter((asset) => asset.group === group.id);
         return {
@@ -355,7 +366,7 @@ const server = http.createServer(async (req, res) => {
       sendJson(res, 200, {
         assets,
         groups: totals,
-        catalog,
+        catalog: mergedCatalog,
         root: ROOT,
         generatedAt: new Date().toISOString(),
       });

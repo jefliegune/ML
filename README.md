@@ -15,6 +15,7 @@
 
 - **风格是参数**：色板、字号、间距、卡片、阴影、安全区都有统一 tokens。
 - **动效是组件**：运镜、字效、纹理封装成 `CameraRig`、`KineticType`、`StyleTexture`。
+- **风格包可沉淀**：一次新片验证过的组件、动效和声音规则，可以晋升成公共风格包，下一条直接复用。
 - **时间是单一真源**：旁白、字幕、场景、BGM ducking 和音效共享同一条帧时间轴。
 - **素材可管理**：本地素材管理器统一浏览成片、QC 帧、旁白、音效、字体和文档图片。
 - **质量可验证**：渲染后自动检查编码、分辨率、帧数、响度、True Peak，并支持关键帧人工复核。
@@ -27,7 +28,8 @@
 | 设计语言 | 颜色、字体、间距、圆角、描边、阴影、安全区 | `src/packaging/tokens.ts`、`src/theme.ts` |
 | 视觉组件 | 纸卡、贴纸、标签、章节模板、转场、纹理 | `src/packaging/` |
 | 动效系统 | 入场、弹出、线条生长、运镜、词级字幕 | `src/packaging/motionPrimitives.tsx` 等 |
-| 素材库 | 8 套色板、51 个风格配方、9 张动画语法卡 | `src/library/catalog.json` |
+| 素材库 | 9 套色板、52 个风格配方、9 张动画语法卡、1 个原创风格包 | `src/library/catalog.json`、`src/library/original-packs.json` |
+| 风格包 | 可复用组件、HUD、字幕、流程场景、预览 Composition | `src/packs/` |
 | 默认旁白 | 晓晓 +15% 音色、示例音频与通用生成脚本 | `src/audio/voiceProfiles.json`、`scripts/generate-voiceover.mjs` |
 | 素材管理 | 搜索、筛选、预览、标签、备注、归档 | `studio/` |
 | 后期与 QC | loudnorm 母带、编码/帧数/响度检查 | `scripts/master-video.mjs`、`scripts/verify-video.mjs` |
@@ -39,7 +41,8 @@
 | ID | 时长 | 用途 |
 |---|---:|---|
 | `PackagingSystem` | 10 s | 展示颜色、卡片、贴纸、转场和音效系统 |
-| `StyleLab` | 10 s | 展示 51 个风格、8 套色板、9 张语法卡 |
+| `StyleLab` | 10 s | 展示 52 个风格、9 套色板、9 张语法卡 |
+| `PixelArcadeShowcase` | 10 s | 原创像素街机风格包预览 |
 | `BackgroundTest` | 1 s | 背景组件的最小开发测试 |
 
 ![素材管理器](docs/assets/asset-manager.png)
@@ -62,6 +65,7 @@ npm run assets       # 打开本地素材管理器 http://127.0.0.1:4321
 npm run dev                 # Remotion Studio
 npm run assets              # 本地素材管理器
 npm run lint                # ESLint + TypeScript
+npm run pack:check          # 校验风格包 manifest、入口、色板、预览注册和私有内容隔离
 
 npm run render:packaging    # 渲染包装系统样张
 npm run master:packaging    # loudnorm 母带
@@ -114,8 +118,11 @@ npm run library:import      # 重新生成设计资产 catalog
 │  │  ├─ CameraRig.tsx             推 / 拉 / 摇 / 急推六种运镜
 │  │  ├─ KineticType.tsx           词级错峰入场与关键词高亮
 │  │  └─ StyleTexture.tsx          纸张 / 颗粒 / 半调 / 扫描线等纹理
+│  ├─ packs/                       原创风格包
+│  │  └─ pixel-arcade/             像素街机：组件、预览、manifest、用法说明
 │  └─ library/                     设计资产索引与样张
-│     ├─ catalog.json              8 套色板 / 51 个风格 / 9 张语法卡
+│     ├─ catalog.json              8 套色板 / 51 个导入风格 / 9 张语法卡
+│     ├─ original-packs.json       1 套原创色板 / 1 个原创风格 / 1 个风格包
 │     ├─ index.ts                  类型、查询函数与只读导出
 │     └─ StyleLab.tsx              设计资产动态样张
 ├─ scripts/                        母带、QC、资产导入与通用音频生成
@@ -130,22 +137,43 @@ npm run library:import      # 重新生成设计资产 catalog
 
 ## 素材库
 
-`src/library/catalog.json` 把三个 MIT 项目的可复用部分整理成可检索数据：
+`src/library/catalog.json` 把三个 MIT 项目的可复用部分整理成可检索数据；`src/library/original-packs.json` 登记本仓库自己沉淀的风格包：
 
 | 类别 | 数量 | 来源 |
 |---|---:|---|
-| 色板 | 8 | Huashu Art Motion |
+| 色板 | 9 | Huashu Art Motion（8）+ 本仓库（1） |
 | MG 风格 | 15 | MG Styles 15 |
 | 花叔风格配方 | 36 | Huashu Art Motion |
+| 原创风格 | 1 | 本仓库 |
 | 动画语法 | 9 | Huashu Art Motion |
+| 原创风格包 | 1 | 本仓库 |
 
 只取方法、目录和参数，不复制上游成片、GIF、音频、插画或工程文件。版权与许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+
+## 沉淀：让下一条视频少造轮子
+
+每条视频交付后，不要直接进入下一条。先做一次 15 分钟的资产复盘：
+
+1. **筛选**：列出这次新做的组件、动效、字幕样式和声音规则。
+2. **判定**：只保留“换文案、换色板、换项目仍然成立”的部分。写死具体产品名、台词、时间点或配音文件的，不晋升。
+3. **晋升**：通用部分放进 `src/packs/<pack-id>/`，在 `pack.json` 声明入口、预览 Composition、色板和组件；在 `src/library/original-packs.json` 登记 pack、palette、style。
+4. **验收**：注册 10 秒预览 Composition，运行 `npm run pack:check` 和 `npm run lint`，再抽帧确认。
+
+| 会沉淀 | 不会沉淀 |
+|---|---|
+| 可配置的颜色、字体、间距 | 某条片的具体文案 |
+| 可复用的场景骨架、HUD、字幕条 | TTS 音频、精确时间轴 |
+| 动效、转场、声音触发规则 | 成片、QC 帧、封面 |
+| 预览 Composition 和用法说明 | 只出现一次的项目专用画面 |
+
+沉淀的不是“这一条片”，而是下一条片的起跑线。判断标准只有一条：**下一个项目能不能只改 props 和文案就用起来。**
 
 ## 私有内容与示例片
 
 - 具体项目的文案、配音、时间轴、分镜和成片放在 `local/`。
 - `local/examples/` 保存已归档的示例片源码、素材和生成脚本，不在 Git 中。
-- 新建视频时，建议在 `local/projects/<project-name>/` 下组织私有内容，再把通用组件和 Composition 注册到 `src/`。
+- 新建视频时，在同一个仓库的 `local/projects/<project-name>/` 下组织私有内容；需要并行开发时用 Git branch 或 worktree，不要复制整个框架。
+- 私有项目可以有自己的 `Root.tsx`；只有在提交公共风格包时，才把通用 Composition 注册到 `src/Composition.tsx`。
 - 项目旁白输出到 `public/projects/<project-name>/`，该目录已被忽略；默认音色示例见 [旁白与语音指南](docs/VOICE_GUIDE.md)。
 - 不要提交 `local/`、`out/`、`dist/` 或任何带具体文案的渲染产物。
 

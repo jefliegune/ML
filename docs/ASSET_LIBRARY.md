@@ -2,7 +2,7 @@
 
 素材库只收录会重复使用的视觉、动效和声音资产。一次性画出来的场景元素留在具体 Scene 中，不升级为公共资产。
 
-风格、色板和动画语法的索引在 [参考库与设计资产](REFERENCE_LIBRARY.md)；本文件只记录已经封装成组件的资产。
+风格、色板和动画语法的索引在 [参考库与设计资产](REFERENCE_LIBRARY.md)；本文件只记录已经封装成组件的资产。导入资产和原创风格包分开登记，避免把上游方法说成本仓库原创。
 
 ## 背景
 
@@ -52,6 +52,24 @@
 | 词级字效 | `KineticType` | 标题、关键词、结论句 |
 | 风格纹理 | `StyleTexture` | 纸纹、颗粒、半调、扫描线、孔版、暗角 |
 
+## 原创风格包
+
+原创风格包放在 `src/packs/<pack-id>/`，每个包都有自己的 `pack.json`、统一出口、用法说明和 10 秒预览 Composition。它们不是“参考配方”，而是可以直接挂进新片的代码组件。
+
+| 风格包 | 入口 | 预览 Composition | 提供什么 |
+|---|---|---|---|
+| 像素街机 `pixel-arcade` | `src/packs/pixel-arcade/index.ts` | `PixelArcadeShowcase` | `PixelStage`、`PixelHud`、`PixelCaptionBar`、`PixelGuideActor`、`PixelHookScene`、`PixelWorkflowScene`、`PixelPipelineScene`、`PixelGlitch` |
+
+像素街机包的核心能力：
+
+- 深色 CRT 舞台、扫描线、硬边像素卡片。
+- 像素讲解员，支持 `idle`、`wave`、`point` 三种姿态和配色。
+- 像素字幕条，支持关键词高亮和逐字入场。
+- 三步工作流卡、终端流水线、故障转场。
+- 10 秒预览样张，用来在改动后快速验收。
+
+使用方式见 [像素街机 README](../src/packs/pixel-arcade/README.md)。
+
 ## 声音
 
 | 资产 | 文件 | 默认用途 |
@@ -63,6 +81,33 @@
 | `impact` | `public/sfx/impact.wav` | 错误、盖章、结论 |
 | `riser` | `public/sfx/riser.wav` | 揭示、结论出现前的蓄力 |
 | 默认旁白示例 | `public/audio/voice-sample.mp3` | 试听默认音色、检查语速与停顿 |
+
+## 沉淀规则
+
+一条新片交付后，按下面的标准决定哪些资产进入素材库：
+
+| 会进入 | 不会进入 |
+|---|---|
+| 换文案还能用的组件 | 只服务这一条片的画面 |
+| 换色板还能用的版式 | 写死品牌色和产品名的卡片 |
+| 换项目还能用的场景骨架 | 具体台词、口号、分镜 |
+| 可配置的动效和声音规则 | TTS 音频、精确时间轴、成片 |
+
+晋升后必须更新：
+
+- `src/packs/<pack-id>/pack.json`
+- `src/library/original-packs.json`
+- `src/Composition.tsx`
+- 本文件的原创风格包表
+
+最后运行：
+
+```bash
+npm run pack:check
+npm run lint
+```
+
+`pack:check` 会拦住 manifest 缺字段、预览未注册、组件未导出、色板/风格未登记，以及包里误放私有媒体或引用 `local/` 的情况。
 
 ## 使用顺序
 

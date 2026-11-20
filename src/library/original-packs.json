@@ -1,0 +1,62 @@
+{
+  "version": 1,
+  "sources": [
+    {
+      "id": "original-packs",
+      "name": "Original Style Packs",
+      "author": "本仓库",
+      "repo": "src/packs",
+      "license": "Original",
+      "usage": "components, palettes, motion, sound recipes",
+      "note": "由本仓库视频制作过程中沉淀的原创风格包。"
+    }
+  ],
+  "palettes": [
+    {
+      "id": "pixel-arcade",
+      "name": "像素街机",
+      "bestFor": "像素教程、游戏化界面、技术演示",
+      "colors": {
+        "bg": "#0D1020",
+        "surface": "#1D243D",
+        "ink": "#F6F1E3",
+        "sub": "#8F98B3",
+        "accent": "#FFC857",
+        "accent2": "#3DDC97"
+      },
+      "source": "original/pixel-arcade"
+    }
+  ],
+  "styles": [
+    {
+      "id": "pack-pixel-arcade",
+      "name": "像素街机",
+      "english": "Pixel Arcade / 8-bit Explainer",
+      "family": "original",
+      "quality": 3,
+      "palette": "pixel-arcade",
+      "technique": "深色街机界面、硬边像素卡片、CRT 扫描线、终端流水线。",
+      "motion": "像素弹入、逐字输入、进度条、扫描线和故障转场。",
+      "transition": "横向故障条 + 快速闪白。",
+      "weakness": "大量中文正文仍依赖系统字体，超长文案需要单独做字距和行高检查。",
+      "source": "src/packs/pixel-arcade/pack.json",
+      "summary": "面向教程、产品演示和技术流程的完整像素风组件包。",
+      "visual": "深海军蓝底、暖白正文、黄色强调、薄荷绿成功状态。",
+      "techniques": ["像素边框", "CRT 扫描线", "终端进度条", "像素讲解员", "故障转场"],
+      "original": "Original / code-driven-video-system",
+      "demo": "PixelArcadeShowcase"
+    }
+  ],
+  "grammars": [],
+  "packs": [
+    {
+      "id": "pixel-arcade",
+      "name": "像素街机",
+      "entry": "src/packs/pixel-arcade/index.ts",
+      "manifest": "src/packs/pixel-arcade/pack.json",
+      "previewComposition": "PixelArcadeShowcase",
+      "palette": "pixel-arcade",
+      "status": "stable"
+    }
+  ]
+}

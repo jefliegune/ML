@@ -1,7 +1,7 @@
 import type {CSSProperties, FC} from "react";
 import {AbsoluteFill, Sequence} from "remotion";
 import type {LibraryGrammar, LibraryStyle} from "./index";
-import {GRAMMARS, STYLES, getPalette} from "./index";
+import {GRAMMARS, STYLES, STYLE_COUNTS, getPalette} from "./index";
 import {CameraRig} from "../packaging/CameraRig";
 import {KineticType} from "../packaging/KineticType";
 import {StyleTexture} from "../packaging/StyleTexture";
@@ -166,9 +166,15 @@ export const StyleLab: FC = () => {
   return (
     <AbsoluteFill style={{backgroundColor: BRAND_COLORS.cream}}>
       <Sequence durationInFrames={104}>
-        <PackagingBackground tone="paper" index="01" label="ASSET LIBRARY / 51">
+        <PackagingBackground
+          tone="paper"
+          index="01"
+          label={`ASSET LIBRARY / ${STYLE_COUNTS.mg + STYLE_COUNTS.huashu + STYLE_COUNTS.original}`}
+        >
           <CameraRig move="push" amount={1.07} durationInFrames={104} style={content}>
-            <Kicker>IMPORTED / 51 STYLES</Kicker>
+            <Kicker>
+              {STYLE_COUNTS.mg + STYLE_COUNTS.huashu} IMPORTED · {STYLE_COUNTS.original} ORIGINAL
+            </Kicker>
             <KineticType
               tokens={["风格", "不是", "贴纸"]}
               accent={[2]}
@@ -181,7 +187,8 @@ export const StyleLab: FC = () => {
             </div>
             <div style={{position: "absolute", right: 120, top: 190}}>
               <Sticker color={BRAND_COLORS.lime} rotate={-6}>
-                51 STYLES · 9 GRAMMARS
+                {STYLE_COUNTS.mg + STYLE_COUNTS.huashu + STYLE_COUNTS.original} STYLES ·{" "}
+                {STYLE_COUNTS.grammars} GRAMMARS
               </Sticker>
             </div>
           </CameraRig>

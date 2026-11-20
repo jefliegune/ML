@@ -1,6 +1,7 @@
 import catalogJson from "./catalog.json";
+import originalPacksJson from "./original-packs.json";
 
-export type StyleFamily = "mg" | "huashu";
+export type StyleFamily = "mg" | "huashu" | "original";
 
 export interface LibraryPalette {
   id: string;
@@ -54,12 +55,35 @@ export interface LibrarySource {
   note: string;
 }
 
+export interface LibraryPack {
+  id: string;
+  name: string;
+  entry: string;
+  manifest: string;
+  previewComposition: string;
+  palette: string;
+  status: string;
+}
+
 export const catalog = catalogJson;
 
-export const PALETTES = catalogJson.palettes as LibraryPalette[];
-export const STYLES = catalogJson.styles as LibraryStyle[];
-export const GRAMMARS = catalogJson.grammars as LibraryGrammar[];
-export const SOURCES = catalogJson.sources as LibrarySource[];
+export const PALETTES = [
+  ...(catalogJson.palettes as LibraryPalette[]),
+  ...(originalPacksJson.palettes as LibraryPalette[]),
+];
+export const STYLES = [
+  ...(catalogJson.styles as LibraryStyle[]),
+  ...(originalPacksJson.styles as LibraryStyle[]),
+];
+export const GRAMMARS = [
+  ...(catalogJson.grammars as LibraryGrammar[]),
+  ...(originalPacksJson.grammars as LibraryGrammar[]),
+];
+export const SOURCES = [
+  ...(catalogJson.sources as LibrarySource[]),
+  ...(originalPacksJson.sources as LibrarySource[]),
+];
+export const PACKS = originalPacksJson.packs as LibraryPack[];
 export const CUE_SCHEMA = catalogJson.cueSchema;
 
 export const getPalette = (id: string | null | undefined): LibraryPalette =>
@@ -74,6 +98,8 @@ export const getGrammar = (id: string): LibraryGrammar | undefined =>
 export const STYLE_COUNTS = {
   mg: STYLES.filter((style) => style.family === "mg").length,
   huashu: STYLES.filter((style) => style.family === "huashu").length,
+  original: STYLES.filter((style) => style.family === "original").length,
   palettes: PALETTES.length,
   grammars: GRAMMARS.length,
+  packs: PACKS.length,
 };

@@ -1,0 +1,28 @@
+{
+  "id": "pixel-arcade",
+  "name": "像素街机",
+  "version": "1.0.0",
+  "status": "stable",
+  "entry": "./index.ts",
+  "previewComposition": "PixelArcadeShowcase",
+  "palette": "pixel-arcade",
+  "description": "深色像素街机风格：CRT 扫描线、硬边卡片、像素讲解员、终端流水线与故障转场。",
+  "bestFor": "教程、产品演示、技术流程、游戏化知识视频",
+  "tags": ["pixel", "arcade", "tutorial", "hud", "terminal", "mascot"],
+  "components": [
+    "PixelStage",
+    "PixelHud",
+    "PixelCaptionBar",
+    "PixelGuideActor",
+    "PixelHookScene",
+    "PixelWorkflowScene",
+    "PixelPipelineScene",
+    "PixelGlitch"
+  ],
+  "privateContent": [
+    "具体文案",
+    "TTS 配音",
+    "精确项目时间轴",
+    "成片与 QC 帧"
+  ]
+}
