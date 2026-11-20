@@ -470,5 +470,5 @@ server.on("error", (error) => {
 
 server.listen(PORT, HOST, () => {
   const displayHost = HOST === "0.0.0.0" ? "localhost" : HOST;
-  console.log(`\n  ML ASSET LIBRARY\n  http://${displayHost}:${PORT}\n`);
+  console.log(`\n  VIDEO ASSET LIBRARY\n  http://${displayHost}:${PORT}\n`);
 });

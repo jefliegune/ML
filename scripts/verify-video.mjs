@@ -6,7 +6,7 @@ import {requireBinary} from "./lib/binaries.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const relativeFile =
-  process.argv[2] ?? "local/out/ml-explainer-full-final.mp4";
+  process.argv[2] ?? "local/out/video-project-final.mp4";
 const filePath = path.resolve(root, relativeFile);
 const ffprobe = requireBinary("ffprobe", "FFPROBE_PATH");
 const ffmpeg = requireBinary("ffmpeg", "FFMPEG_PATH");

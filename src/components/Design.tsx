@@ -126,7 +126,9 @@ export const TopBar: React.FC<{
   chapter: string;
   label: string;
   dark?: boolean;
-}> = ({chapter, label, dark = false}) => {
+  brand?: string;
+  meta?: string;
+}> = ({chapter, label, dark = false, brand = "VIDEO", meta = "EXPLAINER"}) => {
   return (
     <div
       style={{
@@ -157,7 +159,7 @@ export const TopBar: React.FC<{
             letterSpacing: 1.2,
           }}
         >
-          <span>ML</span>
+          <span>{brand}</span>
           <span style={{opacity: 0.55}}>/</span>
           <span>{chapter}</span>
         </div>
@@ -194,7 +196,7 @@ export const TopBar: React.FC<{
             boxShadow: `0 0 0 5px ${COLORS.coral}22`,
           }}
         />
-        2 MIN EXPLAINER
+        {meta}
       </div>
       <div
         style={{
@@ -298,188 +300,6 @@ export const CaptionBar: React.FC<{
         </div>
       </div>
     </AbsoluteFill>
-  );
-};
-
-export const CatPortrait: React.FC<{
-  size?: number;
-  color?: string;
-  variant?: number;
-  style?: CSSProperties;
-}> = ({size = 220, color = COLORS.coral, variant = 0, style}) => {
-  const eyesClosed = variant === 2;
-  const wink = variant === 3;
-
-  return (
-    <svg
-      viewBox="0 0 300 300"
-      width={size}
-      height={size}
-      style={{overflow: "visible", ...style}}
-    >
-      <path
-        d="M57 101 L77 29 L128 68 Q150 58 172 68 L223 29 L243 101 Q260 139 250 184 Q236 258 150 267 Q64 258 50 184 Q40 139 57 101 Z"
-        fill={color}
-        stroke={COLORS.ink}
-        strokeWidth={11}
-        strokeLinejoin="round"
-      />
-      {variant === 1 ? (
-        <>
-          <path
-            d="M150 70 L150 108 M130 82 L136 112 M170 82 L164 112"
-            stroke={COLORS.ink}
-            strokeWidth={8}
-            strokeLinecap="round"
-            opacity={0.34}
-          />
-          <path
-            d="M78 142 L105 149 M222 142 L195 149"
-            stroke={COLORS.ink}
-            strokeWidth={7}
-            strokeLinecap="round"
-            opacity={0.28}
-          />
-        </>
-      ) : null}
-      {variant === 3 ? (
-        <>
-          <path
-            d="M150 67 L150 104 M127 75 L132 107 M173 75 L168 107"
-            stroke={COLORS.ink}
-            strokeWidth={7}
-            strokeLinecap="round"
-            opacity={0.26}
-          />
-          <path
-            d="M66 181 L101 177 M199 177 L234 181"
-            stroke={COLORS.ink}
-            strokeWidth={6}
-            strokeLinecap="round"
-            opacity={0.2}
-          />
-        </>
-      ) : null}
-
-      {eyesClosed ? (
-        <>
-          <path
-            d="M85 160 Q108 143 132 160"
-            fill="none"
-            stroke={COLORS.ink}
-            strokeWidth={10}
-            strokeLinecap="round"
-          />
-          <path
-            d="M168 160 Q192 143 215 160"
-            fill="none"
-            stroke={COLORS.ink}
-            strokeWidth={10}
-            strokeLinecap="round"
-          />
-        </>
-      ) : (
-        <>
-          <ellipse cx={108} cy={158} rx={17} ry={23} fill={COLORS.ink} />
-          <ellipse cx={192} cy={158} rx={17} ry={23} fill={COLORS.ink} />
-          <circle cx={114} cy={151} r={5.5} fill={COLORS.white} />
-          <circle cx={198} cy={151} r={5.5} fill={COLORS.white} />
-          {wink ? (
-            <path
-              d="M168 160 Q192 143 215 160"
-              fill="none"
-              stroke={COLORS.ink}
-              strokeWidth={10}
-              strokeLinecap="round"
-            />
-          ) : null}
-        </>
-      )}
-
-      <path
-        d="M141 193 Q150 184 159 193 Q156 207 150 209 Q144 207 141 193 Z"
-        fill={COLORS.ink}
-      />
-      <path
-        d="M134 221 Q150 236 166 221"
-        fill="none"
-        stroke={COLORS.ink}
-        strokeWidth={8}
-        strokeLinecap="round"
-      />
-      <path
-        d="M132 207 L80 197 M132 216 L77 220 M168 207 L220 197 M168 216 L223 220"
-        stroke={COLORS.ink}
-        strokeWidth={6}
-        strokeLinecap="round"
-      />
-      <circle cx={77} cy={188} r={11} fill={COLORS.coral} opacity={0.55} />
-      <circle cx={223} cy={188} r={11} fill={COLORS.coral} opacity={0.55} />
-    </svg>
-  );
-};
-
-export const DogPortrait: React.FC<{
-  size?: number;
-  color?: string;
-  style?: CSSProperties;
-}> = ({size = 220, color = "#B98A62", style}) => {
-  return (
-    <svg
-      viewBox="0 0 300 300"
-      width={size}
-      height={size}
-      style={{overflow: "visible", ...style}}
-    >
-      <ellipse
-        cx={68}
-        cy={123}
-        rx={38}
-        ry={68}
-        fill={color}
-        stroke={COLORS.ink}
-        strokeWidth={11}
-        transform="rotate(18 68 123)"
-      />
-      <ellipse
-        cx={232}
-        cy={123}
-        rx={38}
-        ry={68}
-        fill={color}
-        stroke={COLORS.ink}
-        strokeWidth={11}
-        transform="rotate(-18 232 123)"
-      />
-      <path
-        d="M76 102 Q84 52 150 48 Q216 52 224 102 Q238 153 226 197 Q211 258 150 264 Q89 258 74 197 Q62 153 76 102 Z"
-        fill={color}
-        stroke={COLORS.ink}
-        strokeWidth={11}
-        strokeLinejoin="round"
-      />
-      <ellipse cx={109} cy={153} rx={12} ry={16} fill={COLORS.ink} />
-      <ellipse cx={191} cy={153} rx={12} ry={16} fill={COLORS.ink} />
-      <circle cx={113} cy={148} r={4} fill={COLORS.white} />
-      <circle cx={195} cy={148} r={4} fill={COLORS.white} />
-      <ellipse cx={150} cy={195} rx={30} ry={23} fill={COLORS.paper} />
-      <ellipse cx={150} cy={190} rx={17} ry={11} fill={COLORS.ink} />
-      <path
-        d="M150 202 L150 220 M150 220 Q136 235 122 224 M150 220 Q164 235 178 224"
-        fill="none"
-        stroke={COLORS.ink}
-        strokeWidth={8}
-        strokeLinecap="round"
-      />
-      <path
-        d="M130 184 Q150 194 170 184"
-        fill="none"
-        stroke={COLORS.ink}
-        strokeWidth={6}
-        strokeLinecap="round"
-        opacity={0.4}
-      />
-    </svg>
   );
 };
 

@@ -53,6 +53,44 @@ if (!Number.isFinite(videoDuration) || videoDuration <= 0) {
 
 fs.mkdirSync(path.dirname(output), {recursive: true});
 
+const loudnessFilter = `loudnorm=I=${target}:TP=-1.5:LRA=9`;
+const nullSink = process.platform === "win32" ? "NUL" : "/dev/null";
+const analysis = spawnSync(
+  ffmpeg,
+  [
+    "-hide_banner",
+    "-i",
+    input,
+    "-vn",
+    "-af",
+    `${loudnessFilter}:print_format=json`,
+    "-f",
+    "null",
+    nullSink,
+  ],
+  {encoding: "utf8"},
+);
+
+let measured = null;
+if (analysis.status === 0) {
+  const jsonStart = analysis.stderr.lastIndexOf("{");
+  const jsonEnd = analysis.stderr.lastIndexOf("}");
+  if (jsonStart >= 0 && jsonEnd > jsonStart) {
+    try {
+      const data = JSON.parse(analysis.stderr.slice(jsonStart, jsonEnd + 1));
+      if ([data.input_i, data.input_tp, data.input_lra, data.input_thresh, data.target_offset].every((value) => Number.isFinite(Number(value)))) {
+        measured = data;
+      }
+    } catch {
+      measured = null;
+    }
+  }
+}
+
+const secondPassFilter = measured
+  ? `${loudnessFilter}:measured_I=${measured.input_i}:measured_TP=${measured.input_tp}:measured_LRA=${measured.input_lra}:measured_thresh=${measured.input_thresh}:offset=${measured.target_offset}:linear=true:print_format=summary`
+  : `${loudnessFilter}:print_format=summary`;
+
 const result = spawnSync(
   ffmpeg,
   [
@@ -67,7 +105,7 @@ const result = spawnSync(
     "-c:v",
     "copy",
     "-af",
-    `loudnorm=I=${target}:TP=-1.5:LRA=9:print_format=summary`,
+    secondPassFilter,
     "-ar",
     "48000",
     "-c:a",

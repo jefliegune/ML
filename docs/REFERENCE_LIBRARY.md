@@ -131,7 +131,7 @@ const palette = getPalette(style?.palette);
 - `KineticType`：词级错峰入场，支持 `marker / block / none` 三种关键词高亮。
 - `StyleTexture`：`paper / grain / halftone / scanlines / riso / vignette` 六种纹理叠层。
 
-`MLStyleLab` 是这些资产的动态样张，展示 3 张 MG 风格卡、15 个风格 chip 和 9 张语法卡：
+`StyleLab` 是这些资产的动态样张，展示 3 张 MG 风格卡、15 个风格 chip 和 9 张语法卡：
 
 ```bash
 npm run render:stylelab

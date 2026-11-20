@@ -68,7 +68,7 @@
 
 ```bash
 npm run lint
-npm run verify:video
+node scripts/verify-video.mjs local/out/<成片>.mp4
 ```
 
 - [ ] 1920×1080

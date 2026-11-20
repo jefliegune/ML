@@ -1,11 +1,11 @@
 # Dependencies
 node_modules/
 
-# Local-only production output: renders, covers, QC frames, scratch files.
-# Everything here stays on your machine and never enters the repository.
+# Local-only production output: renders, bundles, QC frames, scratch files.
+build/
+dist/
 local/
 out/
-dist/
 
 # Environment and OS noise
 .env
@@ -16,11 +16,22 @@ Thumbs.db
 *.log
 npm-debug.log*
 
-# Heavy generated audio. Re-create with `npm run audio:full`.
+# Private voiceover, timing data and heavy generated audio.
 public/audio/bgm-full.wav
-
-# Promo-specific voiceover and timing data. Keep content private.
+public/audio/full/
 public/audio/promo/
+public/audio/voice_*.mp3
+
+# Demo media that should stay local.
+public/vibe/
+public/showcase/
+public/audio/showcase-score.wav
+public/promo/
+
+# Per-video storyboard and preview assets.
+docs/STORYBOARD.md
+docs/assets/cover.png
+docs/assets/preview.gif
 
 # Editors
 .idea/

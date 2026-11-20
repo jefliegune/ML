@@ -118,8 +118,8 @@ export const EndSlate: React.FC<{
 }> = ({
   title,
   subtitle,
-  footer = "ML EXPLAINED / SYSTEM V1",
-  tags = ["DATA", "MODEL", "FEEDBACK"],
+  footer = "VIDEO SYSTEM / V1",
+  tags = ["SCRIPT", "MOTION", "SOUND"],
   accent = BRAND_COLORS.lime,
   tone = "ink",
 }) => {

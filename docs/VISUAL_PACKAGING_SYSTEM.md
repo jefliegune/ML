@@ -99,7 +99,7 @@
 ### L7 质检层
 
 - `npm run lint`
-- `npm run verify:video`
+- `node scripts/verify-video.mjs local/out/<成片>.mp4`
 - 关键帧抽检
 - 字幕长度与遮挡检查
 - 响度/峰值检查
@@ -121,7 +121,7 @@
 1. 先判断它是否会在至少 2 条视频里出现。只出现一次的元素不要进素材库。
 2. 在 `tokens.ts` 中补充必要的颜色、字号、间距或阴影。
 3. 在 `primitives.tsx` 或新文件中实现组件，props 负责内容与少量变化。
-4. 在 `MLPackagingSystem` 组合里加入一个样张。
+4. 在 `PackagingSystem` 组合里加入一个样张。
 5. 在 `docs/ASSET_LIBRARY.md` 登记用途、尺寸、层级和使用场景。
 6. 跑 `npm run lint`，并抽帧检查。
 

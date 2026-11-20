@@ -70,7 +70,7 @@ npm run assets
 |---|---|---:|---|
 | 成片与渲染 | `local/out/` | 否 | 成片、母带、封面、包装样张 |
 | 质检帧 | `local/out/qc/` | 是 | 抽帧、拼图、UI 截图 |
-| 旁白与 BGM | `public/audio/` | 是 | 可提交的旁白和预览 BGM |
+| 旁白与 BGM | `public/audio/` | 是 | 预览 BGM 可提交；具体项目旁白留在 `local/` |
 | 音效 | `public/sfx/` | 是 | 转场、点击、冲击音效 |
 | 文档素材 | `docs/assets/` | 否 | README 和文档引用的图片 |
 | 字体 | `public/fonts/` | 否 | 字体放置说明或本地字体 |
@@ -151,7 +151,7 @@ studio/
 
 ## 一条新视频的工作流
 
-1. `npm run render:preview` 或 `npm run render:full`，产物进 `local/out/`。
+1. 使用自己的渲染命令，或运行 `npm run render:packaging`，产物进 `local/out/`。
 2. `npm run assets`，在素材库里给这一版打标签，例如 `待审 / 已发布 / 废片`。
 3. 需要引用到文档或页面时，复制 `staticFile()` 片段；只对 `public/` 下的文件生成。
 4. 旧版本点“归档”，移动到 `local/archive/`，不占素材库主视图。

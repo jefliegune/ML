@@ -1,5 +1,5 @@
 {
-  "name": "ml-explainer",
+  "name": "code-driven-video-system",
   "version": "1.0.0",
   "description": "A code-driven video production system built with Remotion, React and TypeScript, including reusable motion design, asset management, mastering and QC.",
   "license": "MIT",
@@ -30,25 +30,13 @@
     "upgrade": "remotion upgrade",
     "lint": "eslint src && tsc",
     "audio": "node scripts/generate-audio.mjs",
-    "audio:full": "node scripts/generate-full-bgm.mjs",
-    "voice": "node scripts/generate-full-voiceover.mjs",
     "library:import": "node scripts/import-reference-libraries.mjs",
     "assets": "node studio/server.mjs",
-    "render:preview": "remotion render MLExplainerPreview local/out/ml-explainer-preview.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k",
-    "master:preview": "node scripts/master-video.mjs local/out/ml-explainer-preview.mp4 local/out/ml-explainer-preview-final.mp4 -16",
-    "render:full": "remotion render MLExplainerFull local/out/ml-explainer-full.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k --concurrency=4",
-    "master:full": "node scripts/master-video.mjs local/out/ml-explainer-full.mp4 local/out/ml-explainer-full-final.mp4 -15.5",
-    "render:packaging": "remotion render MLPackagingSystem local/out/ml-packaging-system.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k",
-    "master:packaging": "node scripts/master-video.mjs local/out/ml-packaging-system.mp4 local/out/ml-packaging-system-final.mp4 -16",
-    "verify:video": "node scripts/verify-video.mjs local/out/ml-explainer-full-final.mp4",
-    "verify:packaging": "node scripts/verify-video.mjs local/out/ml-packaging-system-final.mp4",
-    "render:stylelab": "remotion render MLStyleLab local/out/ml-stylelab.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k",
-    "master:stylelab": "node scripts/master-video.mjs local/out/ml-stylelab.mp4 local/out/ml-stylelab-final.mp4 -16",
-    "promo:dev": "remotion studio --props=local/promo/promo-props.json",
-    "promo:voice": "node scripts/generate-promo-voiceover.mjs",
-    "render:promo": "remotion render MLProjectPromo local/out/ml-project-promo.mp4 --props=local/promo/promo-props.json --codec=h264 --crf=18 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k --concurrency=4",
-    "master:promo": "node scripts/master-video.mjs local/out/ml-project-promo.mp4 local/out/ml-project-promo-final.mp4 -15.5",
-    "verify:promo": "node scripts/verify-video.mjs local/out/ml-project-promo-final.mp4"
+    "render:packaging": "remotion render PackagingSystem local/out/packaging-system.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k",
+    "master:packaging": "node scripts/master-video.mjs local/out/packaging-system.mp4 local/out/packaging-system-final.mp4 -16",
+    "verify:packaging": "node scripts/verify-video.mjs local/out/packaging-system-final.mp4",
+    "render:stylelab": "remotion render StyleLab local/out/stylelab.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k",
+    "master:stylelab": "node scripts/master-video.mjs local/out/stylelab.mp4 local/out/stylelab-final.mp4 -16"
   },
   "allowScripts": {
     "esbuild": false

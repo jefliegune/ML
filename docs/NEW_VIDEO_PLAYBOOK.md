@@ -1,10 +1,10 @@
 # 新视频操作手册
 
-> 本文讲的是如何用这套系统生产一条新视频。仓库内置的 `MLExplainer*` 和《AI 怎么学会认猫？》只是示例；新项目可以使用自己的系列名、Composition ID 和输出文件名。
+> 本文讲的是如何用这套通用框架生产一条新视频。仓库不包含任何具体视频项目的文案、配音、分镜和成片。
 
-## 1. 复制还是继续用当前工程
+## 1. 准备独立工作区
 
-建议把当前工程复制成新目录，避免旧片和新片互相覆盖：
+建议为每条视频复制一份框架到新目录，避免不同项目的素材和时间轴互相覆盖：
 
 ```text
 video-project-02/
@@ -23,19 +23,18 @@ video-project-02/
 
 不要复制：
 
-- `local/out/`：旧成片与中间文件
-- `public/audio/full/`：旧旁白
-- `node_modules/`：可以在新目录重新安装
-
-如果环境不能联网，可以复制 `node_modules`，但会多占约 866MB。
+- `local/`：旧成片、QC 帧、私有内容和归档示例
+- `out/`、`dist/`
+- `node_modules/`：在新目录重新安装即可
 
 ## 2. 先写内容，不做画面
 
-编辑 `scripts/full-lines.json`：
+在项目工作区里建立自己的文案清单，例如 `local/project/lines.json`。每条 line 至少包含：
 
-- `voice`：沿用 `zh-CN-XiaoxiaoNeural` 或换成新音色
-- `rate`：沿用 `+15%` 或按节奏调整
-- `lines`：每句包含 `id`、`section`、`text`、`highlights`
+- `id`：稳定标识
+- `text`：旁白文本
+- `highlights`：需要强调的词
+- `startFrame`：开场段落可以直接指定；后续段落由真实音频时长计算
 
 建议：
 
@@ -46,36 +45,22 @@ video-project-02/
 
 ## 3. 生成旁白和时间轴
 
-```bash
-node scripts/generate-full-voiceover.mjs
-```
+使用你选择的 TTS 工具逐句生成音频，然后用 `ffprobe` 读取真实时长，计算每句的 `startFrame`、`endFrame`、`captionStartFrame` 和 `captionEndFrame`。
 
-需要：
+时间轴必须满足：
 
-- Python 3，以及 `pip install edge-tts`
-- 网络连接
-- 可选：`EDGE_TTS_PYTHONPATH` 指向本地 edge-tts 目录，`PYTHON` 指定解释器
+- 字幕和旁白读取同一组帧
+- 场景 `Sequence` 的时长等于段落长度
+- BGM ducking 和 SFX 使用同一组段落边界
 
-输出：
-
-- `public/audio/full/vXX.mp3`
-- `src/full/voiceTimeline.generated.ts`
-- `scripts/full-lines.generated.json`
-
-如果只想重算时间轴、不重新合成语音：
-
-```text
-不要设置 FORCE_TTS=1
-```
-
-脚本会跳过已存在的音频，只读取时长。
+如果需要参考实现，本地归档的示例脚本在 `local/examples/` 中，但它不属于公开框架，也不会随仓库发布。
 
 ## 4. 拆场景
 
-建议按 section 建立场景：
+建议每个 section 建立一个场景组件：
 
 ```text
-src/full/scenes/SceneXxx.tsx
+src/scenes/SceneXxx.tsx
 ```
 
 每个场景只负责一个视觉命题，例如：
@@ -88,7 +73,7 @@ src/full/scenes/SceneXxx.tsx
 
 优先使用：
 
-- `src/packaging` 的 `PackagingBackground`
+- `src/packaging` 里的 `PackagingBackground`
 - `PaperCard`
 - `Kicker`
 - `Headline`
@@ -99,30 +84,20 @@ src/full/scenes/SceneXxx.tsx
 
 只有现有资产不够时才新增组件，并且先判断它是否会被复用。
 
-## 5. 总装
+## 5. 总装与注册
 
-编辑 `src/full/FullVideo.tsx`：
+在项目工作区里编辑总装组件：
 
-- 按 `FULL_SECTIONS` 顺序挂载 `Sequence`
+- 按 section 顺序挂载 `Sequence`
 - 确保每个 `Sequence` 的 `durationInFrames` 等于段落长度
-- 更新 `SECTION_WIPES`
-- 更新 `SFX` 时间点
-- 检查 `DARK_SECTIONS` 是否覆盖所有深色场景
+- 更新转场、SFX 和深色段落列表
+- 在 `src/Composition.tsx` 注册自己的 Composition ID 和输出尺寸
 
-编辑 `src/Composition.tsx`：
+通用框架默认只注册 `PackagingSystem`、`StyleLab` 和 `BackgroundTest`；具体视频项目在自己的副本里注册。
 
-- 更新 `durationInFrames`
-- 新建自己的 composition id，例如 `VideoProjectFull02`；仓库内置示例仍使用 `MLExplainerFull`
+## 6. BGM 与音效
 
-## 6. BGM
-
-```bash
-node scripts/generate-full-bgm.mjs
-```
-
-如果新片时长不是 120 秒，需要修改脚本中的时长参数或生成器输出长度。
-
-BGM 的原则：
+通用音效在 `public/sfx/`。BGM 可以使用自己的生成器或授权音乐，原则是：
 
 - 旁白期间自动 duck
 - 结尾有收束
@@ -135,7 +110,6 @@ BGM 的原则：
 
 ```bash
 npx remotion still <CompositionId> local/out/qc/frame-0300.png --frame=300 --scale=0.5 --overwrite
-# 示例片可填 MLExplainerFull
 ```
 
 至少检查：
@@ -145,32 +119,19 @@ npx remotion still <CompositionId> local/out/qc/frame-0300.png --frame=300 --sca
 - 数字卡片
 - 深色/浅色切换
 - 对比卡片
-- 片尾结论卡
-
-渲染完成后：
-
-```bash
-npm run verify:video
-```
+- 片尾结论句
 
 ## 8. 渲染和母带
 
 ```bash
-npm run render:full
-npm run master:full
-npm run verify:video
-```
-
-新项目如果改了输出文件名，可以直接调用通用脚本：
-
-```bash
-node scripts/master-video.mjs local/out/input.mp4 local/out/output-final.mp4 -15.5
-node scripts/verify-video.mjs local/out/output-final.mp4
+npx remotion render <CompositionId> local/out/video-project.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k
+node scripts/master-video.mjs local/out/video-project.mp4 local/out/video-project-final.mp4 -15.5
+node scripts/verify-video.mjs local/out/video-project-final.mp4
 ```
 
 母带目标：
 
-- 响度约 -15.5 到 -16 LUFS
+- 响度约 -15.5 至 -16 LUFS
 - True Peak ≤ -1.0 dBTP
 - 48kHz stereo
 
@@ -182,11 +143,7 @@ node scripts/verify-video.mjs local/out/output-final.mp4
 
 - `local/out/video-project-final.mp4`
 - `local/out/video-project-cover.png`
-- `src/`
-- `public/audio/`
-- `public/sfx/`
-- `scripts/`
-- 配置文件
+- 项目源码与配置
 
 可删除：
 
@@ -203,9 +160,8 @@ node scripts/verify-video.mjs local/out/output-final.mp4
 → 旁白时长正确
 → 字幕不溢出
 → 每段有一个视觉动作
-→ 转场不重复
+→ 转场不重叠
 → 音效不抢旁白
 → 抽帧无遮挡
-→ verify:video 通过
+→ verify-video 通过
 ```
-

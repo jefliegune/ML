@@ -2,8 +2,6 @@
 
 素材库只收录会重复使用的视觉、动效和声音资产。一次性画出来的场景元素留在具体 Scene 中，不升级为公共资产。
 
-> 下表中的 `NetworkGraph`、`CatPortrait`、`DogPortrait` 等组件来自内置示例片，只作为“如何封装领域图形”的案例，不代表项目领域。
-
 风格、色板和动画语法的索引在 [参考库与设计资产](REFERENCE_LIBRARY.md)；本文件只记录已经封装成组件的资产。
 
 ## 背景
@@ -37,9 +35,6 @@
 | 标题 | `Headline` | display / h1 / h2 / h3 |
 | 标签 | `Kicker` | 栏目、章节、资产分类 |
 | 纸卡 | `PaperCard` | 信息卡、对比卡、数据卡 |
-| 字幕条 | `FullCaptionBar` | 逐句旁白、关键词高亮 |
-| 网络图 | `NetworkGraph` | 示例片的节点、传播和连接关系 |
-| 角色 | `CatPortrait` / `DogPortrait` | 示例片的系列角色与例子 |
 | 章节开场 | `ChapterOpener` | 新章节第一屏 |
 | 结尾卡 | `EndSlate` | 结论、系列标识、下期预告 |
 
