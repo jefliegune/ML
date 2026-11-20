@@ -28,6 +28,7 @@
 | 视觉组件 | 纸卡、贴纸、标签、章节模板、转场、纹理 | `src/packaging/` |
 | 动效系统 | 入场、弹出、线条生长、运镜、词级字幕 | `src/packaging/motionPrimitives.tsx` 等 |
 | 素材库 | 8 套色板、51 个风格配方、9 张动画语法卡 | `src/library/catalog.json` |
+| 默认旁白 | 晓晓 +15% 音色、示例音频与通用生成脚本 | `src/audio/voiceProfiles.json`、`scripts/generate-voiceover.mjs` |
 | 素材管理 | 搜索、筛选、预览、标签、备注、归档 | `studio/` |
 | 后期与 QC | loudnorm 母带、编码/帧数/响度检查 | `scripts/master-video.mjs`、`scripts/verify-video.mjs` |
 
@@ -70,6 +71,7 @@ npm run render:stylelab     # 渲染设计资产样张
 npm run master:stylelab
 
 npm run audio               # 重新生成通用音效与预览 BGM
+npm run voice -- --manifest local/projects/my-video/lines.json  # 用默认音色生成旁白与时间轴
 npm run library:import      # 重新生成设计资产 catalog
 ```
 
@@ -97,6 +99,7 @@ npm run library:import      # 重新生成设计资产 catalog
 ├─ src/
 │  ├─ Composition.tsx             通用 Composition 注册
 │  ├─ theme.ts                     基础色板与字体
+│  ├─ audio/                       默认旁白音色配置
 │  ├─ components/                  背景、字幕、通用视觉组件
 │  ├─ packaging/                   可复用视觉包装系统
 │  │  ├─ tokens.ts                 颜色、字号、间距、圆角、阴影、安全区
@@ -141,6 +144,7 @@ npm run library:import      # 重新生成设计资产 catalog
 - 具体项目的文案、配音、时间轴、分镜和成片放在 `local/`。
 - `local/examples/` 保存已归档的示例片源码、素材和生成脚本，不在 Git 中。
 - 新建视频时，建议在 `local/projects/<project-name>/` 下组织私有内容，再把通用组件和 Composition 注册到 `src/`。
+- 项目旁白输出到 `public/projects/<project-name>/`，该目录已被忽略；默认音色示例见 [旁白与语音指南](docs/VOICE_GUIDE.md)。
 - 不要提交 `local/`、`out/`、`dist/` 或任何带具体文案的渲染产物。
 
 ## 质量控制

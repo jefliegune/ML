@@ -62,6 +62,7 @@
 | `ding` | `public/sfx/ding.wav` | 成功、命中、确认 |
 | `impact` | `public/sfx/impact.wav` | 错误、盖章、结论 |
 | `riser` | `public/sfx/riser.wav` | 揭示、结论出现前的蓄力 |
+| 默认旁白示例 | `public/audio/voice-sample.mp3` | 试听默认音色、检查语速与停顿 |
 
 ## 使用顺序
 

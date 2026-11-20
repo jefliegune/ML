@@ -70,7 +70,7 @@ npm run assets
 |---|---|---:|---|
 | 成片与渲染 | `local/out/` | 否 | 成片、母带、封面、包装样张 |
 | 质检帧 | `local/out/qc/` | 是 | 抽帧、拼图、UI 截图 |
-| 旁白与 BGM | `public/audio/` | 是 | 预览 BGM 可提交；具体项目旁白留在 `local/` |
+| 旁白与 BGM | `public/audio/` | 是 | 默认旁白示例与预览 BGM 可提交；项目旁白放 `public/projects/` 并忽略 |
 | 音效 | `public/sfx/` | 是 | 转场、点击、冲击音效 |
 | 文档素材 | `docs/assets/` | 否 | README 和文档引用的图片 |
 | 字体 | `public/fonts/` | 否 | 字体放置说明或本地字体 |

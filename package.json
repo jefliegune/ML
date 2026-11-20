@@ -30,6 +30,7 @@
     "upgrade": "remotion upgrade",
     "lint": "eslint src && tsc",
     "audio": "node scripts/generate-audio.mjs",
+    "voice": "node scripts/generate-voiceover.mjs",
     "library:import": "node scripts/import-reference-libraries.mjs",
     "assets": "node studio/server.mjs",
     "render:packaging": "remotion render PackagingSystem local/out/packaging-system.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k",

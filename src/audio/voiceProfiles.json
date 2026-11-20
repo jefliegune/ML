@@ -1,0 +1,15 @@
+{
+  "profiles": [
+    {
+      "id": "xiaoxiao-default",
+      "label": "晓晓 · 默认科普旁白",
+      "engine": "edge-tts",
+      "voice": "zh-CN-XiaoxiaoNeural",
+      "rate": "+15%",
+      "pitch": "+0Hz",
+      "sample": "audio/voice-sample.mp3",
+      "bestFor": "知识科普、解释类、产品说明",
+      "default": true
+    }
+  ]
+}

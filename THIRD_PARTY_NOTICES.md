@@ -28,6 +28,10 @@ Used for: the 8 colour palettes, 36 style-recipe summaries and 9 animation-gramm
 
 Used for: the names, signature visual features and key techniques of 15 motion-design styles, plus the cue-timeline schema example in `src/library/catalog.json`. No demo film, audio, source file or asset is redistributed.
 
+## Voice sample
+
+`public/audio/voice-sample.mp3` was generated locally with Microsoft Edge TTS (`zh-CN-XiaoxiaoNeural`, `+15%`). It is a neutral demonstration clip only. The repository does not bundle the `edge-tts` package. Confirm Microsoft service terms before commercial use or redistribution.
+
 ## Scope
 
 - The catalog in `src/library/catalog.json` is an adapted, condensed index, not a copy of the upstream repositories.

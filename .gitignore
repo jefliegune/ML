@@ -21,6 +21,7 @@ public/audio/bgm-full.wav
 public/audio/full/
 public/audio/promo/
 public/audio/voice_*.mp3
+public/projects/
 
 # Demo media that should stay local.
 public/vibe/
