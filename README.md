@@ -66,6 +66,12 @@ npm run dev                 # Remotion Studio
 npm run assets              # 本地素材管理器
 npm run lint                # ESLint + TypeScript
 npm run pack:check          # 校验风格包 manifest、入口、色板、预览注册和私有内容隔离
+npm run check               # lint + pack:check + 公共目录边界检查
+npm run check:boundaries    # 禁止 src/ 引用 local/ 和项目私有素材
+npm run check:timeline -- --project <id|path>  # 校验时间轴、字幕窗口和音频文件
+
+npm run pipeline -- --project packaging-system  # 统一入口：检查 → 渲染 → 母带 → 质检
+npm run pipeline -- --project <id|path> --dry-run  # 只打印将执行的命令
 
 npm run render:packaging    # 渲染包装系统样张
 npm run master:packaging    # loudnorm 母带
@@ -125,7 +131,13 @@ npm run library:import      # 重新生成设计资产 catalog
 │     ├─ original-packs.json       1 套原创色板 / 1 个原创风格 / 1 个风格包
 │     ├─ index.ts                  类型、查询函数与只读导出
 │     └─ StyleLab.tsx              设计资产动态样张
-├─ scripts/                        母带、QC、资产导入与通用音频生成
+├─ projects/                       公共样张的项目清单
+├─ schemas/                        video.project.json 的 JSON Schema
+├─ scripts/                        流水线、时间轴检查、母带、QC 与音频生成
+│  ├─ pipeline.mjs                  统一项目入口
+│  ├─ check-timeline.mjs            时间轴与字幕预检
+│  ├─ check-boundaries.mjs          公共/私有目录边界检查
+│  └─ lib/video-project.mjs         项目清单解析与路径约束
 ├─ studio/                         本地素材管理前端
 ├─ public/                         通用音频、音效、字体说明
 ├─ docs/                           制作规范、素材库、检查表
@@ -195,6 +207,19 @@ Remotion render
 
 渲染输出的是**完整视频**，不是单帧。需要单帧检查时用 `remotion still`。
 
+### 项目清单与统一入口
+
+每条视频通过 `video.project.json` 声明入口、Composition、输出路径和质检规格：
+
+```bash
+npm run check:timeline -- --project local/projects/my-video
+npm run pipeline -- --project local/projects/my-video
+```
+
+流水线会先运行公共目录边界检查和时间轴检查，再依次渲染、母带、质检。`--dry-run` 可先查看实际命令，`--skip-render`、`--skip-master`、`--skip-verify` 可控制执行阶段。
+
+字段、路径规则和示例见 [项目清单与统一流水线](docs/PROJECT_MANIFEST.md)。
+
 ### 分步执行
 
 ```bash
@@ -218,6 +243,8 @@ render:packaging → master:packaging → verify:packaging
 ```
 
 脚本使用 `&&` 串行执行：前一步失败，后续步骤不会继续；质检不通过时命令会以非零状态退出。
+
+`pipeline:packaging` 与 `pipeline:stylelab` 现在都是统一流水线的项目别名；新项目优先使用 `npm run pipeline -- --project <id|path>`。
 
 `StyleLab` 也有同样的流程：
 

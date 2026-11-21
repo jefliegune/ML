@@ -1,12 +1,31 @@
 import fs from "node:fs";
 import path from "node:path";
-import {spawnSync} from "node:child_process";
-import {fileURLToPath} from "node:url";
-import {requireBinary} from "./lib/binaries.mjs";
+import { spawnSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
+import { requireBinary } from "./lib/binaries.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const args = process.argv.slice(2);
+const readOption = (name) => {
+  const prefix = "--" + name + "=";
+  const inline = args.find((arg) => arg.startsWith(prefix));
+  if (inline) return inline.slice(prefix.length);
+  const index = args.indexOf("--" + name);
+  return index >= 0 ? args[index + 1] : undefined;
+};
+const readNumber = (name) => {
+  const value = readOption(name);
+  return value == null ? null : Number(value);
+};
+const expected = {
+  width: readNumber("width"),
+  height: readNumber("height"),
+  fps: readNumber("fps"),
+  frames: readNumber("frames"),
+};
 const relativeFile =
-  process.argv[2] ?? "local/out/video-project-final.mp4";
+  args.find((arg) => !arg.startsWith("--")) ??
+  "local/out/video-project-final.mp4";
 const filePath = path.resolve(root, relativeFile);
 const ffprobe = requireBinary("ffprobe", "FFPROBE_PATH");
 const ffmpeg = requireBinary("ffmpeg", "FFMPEG_PATH");
@@ -17,7 +36,7 @@ if (!fs.existsSync(filePath)) {
 }
 
 const run = (command, args) => {
-  const result = spawnSync(command, args, {encoding: "utf8"});
+  const result = spawnSync(command, args, { encoding: "utf8" });
   if (result.error) {
     throw result.error;
   }
@@ -47,24 +66,41 @@ const video = probeData.streams.find((stream) => stream.codec_type === "video");
 const audio = probeData.streams.find((stream) => stream.codec_type === "audio");
 const duration = Number(probeData.format.duration);
 const sizeMB = Number(probeData.format.size) / 1024 / 1024;
-const fpsParts = String(video?.r_frame_rate ?? "0/1").split("/").map(Number);
+const fpsParts = String(video?.r_frame_rate ?? "0/1")
+  .split("/")
+  .map(Number);
 const fps = fpsParts[0] / fpsParts[1];
+const targetWidth = expected.width ?? 1920;
+const targetHeight = expected.height ?? 1080;
+const targetFps = expected.fps ?? 30;
 
 const results = [];
 const check = (name, pass, detail, severity = "FAIL") => {
-  results.push({name, pass, detail, severity: pass ? "PASS" : severity});
+  results.push({ name, pass, detail, severity: pass ? "PASS" : severity });
 };
 
 check("File exists", true, `${relativeFile} / ${sizeMB.toFixed(2)} MB`);
 check("Duration", duration > 1, `${duration.toFixed(3)} s`);
-check("Video codec", video?.codec_name === "h264", video?.codec_name ?? "missing");
+check(
+  "Video codec",
+  video?.codec_name === "h264",
+  video?.codec_name ?? "missing",
+);
 check(
   "Resolution",
-  video?.width === 1920 && video?.height === 1080,
-  `${video?.width ?? 0}x${video?.height ?? 0}`,
+  video?.width === targetWidth && video?.height === targetHeight,
+  `${video?.width ?? 0}x${video?.height ?? 0} / expected ${targetWidth}x${targetHeight}`,
 );
-check("Frame rate", Math.abs(fps - 30) < 0.001, `${fps.toFixed(3)} fps`);
-check("Audio codec", audio?.codec_name === "aac", audio?.codec_name ?? "missing");
+check(
+  "Frame rate",
+  Math.abs(fps - targetFps) < 0.001,
+  `${fps.toFixed(3)} fps / expected ${targetFps}`,
+);
+check(
+  "Audio codec",
+  audio?.codec_name === "aac",
+  audio?.codec_name ?? "missing",
+);
 check(
   "Audio sample rate",
   Number(audio?.sample_rate) === 48000,
@@ -77,7 +113,7 @@ check(
 );
 
 if (video?.nb_read_frames) {
-  const expectedFrames = Math.round(duration * fps);
+  const expectedFrames = expected.frames ?? Math.round(duration * targetFps);
   check(
     "Frame count",
     Math.abs(Number(video.nb_read_frames) - expectedFrames) <= 1,

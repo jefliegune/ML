@@ -1,0 +1,22 @@
+{
+  "$schema": "../schemas/video.project.schema.json",
+  "id": "pixel-arcade",
+  "root": ".",
+  "entry": "src/index.ts",
+  "composition": "PixelArcadeShowcase",
+  "output": "local/out/pixel-arcade.mp4",
+  "master": "local/out/pixel-arcade-final.mp4",
+  "video": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "durationInFrames": 300
+  },
+  "audio": {
+    "targetLufs": -16
+  },
+  "render": {
+    "crf": 18,
+    "concurrency": 8
+  }
+}

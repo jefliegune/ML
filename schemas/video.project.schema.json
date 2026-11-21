@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/code-driven-video/video.project.schema.json",
+  "title": "Code-driven video project",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "root", "entry", "composition", "output"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9_-]+$"
+    },
+    "root": {
+      "type": "string",
+      "description": "Project root relative to the repository root."
+    },
+    "entry": {
+      "type": "string",
+      "description": "Remotion entry file relative to root."
+    },
+    "composition": {
+      "type": "string"
+    },
+    "timeline": {
+      "type": "string",
+      "description": "Generated timeline JSON relative to root."
+    },
+    "timelineTypes": {
+      "type": "string",
+      "description": "Generated timeline TypeScript file relative to root."
+    },
+    "output": {
+      "type": "string",
+      "description": "Pre-master MP4 under local/out/ or out/."
+    },
+    "master": {
+      "type": "string",
+      "description": "Mastered MP4 under local/out/ or out/."
+    },
+    "video": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["width", "height", "fps", "durationInFrames"],
+      "properties": {
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "fps": { "type": "integer", "minimum": 1 },
+        "durationInFrames": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "audio": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "targetLufs": { "type": "number", "minimum": -24, "maximum": -10 }
+      }
+    },
+    "render": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "codec": { "type": "string" },
+        "crf": { "type": "integer", "minimum": 0, "maximum": 51 },
+        "pixelFormat": { "type": "string" },
+        "audioCodec": { "type": "string" },
+        "audioBitrate": { "type": "string" },
+        "concurrency": { "type": "integer", "minimum": 1 }
+      }
+    }
+  }
+}

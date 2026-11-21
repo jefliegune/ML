@@ -1,8 +1,8 @@
 import fs from "node:fs";
 import path from "node:path";
-import {spawn} from "node:child_process";
-import {fileURLToPath} from "node:url";
-import {requireBinary} from "./lib/binaries.mjs";
+import { spawn } from "node:child_process";
+import { fileURLToPath } from "node:url";
+import { requireBinary } from "./lib/binaries.mjs";
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const args = process.argv.slice(2);
@@ -16,7 +16,9 @@ const readArg = (name) => {
 
 const manifestArg = readArg("--manifest");
 if (!manifestArg) {
-  console.error("Usage: npm run voice -- --manifest local/projects/<name>/lines.json [--force]");
+  console.error(
+    "Usage: npm run voice -- --manifest local/projects/<name>/lines.json [--force]",
+  );
   process.exit(1);
 }
 
@@ -35,7 +37,8 @@ if (!/^[a-zA-Z0-9_-]+$/.test(project)) {
 
 const profilePath = path.join(root, "src", "audio", "voiceProfiles.json");
 const profiles = JSON.parse(fs.readFileSync(profilePath, "utf8")).profiles;
-const defaultProfile = profiles.find((profile) => profile.default) ?? profiles[0];
+const defaultProfile =
+  profiles.find((profile) => profile.default) ?? profiles[0];
 const fps = Number(manifest.fps ?? 30);
 const voice = manifest.voice ?? defaultProfile.voice;
 const rate = manifest.rate ?? defaultProfile.rate;
@@ -70,7 +73,7 @@ const run = (command, commandArgs, env = process.env) =>
     child.on("error", reject);
     child.on("close", (code) => {
       if (code === 0) {
-        resolve({stdout, stderr});
+        resolve({ stdout, stderr });
       } else {
         reject(new Error(command + " exited with " + code + "\n" + stderr));
       }
@@ -78,15 +81,19 @@ const run = (command, commandArgs, env = process.env) =>
   });
 
 const ffprobe = requireBinary("ffprobe", "FFPROBE_PATH");
-const python = process.env.PYTHON ?? (process.platform === "win32" ? "python" : "python3");
+const python =
+  process.env.PYTHON ?? (process.platform === "win32" ? "python" : "python3");
 const siblingTools = path.resolve(root, "..", ".tools");
 const pythonPath =
   process.env.EDGE_TTS_PYTHONPATH ??
   (fs.existsSync(siblingTools) ? siblingTools : "");
-const ttsEnv = pythonPath ? {...process.env, PYTHONPATH: pythonPath} : process.env;
+const ttsEnv = pythonPath
+  ? { ...process.env, PYTHONPATH: pythonPath }
+  : process.env;
 
 const resolveAudioRel = (line) => {
-  const relative = line.file ?? "projects/" + project + "/audio/" + line.id + ".mp3";
+  const relative =
+    line.file ?? "projects/" + project + "/audio/" + line.id + ".mp3";
   const normalized = relative.replace(/\\/g, "/");
   const absolute = path.resolve(publicRoot, normalized);
   if (!absolute.startsWith(publicRoot + path.sep)) {
@@ -96,7 +103,7 @@ const resolveAudioRel = (line) => {
 };
 
 const getDuration = async (filePath) => {
-  const {stdout} = await run(ffprobe, [
+  const { stdout } = await run(ffprobe, [
     "-v",
     "error",
     "-show_entries",
@@ -139,20 +146,14 @@ const pending = allLines.filter((line) => {
 
 const ensureLine = async (line) => {
   const absolute = path.join(publicRoot, line.file);
-  fs.mkdirSync(path.dirname(absolute), {recursive: true});
-  const ttsArgs = [
-    "-m",
-    "edge_tts",
-    "--voice",
-    voice,
-    "--rate=" + rate,
-  ];
+  fs.mkdirSync(path.dirname(absolute), { recursive: true });
+  const ttsArgs = ["-m", "edge_tts", "--voice", voice, "--rate=" + rate];
   if (pitch && pitch !== "+0Hz") {
     ttsArgs.push("--pitch=" + pitch);
   }
   ttsArgs.push("--text", line.text, "--write-media", absolute);
   await run(python, ttsArgs, ttsEnv);
-  return {id: line.id, file: line.file};
+  return { id: line.id, file: line.file };
 };
 
 for (let index = 0; index < pending.length; index += 3) {
@@ -223,6 +224,7 @@ for (const section of sections) {
 
   const sectionStart = cursor;
   const sectionEnd = sectionStart + sectionFrames;
+  const timings = [];
   let start = sectionStart + leadFrames;
 
   for (let index = 0; index < lineCount; index++) {
@@ -232,24 +234,61 @@ for (const section of sections) {
     }
     const durationFrames = Math.ceil(durations[index] * fps);
     const end = start + durationFrames;
+    const roundedStart = Math.round(start);
+    const roundedEnd = Math.round(end);
+
+    if (index > 0 && roundedStart < timings[index - 1].end) {
+      throw new Error(
+        section.id +
+          " line " +
+          line.id +
+          " starts before the previous line ends",
+      );
+    }
+    if (roundedEnd > sectionEnd) {
+      throw new Error(
+        section.id + " line " + line.id + " ends outside the section budget",
+      );
+    }
+
+    timings.push({ line, start: roundedStart, end: roundedEnd });
+    start = end + gapFrames;
+  }
+
+  for (let index = 0; index < timings.length; index++) {
+    const timing = timings[index];
+    const next = timings[index + 1];
+    const nextCaptionStart = next
+      ? Math.max(sectionStart, next.start - 2)
+      : sectionEnd;
+    const captionStart = Math.max(sectionStart, timing.start - 2);
+    const captionEnd = Math.min(
+      sectionEnd,
+      nextCaptionStart,
+      timing.end + Math.max(10, Math.round(gapFrames) - 2),
+    );
+
+    if (captionEnd < timing.end || captionEnd <= captionStart) {
+      throw new Error(
+        section.id +
+          " line " +
+          timing.line.id +
+          " has no safe caption window; increase gapFrames or section targetFrames",
+      );
+    }
 
     linesOut.push({
-      id: line.id,
+      id: timing.line.id,
       section: section.id,
-      file: line.file,
-      text: line.text,
-      highlights: line.highlights ?? [],
+      file: timing.line.file,
+      text: timing.line.text,
+      highlights: timing.line.highlights ?? [],
       durationSeconds: Number(durations[index].toFixed(3)),
-      startFrame: Math.round(start),
-      endFrame: Math.round(end),
-      captionStartFrame: Math.max(sectionStart, Math.round(start) - 2),
-      captionEndFrame: Math.min(
-        sectionEnd,
-        Math.round(end) + Math.max(10, Math.round(gapFrames) - 2),
-      ),
+      startFrame: timing.start,
+      endFrame: timing.end,
+      captionStartFrame: captionStart,
+      captionEndFrame: captionEnd,
     });
-
-    start = end + gapFrames;
   }
 
   sectionsOut.push({
@@ -284,11 +323,8 @@ const generated = {
   lines: linesOut,
 };
 
-fs.mkdirSync(outDir, {recursive: true});
-fs.writeFileSync(
-  timelineJsonPath,
-  JSON.stringify(generated, null, 2) + "\n",
-);
+fs.mkdirSync(outDir, { recursive: true });
+fs.writeFileSync(timelineJsonPath, JSON.stringify(generated, null, 2) + "\n");
 
 const ts = `// Generated by scripts/generate-voiceover.mjs. Private local file.
 export type VoiceLineTiming = {
@@ -313,7 +349,7 @@ export type VoiceSectionTiming = {
 };
 
 export const VOICE_META = ${JSON.stringify(
-  {project, fps, voice, rate, durationInFrames: cursor},
+  { project, fps, voice, rate, durationInFrames: cursor },
   null,
   2,
 )} as const;

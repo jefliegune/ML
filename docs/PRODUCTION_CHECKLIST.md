@@ -68,10 +68,13 @@
 ## H. 技术验收
 
 ```bash
-npm run lint
-node scripts/verify-video.mjs local/out/<成片>.mp4
+npm run check
+npm run check:timeline -- --project <id|path>
+npm run pipeline -- --project <id|path>
 ```
 
+- [ ] `video.project.json` 的入口、Composition、输出路径和视频规格正确
+- [ ] 时间轴 section 连续，字幕窗口无重叠，旁白文件全部存在
 - [ ] 1920×1080
 - [ ] 30fps
 - [ ] H.264
@@ -99,7 +102,8 @@ node scripts/verify-video.mjs local/out/<成片>.mp4
 - [ ] `src/Composition.tsx` 已注册 10 秒预览 Composition。
 - [ ] `docs/ASSET_LIBRARY.md` 已补资产说明。
 - [ ] `npm run pack:check` 通过。
-- [ ] `npm run lint` 通过。
+- [ ] `npm run check` 通过。
+- [ ] `npm run check:boundaries` 确认 `src/` 没有引用私有项目内容。
 - [ ] 已抽查预览帧，确认拆包后没有叠层、遮挡或字幕溢出。
 - [ ] 具体文案、配音、时间轴、成片和 QC 帧没有进入 `src/packs/`。
 

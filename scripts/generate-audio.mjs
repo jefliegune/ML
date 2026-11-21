@@ -456,8 +456,15 @@ const makeSfx = () => {
   }
 };
 
-makeMusic();
-makeSfx();
+const isMain =
+  process.argv[1] &&
+  path.resolve(process.argv[1]) === fileURLToPath(import.meta.url);
+
+if (isMain) {
+  makeMusic();
+  makeSfx();
+  console.log("Generated original BGM and SFX in public/audio and public/sfx.");
+}
 export {
   SAMPLE_RATE,
   TAU,
@@ -477,5 +484,4 @@ export {
   applyFade,
   writeWav,
 };
-console.log("Generated original BGM and SFX in public/audio and public/sfx.");
 

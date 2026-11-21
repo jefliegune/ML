@@ -29,6 +29,7 @@ local/projects/<project-name>/
 ├─ lines.json                  # 旁白清单，私有
 ├─ timeline.generated.json     # 脚本生成的精确时间轴，私有
 ├─ timeline.generated.ts       # 场景读取的时间轴，私有
+├─ video.project.json          # 入口、Composition、输出与质检规格，私有
 ├─ SceneXxx.tsx                # 这一条片专用的场景，私有
 ├─ Root.tsx                    # 这一条片的 Composition 入口，私有
 └─ README.md                   # 项目说明，可选
@@ -186,7 +187,17 @@ npx remotion still local/projects/<project-name>/Root.tsx <CompositionId> local/
 
 ## 8. 渲染、母带和质检
 
-三步固定顺序，后一步依赖前一步：
+先在 `video.project.json` 声明项目规格，再运行统一流水线：
+
+```bash
+npm run check:timeline -- --project local/projects/<project-name>
+npm run pipeline -- --project local/projects/<project-name> --dry-run
+npm run pipeline -- --project local/projects/<project-name>
+```
+
+流水线会先检查公共目录边界和时间轴，再依次执行渲染、母带和质检。字段说明见 [项目清单与统一流水线](PROJECT_MANIFEST.md)。
+
+需要单独调试时，三步仍可手动执行，后一步依赖前一步：
 
 ```bash
 npx remotion render local/projects/<project-name>/Root.tsx <CompositionId> local/out/<project-name>.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k
