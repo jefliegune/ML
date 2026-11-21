@@ -1,7 +1,10 @@
 import catalogJson from "./catalog.json";
+import huashuJson from "./huashu.json";
 import originalPacksJson from "./original-packs.json";
 
-export type StyleFamily = "mg" | "huashu" | "original";
+export * from "./HuashuFonts";
+
+export type StyleFamily = "huashu" | "original";
 
 export interface LibraryPalette {
   id: string;
@@ -15,6 +18,7 @@ export interface LibraryPalette {
     accent: string;
     accent2: string;
   };
+  docPath?: string;
   source: string;
 }
 
@@ -28,6 +32,7 @@ export interface LibraryStyle {
   motion: string;
   transition: string;
   weakness: string;
+  cardPath?: string;
   source: string;
   english?: string;
   original?: string;
@@ -42,6 +47,7 @@ export interface LibraryGrammar {
   id: string;
   name: string;
   oneLiner: string;
+  cardPath?: string;
   source: string;
 }
 
@@ -84,7 +90,7 @@ export const SOURCES = [
   ...(originalPacksJson.sources as LibrarySource[]),
 ];
 export const PACKS = originalPacksJson.packs as LibraryPack[];
-export const CUE_SCHEMA = catalogJson.cueSchema;
+export const HUASHU_LIBRARY = huashuJson;
 
 export const getPalette = (id: string | null | undefined): LibraryPalette =>
   PALETTES.find((palette) => palette.id === id) ?? PALETTES[0];
@@ -95,8 +101,16 @@ export const getStyle = (id: string): LibraryStyle | undefined =>
 export const getGrammar = (id: string): LibraryGrammar | undefined =>
   GRAMMARS.find((grammar) => grammar.id === id);
 
+export const getHuashuStyleCard = (id: string) =>
+  HUASHU_LIBRARY.styles.find((style) => style.id === id);
+
+export const getHuashuGrammarCard = (id: string) =>
+  HUASHU_LIBRARY.grammars.find((grammar) => grammar.id === id);
+
+export const getHuashuFont = (family: string) =>
+  HUASHU_LIBRARY.fonts.find((font) => font.family === family);
+
 export const STYLE_COUNTS = {
-  mg: STYLES.filter((style) => style.family === "mg").length,
   huashu: STYLES.filter((style) => style.family === "huashu").length,
   original: STYLES.filter((style) => style.family === "original").length,
   palettes: PALETTES.length,

@@ -1,0 +1,1107 @@
+{
+  "version": 1,
+  "importedAt": "2026-11-22",
+  "source": {
+    "id": "huashu-art-motion",
+    "name": "Huashu Art Motion",
+    "author": "alchaincyf (花叔)",
+    "repo": "https://github.com/alchaincyf/huashu-art-motion",
+    "commit": "a97c45018d46e950d56d61981138e08f4e092909",
+    "commitDate": "2026-11-17T20:14:06-10:00",
+    "commitSubject": "docs: sync author page",
+    "license": "MIT",
+    "fontLicense": "SIL OFL 1.1",
+    "note": "Full MIT-licensed style cards, grammar cards and method documents are imported. Character artwork, overview images, showcase GIFs and demo videos are intentionally excluded."
+  },
+  "counts": {
+    "styles": 36,
+    "grammars": 9,
+    "palettes": 8,
+    "methods": 19,
+    "optional": 4,
+    "fonts": 45
+  },
+  "styles": [
+    {
+      "id": "hs-09-postimp",
+      "cardId": "09_postimp",
+      "name": "梵高",
+      "quality": 3,
+      "technique": "流场笔触三遍（墙竖长/地透视/其余）＋区域色板＋描边；道具层；visibleLines 补线",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/09_postimp.md",
+      "source": "huashu-art-motion/references/风格配方/09_postimp.md"
+    },
+    {
+      "id": "hs-08-impressionism",
+      "cardId": "08_impressionism",
+      "name": "印象派",
+      "quality": 2,
+      "technique": "区域粉彩色板短笔触（位置固定）、窗景细笔",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/08_impressionism.md",
+      "source": "huashu-art-motion/references/风格配方/08_impressionism.md"
+    },
+    {
+      "id": "hs-29-seurat",
+      "cardId": "29_seurat",
+      "name": "修拉点彩",
+      "quality": 2,
+      "technique": "视觉混色：21 色纯色板按比例并置、补色点、等大点",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/29_seurat.md",
+      "source": "huashu-art-motion/references/风格配方/29_seurat.md"
+    },
+    {
+      "id": "hs-25-ghibli",
+      "cardId": "25_ghibli",
+      "name": "吉卜力（既有水彩背景＋整体语言研究）",
+      "quality": 2,
+      "technique": "水彩洗染（透明叠色＋水痕边）、赛璐璐月牙影",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/25_ghibli.md",
+      "source": "huashu-art-motion/references/风格配方/25_ghibli.md"
+    },
+    {
+      "id": "hs-17-ink",
+      "cardId": "17_ink",
+      "name": "中国水墨写意",
+      "quality": 2,
+      "technique": "毛笔笔锋飞白、墨晕 blur 洇开、留白、钤印",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/17_ink.md",
+      "source": "huashu-art-motion/references/风格配方/17_ink.md"
+    },
+    {
+      "id": "hs-13-pop",
+      "cardId": "13_pop",
+      "name": "利希滕斯坦波普",
+      "quality": 3,
+      "technique": "本戴点 createPattern、粗黑描边",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/13_pop.md",
+      "source": "huashu-art-motion/references/风格配方/13_pop.md"
+    },
+    {
+      "id": "hs-14-8bit",
+      "cardId": "14_8bit",
+      "name": "8-bit 像素",
+      "quality": 3,
+      "technique": "240×135 逐像素、14 色板、部件 1px 黑边",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/14_8bit.md",
+      "source": "huashu-art-motion/references/风格配方/14_8bit.md"
+    },
+    {
+      "id": "hs-26-vaporwave",
+      "cardId": "26_vaporwave",
+      "name": "蒸汽波/赛博霓虹",
+      "quality": 3,
+      "technique": "霓虹双色辉光、透视网格、VHS 通道分离后期、路径画灯管假名",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/26_vaporwave.md",
+      "source": "huashu-art-motion/references/风格配方/26_vaporwave.md"
+    },
+    {
+      "id": "hs-35-shinkai",
+      "cardId": "35_shinkai",
+      "name": "新海诚光影",
+      "quality": 2,
+      "technique": "积雨云、丁达尔光柱、赛璐珞硬阴影带、光晕",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/35_shinkai.md",
+      "source": "huashu-art-motion/references/风格配方/35_shinkai.md"
+    },
+    {
+      "id": "hs-32-rembrandt",
+      "cardId": "32_rembrandt",
+      "name": "伦勃朗明暗",
+      "quality": 1,
+      "technique": "光照图整幅相乘、窗光＋烛光",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/32_rembrandt.md",
+      "source": "huashu-art-motion/references/风格配方/32_rembrandt.md"
+    },
+    {
+      "id": "hs-11-cubism",
+      "cardId": "11_cubism",
+      "name": "分析立体主义",
+      "quality": 2,
+      "technique": "半透明渐变面叠空间、切面器（三角不裁剪）、毕加索式双视角脸",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/11_cubism.md",
+      "source": "huashu-art-motion/references/风格配方/11_cubism.md"
+    },
+    {
+      "id": "hs-30-matisse",
+      "cardId": "30_matisse",
+      "name": "马蒂斯剪纸",
+      "quality": 3,
+      "technique": "剪刀边不规则、钉纸投影、饱和平涂",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/30_matisse.md",
+      "source": "huashu-art-motion/references/风格配方/30_matisse.md"
+    },
+    {
+      "id": "hs-16-2026",
+      "cardId": "16_2026",
+      "name": "当代扁平插画",
+      "quality": 3,
+      "technique": "颗粒点彩密度函数、无描边色块",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/16_2026.md",
+      "source": "huashu-art-motion/references/风格配方/16_2026.md"
+    },
+    {
+      "id": "hs-22-constructivism",
+      "cardId": "22_constructivism",
+      "name": "俄国构成主义（窄用途）",
+      "quality": 3,
+      "technique": "灰度照片网点（可变点径 45°）、红楔黑圆、路径画西里尔方块字",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/22_constructivism.md",
+      "source": "huashu-art-motion/references/风格配方/22_constructivism.md"
+    },
+    {
+      "id": "hs-12-bauhaus",
+      "cardId": "12_bauhaus",
+      "name": "包豪斯（窄用途）",
+      "quality": 3,
+      "technique": "纯几何构成、施莱默人偶关节盘",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/12_bauhaus.md",
+      "source": "huashu-art-motion/references/风格配方/12_bauhaus.md"
+    },
+    {
+      "id": "hs-04-roman",
+      "cardId": "04_roman",
+      "name": "庞贝马赛克（窄用途）",
+      "quality": 3,
+      "technique": "距离场沿轮廓排石块、加权 L∞ Voronoi 灰浆、布局一次算颜色每帧流过",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/04_roman.md",
+      "source": "huashu-art-motion/references/风格配方/04_roman.md"
+    },
+    {
+      "id": "hs-15-raytrace",
+      "cardId": "15_raytrace",
+      "name": "早期光追 CGI（窄用途）",
+      "quality": 2,
+      "technique": "统一塑料着色、逐像素棋盘倒影、铬球环境映射",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/15_raytrace.md",
+      "source": "huashu-art-motion/references/风格配方/15_raytrace.md"
+    },
+    {
+      "id": "hs-01-cave",
+      "cardId": "01_cave",
+      "name": "洞穴岩画",
+      "quality": 3,
+      "technique": "噪声浮雕岩壁＋炭点毛边＋赭石吃进岩面",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/01_cave.md",
+      "source": "huashu-art-motion/references/风格配方/01_cave.md"
+    },
+    {
+      "id": "hs-02-egypt",
+      "cardId": "02_egypt",
+      "name": "埃及墓室壁画",
+      "quality": 3,
+      "technique": "侧脸正面眼程式、平涂细勾线、24 个手写象形字",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/02_egypt.md",
+      "source": "huashu-art-motion/references/风格配方/02_egypt.md"
+    },
+    {
+      "id": "hs-03-greek",
+      "cardId": "03_greek",
+      "name": "阿提卡黑绘",
+      "quality": 3,
+      "technique": "黑剪影＋陶土色刻线＋紫红带白点",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/03_greek.md",
+      "source": "huashu-art-motion/references/风格配方/03_greek.md"
+    },
+    {
+      "id": "hs-05-gothic",
+      "cardId": "05_gothic",
+      "name": "哥特泥金手抄本",
+      "quality": 3,
+      "technique": "逐像素金箔（拉丝＋压花错 1px 亮线）、金色度遮罩高光",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/05_gothic.md",
+      "source": "huashu-art-motion/references/风格配方/05_gothic.md"
+    },
+    {
+      "id": "hs-06-renaissance",
+      "cardId": "06_renaissance",
+      "name": "文艺复兴晕涂",
+      "quality": 2,
+      "technique": "整层轻模糊＋高不透明清晰层、龟裂纹/画布纹/黄釉",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/06_renaissance.md",
+      "source": "huashu-art-motion/references/风格配方/06_renaissance.md"
+    },
+    {
+      "id": "hs-10-nouveau",
+      "cardId": "10_nouveau",
+      "name": "慕夏新艺术",
+      "quality": 3,
+      "technique": "可变线宽路径（外粗内细）、剪影错位垫底",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/10_nouveau.md",
+      "source": "huashu-art-motion/references/风格配方/10_nouveau.md"
+    },
+    {
+      "id": "hs-18-klimt",
+      "cardId": "18_klimt",
+      "name": "克里姆特金色时期",
+      "quality": 3,
+      "technique": "复用哥特金箔、螺旋/眼形纹样、写实脸配平面金袍",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/18_klimt.md",
+      "source": "huashu-art-motion/references/风格配方/18_klimt.md"
+    },
+    {
+      "id": "hs-19-munch",
+      "cardId": "19_munch",
+      "name": "蒙克表现主义",
+      "quality": 2,
+      "technique": "长弯流线笔（沿流场走 20–30 步）、按行正弦 warp 整个世界",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/19_munch.md",
+      "source": "huashu-art-motion/references/风格配方/19_munch.md"
+    },
+    {
+      "id": "hs-20-dunhuang",
+      "cardId": "20_dunhuang",
+      "name": "敦煌壁画",
+      "quality": 2,
+      "technique": "土红底矿物色、剥落斑（只在背景）、saturation 褪色",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/20_dunhuang.md",
+      "source": "huashu-art-motion/references/风格配方/20_dunhuang.md"
+    },
+    {
+      "id": "hs-21-kusama",
+      "cardId": "21_kusama",
+      "name": "草间弥生波点",
+      "quality": 3,
+      "technique": "手绘不规则圆、六角网格按真实周期取模",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/21_kusama.md",
+      "source": "huashu-art-motion/references/风格配方/21_kusama.md"
+    },
+    {
+      "id": "hs-23-dali",
+      "cardId": "23_dali",
+      "name": "达利超现实",
+      "quality": 2,
+      "technique": "软钟变形、长影子剪切仿射",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/23_dali.md",
+      "source": "huashu-art-motion/references/风格配方/23_dali.md"
+    },
+    {
+      "id": "hs-24-hopper",
+      "cardId": "24_hopper",
+      "name": "霍珀美国现实主义",
+      "quality": 3,
+      "technique": "双版本光影裁切（亮版/暗版按光块 clip）、硬边光斑",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/24_hopper.md",
+      "source": "huashu-art-motion/references/风格配方/24_hopper.md"
+    },
+    {
+      "id": "hs-27-kirby",
+      "cardId": "27_kirby",
+      "name": "漫威 Kirby 银河时代",
+      "quality": 2,
+      "technique": "四色网点、套色错位、黑块阴影羽化排线、krackle 能量点",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/27_kirby.md",
+      "source": "huashu-art-motion/references/风格配方/27_kirby.md"
+    },
+    {
+      "id": "hs-28-monet",
+      "cardId": "28_monet",
+      "name": "莫奈睡莲与日本桥",
+      "quality": 2,
+      "technique": "短笔触水面倒影、光在水面颤动",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/28_monet.md",
+      "source": "huashu-art-motion/references/风格配方/28_monet.md"
+    },
+    {
+      "id": "hs-31-haring",
+      "cardId": "31_haring",
+      "name": "凯斯·哈林",
+      "quality": 3,
+      "technique": "粗黑等宽线、放射动作线",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/31_haring.md",
+      "source": "huashu-art-motion/references/风格配方/31_haring.md"
+    },
+    {
+      "id": "hs-33-rubberhose",
+      "cardId": "33_rubberhose",
+      "name": "1930 橡皮管卡通",
+      "quality": 3,
+      "technique": "派切眼、面条臂、白手套、12fps 步进、胶片划痕闪烁",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/33_rubberhose.md",
+      "source": "huashu-art-motion/references/风格配方/33_rubberhose.md"
+    },
+    {
+      "id": "hs-34-shadowpuppet",
+      "cardId": "34_shadowpuppet",
+      "name": "中国皮影",
+      "quality": 3,
+      "technique": "半透明牛皮镂空、铆钉关节、10fps 步进、幕后油灯",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/34_shadowpuppet.md",
+      "source": "huashu-art-motion/references/风格配方/34_shadowpuppet.md"
+    },
+    {
+      "id": "hs-36-picasso-blue",
+      "cardId": "36_picasso_blue",
+      "name": "毕加索蓝色时期",
+      "quality": 2,
+      "technique": "单色蓝调、宽笔触、普鲁士蓝粗轮廓、人体拉长",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/36_picasso_blue.md",
+      "source": "huashu-art-motion/references/风格配方/36_picasso_blue.md"
+    },
+    {
+      "id": "hs-37-rick-morty",
+      "cardId": "37_rick_morty",
+      "name": "Rick & Morty",
+      "quality": 2,
+      "technique": "SVG圆角深灰细描边、平涂、背景斑驳",
+      "palette": null,
+      "card": "docs/reference/huashu/风格配方/37_rick_morty.md",
+      "source": "huashu-art-motion/references/风格配方/37_rick_morty.md"
+    }
+  ],
+  "grammars": [
+    {
+      "id": "t1-3b1b",
+      "name": "3Blue1Brown 式数学／概念可视化",
+      "oneLiner": "黑底上只放「正在讲的那一个东西」，用平滑形变（Transform）把上一个概念直接变成下一个，颜色＝概念的名字，全片几乎不切。",
+      "card": "docs/reference/huashu/动画语法/t1_3b1b.md",
+      "source": "huashu-art-motion/references/动画语法/t1_3b1b.md"
+    },
+    {
+      "id": "t2-keynote-ui",
+      "name": "发布会式界面与渐变动效",
+      "oneLiner": "一屏一件事，产品本身（截图、录屏、实物）当主角，名词和数字在口播说到时落定；字收紧，弹簧无回弹或轻回弹。",
+      "card": "docs/reference/huashu/动画语法/t2_keynote_ui.md",
+      "source": "huashu-art-motion/references/动画语法/t2_keynote_ui.md"
+    },
+    {
+      "id": "t3-finance-chart",
+      "name": "财经数据图表动画",
+      "oneLiner": "先搭坐标系、再让数据「长」出来、最后只标一件事；一个颜色讲主角、其余变灰；数值永远诚实（柱从 0 起、单位和来源写在图上），动画只决定「怎么出现」，不改变「是多少」。",
+      "card": "docs/reference/huashu/动画语法/t3_finance_chart.md",
+      "source": "huashu-art-motion/references/动画语法/t3_finance_chart.md"
+    },
+    {
+      "id": "y1",
+      "name": "Kurzgesagt 扁平科普",
+      "oneLiner": "把一个抽象概念画成一个具体的物，放进能无限缩放的发光世界里，相机在尺度之间穿行；环境层（星、粒子）可以一直轻轻动，主体和信息在口播节点上发生变化，落定后停住。",
+      "card": "docs/reference/huashu/动画语法/y1_kurzgesagt.md",
+      "source": "huashu-art-motion/references/动画语法/y1_kurzgesagt.md"
+    },
+    {
+      "id": "y2",
+      "name": "Vox 式拼贴解说",
+      "oneLiner": "把论证摆在一张有真实材料的桌面上——剪报、照片、文件，相机像调查记者的眼睛在桌上移动；线和笔一顿一顿地画上去，证据感来自「这些东西是真的被放在这里的」。",
+      "card": "docs/reference/huashu/动画语法/y2_vox.md",
+      "source": "huashu-art-motion/references/动画语法/y2_vox.md"
+    },
+    {
+      "id": "y3",
+      "name": "白板手绘解说（RSA Animate 型）",
+      "oneLiner": "讲者说一句，手就在一张大白板上写一句、画一个图；相机跟着论证在板上移动，最后拉远，观众看到整场论证是一张图。",
+      "card": "docs/reference/huashu/动画语法/y3_whiteboard.md",
+      "source": "huashu-art-motion/references/动画语法/y3_whiteboard.md"
+    },
+    {
+      "id": "y4",
+      "name": "故事型简笔角色动画（YouTube storytime animation）",
+      "oneLiner": "口播是主角，画面是给口播配的「表情包」——角色在几个姿势之间快切（0.1 秒）然后定住，笑点靠切到反应大特写、并在那一下里闭嘴。",
+      "card": "docs/reference/huashu/动画语法/y4_storytime.md",
+      "source": "huashu-art-motion/references/动画语法/y4_storytime.md"
+    },
+    {
+      "id": "y5",
+      "name": "动态文字排版 / 信息图动效（kinetic typography）",
+      "oneLiner": "字就是演员——每个关键词踩一个重音砸进来，主词大到一眼读完，其余的字从「槽」里升起给耳朵对位；画面里永远只有一个焦点，镜头和底纹一直在动，字落定后不动。",
+      "card": "docs/reference/huashu/动画语法/y5_kinetic_type.md",
+      "source": "huashu-art-motion/references/动画语法/y5_kinetic_type.md"
+    },
+    {
+      "id": "y6",
+      "name": "讲解员式财经科普",
+      "oneLiner": "一个卡通讲解员在纸面、图表和关键词之间串联信息。适合商业史、产品机制和带情绪反应的知识讲解。参考代码在`scripts/engine/reference_films/spacex/spacex_lin/`；这是第9种语法卡，目前没有独立参数化片段，也不附角色sprite。",
+      "card": "docs/reference/huashu/动画语法/y6_presenter_explainer.md",
+      "source": "huashu-art-motion/references/动画语法/y6_presenter_explainer.md"
+    }
+  ],
+  "palettes": [
+    {
+      "id": "paper",
+      "name": "纸本",
+      "bestFor": "人文、历史、读书、解释一个道理",
+      "colors": {
+        "bg": "#F3EDE2",
+        "surface": "#FBF8F2",
+        "ink": "#1B1A17",
+        "sub": "#6B655B",
+        "accent": "#C8402F",
+        "accent2": "#2F5D62"
+      },
+      "docPath": "docs/reference/huashu/色板.md",
+      "source": "huashu-art-motion/references/色板.md",
+      "doc": "docs/reference/huashu/色板.md"
+    },
+    {
+      "id": "poster",
+      "name": "海报黄",
+      "bestFor": "观点、冲突、要一句话砸进去的科普",
+      "colors": {
+        "bg": "#FFD23F",
+        "surface": "#FFF6D6",
+        "ink": "#111111",
+        "sub": "#4A4433",
+        "accent": "#FF5A36",
+        "accent2": "#14213D"
+      },
+      "docPath": "docs/reference/huashu/色板.md",
+      "source": "huashu-art-motion/references/色板.md",
+      "doc": "docs/reference/huashu/色板.md"
+    },
+    {
+      "id": "ink",
+      "name": "深墨",
+      "bestFor": "科技、夜景、严肃话题",
+      "colors": {
+        "bg": "#121417",
+        "surface": "#1E2226",
+        "ink": "#F2EFE8",
+        "sub": "#A39E93",
+        "accent": "#F2B33D",
+        "accent2": "#5FB3A1"
+      },
+      "docPath": "docs/reference/huashu/色板.md",
+      "source": "huashu-art-motion/references/色板.md",
+      "doc": "docs/reference/huashu/色板.md"
+    },
+    {
+      "id": "navy",
+      "name": "海军",
+      "bestFor": "产品、数据、手机与电子设备（平涂，不渐变）",
+      "colors": {
+        "bg": "#0D1B2A",
+        "surface": "#16293D",
+        "ink": "#EEF3F6",
+        "sub": "#8FA3B3",
+        "accent": "#5CC8E0",
+        "accent2": "#F2A93B"
+      },
+      "docPath": "docs/reference/huashu/色板.md",
+      "source": "huashu-art-motion/references/色板.md",
+      "doc": "docs/reference/huashu/色板.md"
+    },
+    {
+      "id": "bauhaus",
+      "name": "包豪斯",
+      "bestFor": "设计、结构、几何、流程",
+      "colors": {
+        "bg": "#EFE9DD",
+        "surface": "#FFFFFF",
+        "ink": "#111111",
+        "sub": "#555555",
+        "accent": "#D62828",
+        "accent2": "#1D4E89"
+      },
+      "docPath": "docs/reference/huashu/色板.md",
+      "source": "huashu-art-motion/references/色板.md",
+      "doc": "docs/reference/huashu/色板.md"
+    },
+    {
+      "id": "snow",
+      "name": "雪原",
+      "bestFor": "冬天、医疗、清洁、实验室",
+      "colors": {
+        "bg": "#E9EEF0",
+        "surface": "#FFFFFF",
+        "ink": "#1F2A30",
+        "sub": "#5E6B72",
+        "accent": "#D9482B",
+        "accent2": "#3E7C8C"
+      },
+      "docPath": "docs/reference/huashu/色板.md",
+      "source": "huashu-art-motion/references/色板.md",
+      "doc": "docs/reference/huashu/色板.md"
+    },
+    {
+      "id": "wood",
+      "name": "暖木",
+      "bestFor": "生活、厨房、手作、家里的事",
+      "colors": {
+        "bg": "#EDE3D1",
+        "surface": "#F7F1E6",
+        "ink": "#2B2622",
+        "sub": "#7A6E62",
+        "accent": "#C4552D",
+        "accent2": "#3F5B4B"
+      },
+      "docPath": "docs/reference/huashu/色板.md",
+      "source": "huashu-art-motion/references/色板.md",
+      "doc": "docs/reference/huashu/色板.md"
+    },
+    {
+      "id": "chalk",
+      "name": "黑板",
+      "bestFor": "课堂、推导、公式、讲题",
+      "colors": {
+        "bg": "#23302B",
+        "surface": "#2E3D37",
+        "ink": "#F1EFE6",
+        "sub": "#A9B3AA",
+        "accent": "#F4D35E",
+        "accent2": "#E87D5A"
+      },
+      "docPath": "docs/reference/huashu/色板.md",
+      "source": "huashu-art-motion/references/色板.md",
+      "doc": "docs/reference/huashu/色板.md"
+    }
+  ],
+  "methods": [
+    {
+      "id": "01-拆解",
+      "title": "01 · 拆解：拿到一段动画，一小时内拆到能写成代码",
+      "file": "docs/reference/huashu/01-拆解.md",
+      "source": "huashu-art-motion/references/01-拆解.md"
+    },
+    {
+      "id": "02-机制",
+      "title": "02 · 机制：「艺术史速通」为什么好看",
+      "file": "docs/reference/huashu/02-机制.md",
+      "source": "huashu-art-motion/references/02-机制.md"
+    },
+    {
+      "id": "03-一帧先行四条路线",
+      "title": "03 · 一帧先行，再让它动：四条路线",
+      "file": "docs/reference/huashu/03-一帧先行四条路线.md",
+      "source": "huashu-art-motion/references/03-一帧先行四条路线.md"
+    },
+    {
+      "id": "04-纯代码绘制",
+      "title": "04 · 纯代码绘制：用 Canvas 把一幅有艺术感的画画出来并让它活",
+      "file": "docs/reference/huashu/04-纯代码绘制.md",
+      "source": "huashu-art-motion/references/04-纯代码绘制.md"
+    },
+    {
+      "id": "05-节奏与配乐",
+      "title": "05 · 节奏与配乐",
+      "file": "docs/reference/huashu/05-节奏与配乐.md",
+      "source": "huashu-art-motion/references/05-节奏与配乐.md"
+    },
+    {
+      "id": "06-口播驱动的艺术短片",
+      "title": "06 · 口播驱动的艺术短片（方法草案，待第一支实片验证）",
+      "file": "docs/reference/huashu/06-口播驱动的艺术短片.md",
+      "source": "huashu-art-motion/references/06-口播驱动的艺术短片.md"
+    },
+    {
+      "id": "07-正面经验",
+      "title": "07 · 正面经验：哪些做法被证明有效",
+      "file": "docs/reference/huashu/07-正面经验.md",
+      "source": "huashu-art-motion/references/07-正面经验.md"
+    },
+    {
+      "id": "08-风格作者规范",
+      "title": "08 · 风格作者规范（通用版，给写 scene 的人和派出去的 agent）",
+      "file": "docs/reference/huashu/08-风格作者规范.md",
+      "source": "huashu-art-motion/references/08-风格作者规范.md"
+    },
+    {
+      "id": "09-视频动画语法",
+      "title": "09 · 视频动画语法：YouTube 解说 / 科技 / AI / 财经片的 8 种画法",
+      "file": "docs/reference/huashu/09-视频动画语法.md",
+      "source": "huashu-art-motion/references/09-视频动画语法.md"
+    },
+    {
+      "id": "10-角色",
+      "title": "10 · 角色：人用 AI 生帧，代码负责合成",
+      "file": "docs/reference/huashu/10-角色.md",
+      "source": "huashu-art-motion/references/10-角色.md"
+    },
+    {
+      "id": "11-长卷穿越片",
+      "title": "11 · 长卷穿越片：一个人从左走到右，穿过一幅幅名画",
+      "file": "docs/reference/huashu/11-长卷穿越片.md",
+      "source": "huashu-art-motion/references/11-长卷穿越片.md"
+    },
+    {
+      "id": "12-口播整片与经验回流",
+      "title": "口播整片与经验回流",
+      "file": "docs/reference/huashu/12-口播整片与经验回流.md",
+      "source": "huashu-art-motion/references/12-口播整片与经验回流.md"
+    },
+    {
+      "id": "13-口播与语音复刻",
+      "title": "13 · 口播与语音复刻",
+      "file": "docs/reference/huashu/13-口播与语音复刻.md",
+      "source": "huashu-art-motion/references/13-口播与语音复刻.md"
+    },
+    {
+      "id": "15-跨场景风格提炼",
+      "title": "15 · 把艺术语言迁移到新场景",
+      "file": "docs/reference/huashu/15-跨场景风格提炼.md",
+      "source": "huashu-art-motion/references/15-跨场景风格提炼.md"
+    },
+    {
+      "id": "16-风格演示95分协议",
+      "title": "16 · 风格演示协议：从「受启发的扁平插画」到「一眼认得出是谁的画」",
+      "file": "docs/reference/huashu/16-风格演示95分协议.md",
+      "source": "huashu-art-motion/references/16-风格演示95分协议.md"
+    },
+    {
+      "id": "18-媒介层与角色入画",
+      "title": "18 · 媒介层：同一个场景换画法，角色也一起被重画",
+      "file": "docs/reference/huashu/18-媒介层与角色入画.md",
+      "source": "huashu-art-motion/references/18-媒介层与角色入画.md"
+    },
+    {
+      "id": "镜头语言",
+      "title": "镜头语言：镜头怎么用",
+      "file": "docs/reference/huashu/镜头语言.md",
+      "source": "huashu-art-motion/references/镜头语言.md"
+    },
+    {
+      "id": "镜头表模板",
+      "title": "镜头表模板：先镜头表，再动手",
+      "file": "docs/reference/huashu/镜头表模板.md",
+      "source": "huashu-art-motion/references/镜头表模板.md"
+    },
+    {
+      "id": "角色精细度",
+      "title": "角色精细度：要么画到位，要么不出脸",
+      "file": "docs/reference/huashu/角色精细度.md",
+      "source": "huashu-art-motion/references/角色精细度.md"
+    }
+  ],
+  "optional": [
+    {
+      "id": "capabilities",
+      "title": "可选语音：配置、跳过与已有素材",
+      "file": "docs/reference/huashu/optional/capabilities.md",
+      "source": "huashu-art-motion/references/capabilities.md"
+    },
+    {
+      "id": "images",
+      "title": "可选图片：已有素材与当前Agent生图",
+      "file": "docs/reference/huashu/optional/images.md",
+      "source": "huashu-art-motion/references/images.md"
+    },
+    {
+      "id": "compatibility",
+      "title": "兼容性与验证范围",
+      "file": "docs/reference/huashu/optional/compatibility.md",
+      "source": "huashu-art-motion/references/compatibility.md"
+    },
+    {
+      "id": "口播API",
+      "title": "火山豆包声音复刻 2.0 · 接口细节与实测记录",
+      "file": "docs/reference/huashu/optional/口播API.md",
+      "source": "huashu-art-motion/references/口播API.md"
+    }
+  ],
+  "fonts": [
+    {
+      "file": "AlfaSlabOne-400.woff",
+      "family": "Alfa Slab One",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/AlfaSlabOne-400.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "Anton-400.woff",
+      "family": "Anton",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/Anton-400.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "ArchivoBlack-400.woff",
+      "family": "Archivo Black",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/ArchivoBlack-400.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "Bangers-400.woff",
+      "family": "Bangers",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/Bangers-400.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "Caveat-600.woff",
+      "family": "Caveat",
+      "style": "normal",
+      "weight": "600",
+      "url": "fonts/huashu/Caveat-600.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "Cinzel-400.woff",
+      "family": "Cinzel",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/Cinzel-400.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "Cinzel-700.woff",
+      "family": "Cinzel",
+      "style": "normal",
+      "weight": "700",
+      "url": "fonts/huashu/Cinzel-700.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "CormorantGaramond-500.woff",
+      "family": "Cormorant Garamond",
+      "style": "normal",
+      "weight": "500",
+      "url": "fonts/huashu/CormorantGaramond-500.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "CormorantGaramond-500i.woff",
+      "family": "Cormorant Garamond",
+      "style": "italic",
+      "weight": "500",
+      "url": "fonts/huashu/CormorantGaramond-500i.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "CormorantGaramond-700.woff",
+      "family": "Cormorant Garamond",
+      "style": "normal",
+      "weight": "700",
+      "url": "fonts/huashu/CormorantGaramond-700.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "EBGaramond-400.woff",
+      "family": "EB Garamond",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/EBGaramond-400.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "EBGaramond-400i.woff",
+      "family": "EB Garamond",
+      "style": "italic",
+      "weight": "400",
+      "url": "fonts/huashu/EBGaramond-400i.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "EBGaramond-600.woff",
+      "family": "EB Garamond",
+      "style": "normal",
+      "weight": "600",
+      "url": "fonts/huashu/EBGaramond-600.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "Exo2-800i.woff",
+      "family": "Exo 2",
+      "style": "italic",
+      "weight": "800",
+      "url": "fonts/huashu/Exo2-800i.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "GochiHand-400.woff",
+      "family": "Gochi Hand",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/GochiHand-400.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "IMFellEnglish-400.woff",
+      "family": "IM Fell English",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/IMFellEnglish-400.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "IMFellEnglish-400i.woff",
+      "family": "IM Fell English",
+      "style": "italic",
+      "weight": "400",
+      "url": "fonts/huashu/IMFellEnglish-400i.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "Inter-var.woff",
+      "family": "Inter",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/Inter-var.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "JosefinSans-700.woff",
+      "family": "Josefin Sans",
+      "style": "normal",
+      "weight": "700",
+      "url": "fonts/huashu/JosefinSans-700.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "Kalam-700.woff",
+      "family": "Kalam",
+      "style": "normal",
+      "weight": "700",
+      "url": "fonts/huashu/Kalam-700.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "LXGWWenKai-500.woff",
+      "family": "LXGW WenKai",
+      "style": "normal",
+      "weight": "500",
+      "url": "fonts/huashu/LXGWWenKai-500.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "LibreBaskerville-400.woff",
+      "family": "Libre Baskerville",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/LibreBaskerville-400.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "LibreBaskerville-700.woff",
+      "family": "Libre Baskerville",
+      "style": "normal",
+      "weight": "700",
+      "url": "fonts/huashu/LibreBaskerville-700.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "LilitaOne-400.woff",
+      "family": "Lilita One",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/LilitaOne-400.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "Marcellus-400.woff",
+      "family": "Marcellus",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/Marcellus-400.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "NotoSansSC-500.woff",
+      "family": "Noto Sans SC",
+      "style": "normal",
+      "weight": "500",
+      "url": "fonts/huashu/NotoSansSC-500.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "NotoSansSC-700.woff",
+      "family": "Noto Sans SC",
+      "style": "normal",
+      "weight": "700",
+      "url": "fonts/huashu/NotoSansSC-700.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "NotoSansSC-800.woff",
+      "family": "Noto Sans SC",
+      "style": "normal",
+      "weight": "800",
+      "url": "fonts/huashu/NotoSansSC-800.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "NotoSansSC-900.woff",
+      "family": "Noto Sans SC",
+      "style": "normal",
+      "weight": "900",
+      "url": "fonts/huashu/NotoSansSC-900.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "NotoSansSC-sub.woff",
+      "family": "Noto Sans SC",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/NotoSansSC-sub.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "NotoSerifJP-600.woff",
+      "family": "Noto Serif JP",
+      "style": "normal",
+      "weight": "600",
+      "url": "fonts/huashu/NotoSerifJP-600.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "NotoSerifSC-sub.woff",
+      "family": "Noto Serif SC",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/NotoSerifSC-sub.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "PlayfairDisplay-400i.woff",
+      "family": "Playfair Display",
+      "style": "italic",
+      "weight": "400",
+      "url": "fonts/huashu/PlayfairDisplay-400i.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "PlayfairDisplay-700.woff",
+      "family": "Playfair Display",
+      "style": "normal",
+      "weight": "700",
+      "url": "fonts/huashu/PlayfairDisplay-700.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "PlayfairDisplay-700i.woff",
+      "family": "Playfair Display",
+      "style": "italic",
+      "weight": "700",
+      "url": "fonts/huashu/PlayfairDisplay-700i.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "Poppins-600.woff",
+      "family": "Poppins",
+      "style": "normal",
+      "weight": "600",
+      "url": "fonts/huashu/Poppins-600.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "Poppins-700.woff",
+      "family": "Poppins",
+      "style": "normal",
+      "weight": "700",
+      "url": "fonts/huashu/Poppins-700.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "Poppins-800.woff",
+      "family": "Poppins",
+      "style": "normal",
+      "weight": "800",
+      "url": "fonts/huashu/Poppins-800.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "PressStart2P-400.woff",
+      "family": "Press Start 2P",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/PressStart2P-400.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "Righteous-400.woff",
+      "family": "Righteous",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/Righteous-400.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "RobotoCondensed-var.woff",
+      "family": "Roboto Condensed",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/RobotoCondensed-var.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "Rye-400.woff",
+      "family": "Rye",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/Rye-400.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "UnifrakturMaguntia-400.woff",
+      "family": "UnifrakturMaguntia",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/UnifrakturMaguntia-400.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "cmunrm.woff",
+      "family": "CMU Serif",
+      "style": "normal",
+      "weight": "400",
+      "url": "fonts/huashu/cmunrm.woff",
+      "license": "SIL OFL 1.1"
+    },
+    {
+      "file": "cmunti.woff",
+      "family": "CMU Serif",
+      "style": "italic",
+      "weight": "400",
+      "url": "fonts/huashu/cmunti.woff",
+      "license": "SIL OFL 1.1"
+    }
+  ],
+  "excluded": [
+    {
+      "path": "assets/角色/",
+      "reason": "Character artwork is demo-only and is not covered by MIT."
+    },
+    {
+      "path": "assets/动画语法/ and assets/全风格总览.jpg",
+      "reason": "Overview images contain the Huashu character and are demo-only."
+    },
+    {
+      "path": "assets/showcase/",
+      "reason": "Showcase GIFs and films are demo-only or contain third-party characters."
+    },
+    {
+      "path": "scripts/engine/",
+      "reason": "Canvas runtime depends on Huashu globals U/MO/CAM and is not a drop-in Remotion module."
+    },
+    {
+      "path": "references/风格配方/38-55",
+      "reason": "Research recipes are explicitly not production-ready and are not part of the 36 implemented cards."
+    }
+  ]
+}

@@ -55,7 +55,7 @@ public/projects/<project-name>/audio/
 需要并行开发时，用 Git branch 或 worktree：
 
 ```bash
-git worktree add ../ml-explainer-next -b video/next-project
+git worktree add ../video-production-system-next -b video/next-project
 ```
 
 不要复制整个仓库，也不要把 `node_modules`、`local/` 和 `public/projects/` 带过去。
@@ -169,9 +169,14 @@ registerRoot(LocalRoot);
 
 ## 7. 先抽帧，再渲染
 
+改完场景先跑关键帧画廊，不要直接整片渲染：
+
 ```bash
-npx remotion still local/projects/<project-name>/Root.tsx <CompositionId> local/out/qc/frame-0300.png --frame=300 --scale=0.5 --overwrite
+npm run preview:shots -- --project local/projects/<project-name> --section <section-id>
+npm run preview:shots -- --project local/projects/<project-name> --section <section-id> --frames 30,120,300
 ```
+
+脚本会打包一次、渲染 3–4 帧，并生成 `local/preview/<project-name>/index.html`。画廊带字幕安全区参考线，适合逐段检查叠字、残影、空镜和越界。
 
 至少检查：
 
@@ -184,6 +189,14 @@ npx remotion still local/projects/<project-name>/Root.tsx <CompositionId> local/
 - 最后一帧
 
 抽帧通过后再渲染完整视频，避免花几分钟渲染才发现字幕溢出。
+
+需要确认动效节奏、转场和音画同步时，再渲染单个段落草稿：
+
+```bash
+npm run preview:section -- --project local/projects/<project-name> --section <section-id> --draft
+```
+
+底层仍可直接使用 `remotion still` 渲染单帧，但优先用上面的脚本，避免每帧重复 bundle。
 
 ## 8. 渲染、母带和质检
 

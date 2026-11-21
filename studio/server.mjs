@@ -32,7 +32,7 @@ const GROUPS = [
   {id: "voice", label: "旁白与 BGM", dir: "public/audio", recursive: true},
   {id: "sfx", label: "音效", dir: "public/sfx", recursive: true},
   {id: "docs", label: "文档素材", dir: "docs/assets", recursive: false},
-  {id: "fonts", label: "字体", dir: "public/fonts", recursive: false},
+  {id: "fonts", label: "字体", dir: "public/fonts", recursive: true},
 ];
 
 const WRITABLE = ["local/"];

@@ -60,9 +60,6 @@ const githubFor = (source) => {
   if (source.startsWith("huashu-art-motion/")) {
     return `https://github.com/alchaincyf/huashu-art-motion/blob/main/${source.slice("huashu-art-motion/".length)}`;
   }
-  if (source.startsWith("mg-styles-15/")) {
-    return `https://github.com/Vincentwei1021/mg-styles-15/blob/main/${source.slice("mg-styles-15/".length)}`;
-  }
   return null;
 };
 
@@ -297,7 +294,7 @@ const renderStyles = () => {
         <div class="view-kicker">CATALOG / ${catalog.styles.length} STYLES · ${packs.length} PACKS</div>
         <h1 class="view-title">设计资产</h1>
       </div>
-      <div class="view-note">来自 MG Styles 15、Huashu Art Motion 与本仓库原创风格包的可检索目录。</div>
+      <div class="view-note">来自 Huashu Art Motion 与本仓库原创风格包的可检索目录。</div>
     </div>
 
     <section class="section">
@@ -343,7 +340,7 @@ const renderStyles = () => {
     <section class="section">
       <div class="section-head"><h2>风格</h2><span>${styles.length} MATCHED</span></div>
       <div class="toolbar">
-        ${["all", "original", "mg", "huashu"]
+        ${["all", "original", "huashu"]
           .map(
             (family) =>
               `<button class="chip ${state.family === family ? "is-active" : ""}" data-family="${family}">${
@@ -351,9 +348,7 @@ const renderStyles = () => {
                   ? "全部"
                   : family === "original"
                     ? "原创"
-                    : family === "mg"
-                      ? "MG / 15"
-                      : "花叔 / 36"
+                    : "花叔 / 36"
               }</button>`,
           )
           .join("")}
@@ -363,20 +358,10 @@ const renderStyles = () => {
           .map((style) => {
             const link = githubFor(style.source);
             const palette = style.palette ? paletteById[style.palette] : null;
-            const familyLabel =
-              style.family === "mg" ? "MG" : style.family === "original" ? "原创" : "花叔";
-            const lineA =
-              style.family === "mg"
-                ? `<b>视觉</b> ${esc(style.visual ?? "")}`
-                : `<b>手法</b> ${esc(style.technique ?? "")}`;
-            const lineB =
-              style.family === "mg"
-                ? `<b>技法</b> ${esc((style.techniques ?? []).join("；"))}`
-                : `<b>母题</b> ${esc(style.motion ?? "")}`;
-            const lineC =
-              style.family === "mg"
-                ? `<b>原片</b> ${esc(style.original ?? "")}`
-                : `<b>短板</b> ${esc(style.weakness ?? "")}`;
+            const familyLabel = style.family === "original" ? "原创" : "花叔";
+            const lineA = `<b>手法</b> ${esc(style.technique ?? "")}`;
+            const lineB = `<b>母题</b> ${esc(style.motion ?? "")}`;
+            const lineC = `<b>短板</b> ${esc(style.weakness ?? "")}`;
             return `
             <article class="style-card">
               <div class="style-card-top">
@@ -412,21 +397,6 @@ const renderStyles = () => {
           )
           .join("")}
       </div>
-    </section>
-
-    <section class="section">
-      <div class="section-head"><h2>Cue 时间轴</h2><span>BPM / FRAME MAP</span></div>
-      <div class="notice">
-        场景只读具名事件帧，不自己算节奏。MG 的一支 10 秒片用 <b>bpm 120</b>、<b>30fps</b>，把 build、drop、outro 和每个动作落在 frames 表里。
-      </div>
-      <pre class="code">${esc(JSON.stringify({
-        fps: catalog.cueSchema.example.fps,
-        bpm: catalog.cueSchema.example.bpm,
-        build: catalog.cueSchema.example.build,
-        drop: catalog.cueSchema.example.drop,
-        outro: catalog.cueSchema.example.outro,
-        frames: Object.fromEntries(Object.entries(catalog.cueSchema.example.frames).slice(0, 10)),
-      }, null, 2))}</pre>
     </section>`;
 };
 
@@ -438,7 +408,7 @@ const renderSources = () => {
         <div class="view-kicker">SOURCES / LICENSES</div>
         <h1 class="view-title">来源与许可</h1>
       </div>
-      <div class="view-note">包含原创风格包，以及三个 MIT 项目的设计与方法来源；不搬运第三方成片、角色或样片素材。</div>
+      <div class="view-note">包含原创风格包，以及 Huashu Art Motion 的设计与方法来源；不搬运第三方成片、角色或样片素材。</div>
     </div>
     <div class="source-grid">
       ${catalog.sources
@@ -461,18 +431,12 @@ const renderSources = () => {
     <section class="section" style="margin-top:32px">
       <div class="section-head"><h2>取用边界</h2><span>WHAT WE TOOK</span></div>
       <div class="notice">
-        <b>取用：</b>风格目录、色板、动画语法、cue 时间轴结构、镜头语言与验收思路。<br />
+        <b>取用：</b>36 张风格卡、9 张语法卡、8 套色板、方法文档与 OFL 字体。<br />
         <b>重写：</b>所有 Remotion 组件都在本工程内重新实现，没有复制对方的渲染器或网页源码。<br />
         <b>未取用：</b>对方的成片、GIF 样片、角色、字体文件与品牌素材。<br />
-        三个上游仓库均为 MIT 许可，完整版权声明见仓库根目录 <b>THIRD_PARTY_NOTICES.md</b>。
+        Huashu Art Motion 代码与文档为 MIT，字体为 SIL OFL 1.1，完整版权声明见仓库根目录 <b>THIRD_PARTY_NOTICES.md</b>。
       </div>
     </section>
-    <section class="section">
-      <div class="section-head"><h2>讲解方法</h2><span>FROM VIBE KNOWLEDGE FILM</span></div>
-      <div class="notice">
-        每个概念先找到外行认得的形象，再写文案；句子里的动词要在屏上真的发生；先给例子，再给名字和结论；
-        提问、命名、结论不硬配新画面；一条片只用一个世界、一把尺子、几样道具。
-      </div>
     </section>`;
 };
 

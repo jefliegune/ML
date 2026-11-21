@@ -65,7 +65,29 @@
 - [ ] 结尾公式卡
 - [ ] 最后一帧
 
-## H. 技术验收
+## H. 三层预览门禁
+
+改完场景不要直接整片渲染。按下面三层依次过，上一层不通过不进入下一层。
+
+```bash
+# 1. 关键帧：改一段只看 3–4 帧，约 15–40 秒
+npm run preview:shots -- --project <id|path> --section review
+
+# 2. 段落视频：确认动效、转场和音画同步，约 30–90 秒
+npm run preview:section -- --project <id|path> --section review --draft
+
+# 3. 整片：前两层通过后再跑完整流水线
+npm run pipeline -- --project <id|path>
+```
+
+- [ ] 关键帧无叠字、残影、空镜、元素越界。
+- [ ] 正文最小字号 ≥ 36px，单帧文本块 ≤ 10。
+- [ ] 无 `REC`、页码、录制时长等无关英文。
+- [ ] 画廊 `local/preview/<id>/index.html` 已逐段看过。
+- [ ] 只改了某段时，没有重渲整片。
+- [ ] `npm run check:composition -- --project <id|path>` 无阻塞项。
+
+## I. 技术验收
 
 ```bash
 npm run check
@@ -84,7 +106,7 @@ npm run pipeline -- --project <id|path>
 - [ ] True Peak ≤ -1.0 dBTP
 - [ ] 文件可正常播放，开头/中段/结尾均无黑帧或静音异常
 
-## I. 交付
+## J. 交付
 
 - [ ] 最终文件命名包含 `-final`。
 - [ ] 保留封面图。
@@ -92,7 +114,7 @@ npm run pipeline -- --project <id|path>
 - [ ] 中间渲染文件与缓存可清理。
 - [ ] 发布前确认字幕在手机端可读。
 
-## J. 沉淀
+## K. 沉淀
 
 - [ ] 已列出这次新做的组件、动效、声音和场景结构。
 - [ ] 只保留“换文案、换色板、换项目还能用”的资产。

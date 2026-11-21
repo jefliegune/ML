@@ -28,7 +28,7 @@
 | 设计语言 | 颜色、字体、间距、圆角、描边、阴影、安全区 | `src/packaging/tokens.ts`、`src/theme.ts` |
 | 视觉组件 | 纸卡、贴纸、标签、章节模板、转场、纹理 | `src/packaging/` |
 | 动效系统 | 入场、弹出、线条生长、运镜、词级字幕 | `src/packaging/motionPrimitives.tsx` 等 |
-| 素材库 | 9 套色板、52 个风格配方、9 张动画语法卡、1 个原创风格包 | `src/library/catalog.json`、`src/library/original-packs.json` |
+| 素材库 | 9 套色板、36 张 Huashu 风格卡、9 张动画语法卡、1 个原创风格包、45 个 OFL 字体 | `src/library/`、`docs/reference/huashu/`、`public/fonts/huashu/` |
 | 风格包 | 可复用组件、HUD、字幕、流程场景、预览 Composition | `src/packs/` |
 | 默认旁白 | 晓晓 +15% 音色、示例音频与通用生成脚本 | `src/audio/voiceProfiles.json`、`scripts/generate-voiceover.mjs` |
 | 素材管理 | 搜索、筛选、预览、标签、备注、归档 | `studio/` |
@@ -41,7 +41,7 @@
 | ID | 时长 | 用途 |
 |---|---:|---|
 | `PackagingSystem` | 10 s | 展示颜色、卡片、贴纸、转场和音效系统 |
-| `StyleLab` | 10 s | 展示 52 个风格、9 套色板、9 张语法卡 |
+| `StyleLab` | 10 s | 展示 37 个风格、9 套色板、9 张语法卡 |
 | `PixelArcadeShowcase` | 10 s | 原创像素街机风格包预览 |
 | `BackgroundTest` | 1 s | 背景组件的最小开发测试 |
 
@@ -85,6 +85,8 @@ npm run pipeline:stylelab    # 渲染 → 母带 → 质检
 npm run audio               # 重新生成通用音效与预览 BGM
 npm run voice -- --manifest local/projects/my-video/lines.json  # 用默认音色生成旁白与时间轴
 npm run library:import      # 重新生成设计资产 catalog
+npm run library:huashu      # 从本地 Huashu 参考仓库导入完整素材库
+npm run library:check       # 校验完整卡、字体、许可与排除项
 ```
 
 ## 制作流程
@@ -127,10 +129,13 @@ npm run library:import      # 重新生成设计资产 catalog
 │  ├─ packs/                       原创风格包
 │  │  └─ pixel-arcade/             像素街机：组件、预览、manifest、用法说明
 │  └─ library/                     设计资产索引与样张
-│     ├─ catalog.json              8 套色板 / 51 个导入风格 / 9 张语法卡
+│     ├─ catalog.json              8 套色板 / 36 个 Huashu 风格 / 9 张语法卡
+│     ├─ huashu.json               36 张完整风格卡 / 9 张语法卡 / 字体清单
 │     ├─ original-packs.json       1 套原创色板 / 1 个原创风格 / 1 个风格包
 │     ├─ index.ts                  类型、查询函数与只读导出
 │     └─ StyleLab.tsx              设计资产动态样张
+├─ docs/reference/huashu/            Huashu 完整卡、方法与色板说明
+├─ public/fonts/huashu/              Huashu OFL 字体与许可
 ├─ projects/                       公共样张的项目清单
 ├─ schemas/                        video.project.json 的 JSON Schema
 ├─ scripts/                        流水线、时间轴检查、母带、QC 与音频生成
@@ -149,18 +154,25 @@ npm run library:import      # 重新生成设计资产 catalog
 
 ## 素材库
 
-`src/library/catalog.json` 把三个 MIT 项目的可复用部分整理成可检索数据；`src/library/original-packs.json` 登记本仓库自己沉淀的风格包：
+`src/library/catalog.json` 把 Huashu Art Motion 的可用部分整理成可检索数据；`src/library/original-packs.json` 登记本仓库自己沉淀的风格包：
 
 | 类别 | 数量 | 来源 |
 |---|---:|---|
 | 色板 | 9 | Huashu Art Motion（8）+ 本仓库（1） |
-| MG 风格 | 15 | MG Styles 15 |
 | 花叔风格配方 | 36 | Huashu Art Motion |
 | 原创风格 | 1 | 本仓库 |
 | 动画语法 | 9 | Huashu Art Motion |
 | 原创风格包 | 1 | 本仓库 |
 
-只取方法、目录和参数，不复制上游成片、GIF、音频、插画或工程文件。版权与许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
+完整 Huashu 素材不只是一行摘要：
+
+- `docs/reference/huashu/风格配方/`：36 张完整实做卡。
+- `docs/reference/huashu/动画语法/`：9 张完整语法卡。
+- `docs/reference/huashu/METHODS.md`：19 份核心方法文档。
+- `public/fonts/huashu/`：45 个 OFL 字体文件。
+- `src/library/huashu.json`：机器可读来源、路径、许可和排除项清单。
+
+不复制上游成片、GIF、总览图、角色图、角色音频或 Canvas 引擎。版权与许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) 和 `docs/reference/huashu/NOT_IMPORTED.md`。
 
 ## 沉淀：让下一条视频少造轮子
 
@@ -205,7 +217,20 @@ Remotion render
 | 母带 | 两遍 `loudnorm`，把响度拉到约 -16 LUFS，视频流直接复制 | `local/out/*-final.mp4` |
 | 质检 | 检查编码、分辨率、帧数、音频参数、响度和 True Peak | 终端 PASS/FAIL 报告 |
 
-渲染输出的是**完整视频**，不是单帧。需要单帧检查时用 `remotion still`。
+渲染输出的是**完整视频**，不是单帧。调画面时不要直接重渲整片，按三层预览依次确认：
+
+```bash
+# 1. 关键帧：每段 3–4 张，生成可逐段查看的 HTML 画廊
+npm run preview:shots -- --project <id|path> --section review
+
+# 2. 段落视频：只渲染改动段，含音频，适合看动效和音画同步
+npm run preview:section -- --project <id|path> --section review --draft
+
+# 3. 整片：前两层通过后再跑完整流水线
+npm run pipeline -- --project <id|path>
+```
+
+关键帧画廊写入 `local/preview/<id>/index.html`，带字幕安全区参考线；段落视频写入 `local/preview/<id>/sections/`。两者都在 Git 忽略范围内。
 
 ### 项目清单与统一入口
 
@@ -266,6 +291,8 @@ npm run pipeline:stylelab
 这些是参考值，不是固定承诺。画面越复杂、图片和视频素材越多、并发越低，渲染越慢；母带只处理音频，所以通常很快；质检需要完整解码视频数帧，长视频会明显变慢。
 
 第一次渲染还要额外花约 5–6 秒做 bundle。低清草稿（`--scale=0.5`）不能直接用于最终质检，因为 `verify-video.mjs` 固定检查 1920×1080 和 30fps。
+
+三层预览的实测参考（同一台机器、0.5 scale）：4 张关键帧约 4.3 秒（含 bundle），526 帧段落草稿约 8.6 秒。只改一段时，反馈从整片的几分钟降到 10 秒内。
 
 更完整的制作规范见 [新视频操作手册](docs/NEW_VIDEO_PLAYBOOK.md) 和 [生产检查表](docs/PRODUCTION_CHECKLIST.md)。
 

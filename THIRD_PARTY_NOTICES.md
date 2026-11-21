@@ -1,32 +1,24 @@
 # Third-Party Notices
 
-This project contains adapted metadata, terminology and documentation derived from three MIT-licensed open-source projects.
+This project contains adapted metadata, terminology, documentation and font files derived from Huashu Art Motion (MIT) plus its SIL OFL font collection.
 
 ## Upstream projects
 
-### 1. Vibe Knowledge Film
-
-- Repository: https://github.com/HeyChengC/vibe-knowledge-film
-- Copyright: Copyright (c) 2026
-- License: MIT
-
-Used for: the narration-free explainer methodology summarised in `docs/REFERENCE_LIBRARY.md` and the **来源与许可** page of the asset manager. No film, GIF, example scene or engine source is redistributed.
-
-### 2. Huashu Art Motion
+### 1. Huashu Art Motion
 
 - Repository: https://github.com/alchaincyf/huashu-art-motion
 - Copyright: Copyright (c) 2026 alchaincyf (花叔 · 花生)
 - License: MIT
 
-Used for: the 8 colour palettes, 36 style-recipe summaries and 9 animation-grammar one-liners stored in `src/library/catalog.json`. No sample films, artwork, characters or upstream renderer code is redistributed.
+Used for: the 8 colour palettes, 36 full implemented style cards and 9 full animation-grammar cards imported into `docs/reference/huashu/`, plus the condensed index in `src/library/catalog.json`. No sample films, overview images, character artwork or upstream Canvas renderer code is redistributed.
 
-### 3. MG Styles 15
+### 2. Huashu OFL fonts
 
-- Repository: https://github.com/Vincentwei1021/mg-styles-15
-- Copyright: Copyright (c) 2026 Vincentwei1021
-- License: MIT
+- Source: `scripts/engine/lib/fonts/` in Huashu Art Motion
+- License: SIL Open Font License 1.1
+- Local copy: `public/fonts/huashu/`
 
-Used for: the names, signature visual features and key techniques of 15 motion-design styles, plus the cue-timeline schema example in `src/library/catalog.json`. No demo film, audio, source file or asset is redistributed.
+The fonts are not covered by the MIT license. Their complete copyright list is in `public/fonts/huashu/LICENSES.md`, and the license text is in `public/fonts/huashu/OFL.txt`.
 
 ## Voice sample
 
@@ -36,7 +28,8 @@ Used for: the names, signature visual features and key techniques of 15 motion-d
 
 - The catalog in `src/library/catalog.json` is an adapted, condensed index, not a copy of the upstream repositories.
 - All Remotion components in `src/packaging/` (including `CameraRig`, `KineticType` and `StyleTexture`) are original implementations written for this project.
-- Upstream media files (MP4, GIF, images, fonts) are not included in this repository.
+- Upstream media files (MP4, GIF, overview images, character artwork, audio and engine source) are not included in this repository.
+- The SIL OFL font files are included under `public/fonts/huashu/` with their own license files.
 
 ## MIT License
 
@@ -64,4 +57,4 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
 
-Each upstream project retains its own copyright line, reproduced above.
+The upstream project retains its own copyright line, reproduced above.

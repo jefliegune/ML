@@ -14,15 +14,22 @@ import {
 } from "../packaging/primitives";
 import {BRAND_COLORS, RADIUS, STROKE, TYPE} from "../packaging/tokens";
 
-const FEATURED_IDS = ["mg-01-flat-vector", "mg-19-paperclip", "mg-22-hud"];
+const FEATURED_IDS = ["hs-09-postimp", "hs-12-bauhaus", "hs-20-dunhuang"];
 
 const featured = FEATURED_IDS.map((id) => STYLES.find((style) => style.id === id)).filter(
   (style): style is LibraryStyle => Boolean(style),
 );
 
-const mgStyles = STYLES.filter((style) => style.family === "mg");
+const huashuStyles = STYLES.filter((style) => style.family === "huashu");
 
 const PaletteDots: FC<{paletteId: string | null}> = ({paletteId}) => {
+  if (!paletteId) {
+    return (
+      <span style={{...TYPE.micro, color: BRAND_COLORS.muted}}>
+        CARD-DEFINED PALETTE
+      </span>
+    );
+  }
   const palette = getPalette(paletteId);
   const keys = ["bg", "surface", "ink", "accent", "accent2", "sub"] as const;
   return (
@@ -59,7 +66,7 @@ const StyleCard: FC<{style: LibraryStyle; index: number}> = ({style, index}) => 
       <div>
         <div style={{display: "flex", justifyContent: "space-between", alignItems: "center"}}>
           <span style={{...TYPE.label, color: BRAND_COLORS.muted}}>
-            0{index + 1} / MG
+            0{index + 1} / HUASHU
           </span>
           <span style={{...TYPE.label, color: BRAND_COLORS.coral, letterSpacing: 2}}>
             {"★".repeat(style.quality)}
@@ -78,7 +85,7 @@ const StyleCard: FC<{style: LibraryStyle; index: number}> = ({style, index}) => 
             minHeight: 72,
           }}
         >
-          {style.visual ?? style.technique}
+          {style.technique}
         </div>
       </div>
       <div>
@@ -169,11 +176,11 @@ export const StyleLab: FC = () => {
         <PackagingBackground
           tone="paper"
           index="01"
-          label={`ASSET LIBRARY / ${STYLE_COUNTS.mg + STYLE_COUNTS.huashu + STYLE_COUNTS.original}`}
+          label={`ASSET LIBRARY / ${STYLE_COUNTS.huashu + STYLE_COUNTS.original}`}
         >
           <CameraRig move="push" amount={1.07} durationInFrames={104} style={content}>
             <Kicker>
-              {STYLE_COUNTS.mg + STYLE_COUNTS.huashu} IMPORTED · {STYLE_COUNTS.original} ORIGINAL
+              {STYLE_COUNTS.huashu} HUASHU · {STYLE_COUNTS.original} ORIGINAL
             </Kicker>
             <KineticType
               tokens={["风格", "不是", "贴纸"]}
@@ -187,7 +194,7 @@ export const StyleLab: FC = () => {
             </div>
             <div style={{position: "absolute", right: 120, top: 190}}>
               <Sticker color={BRAND_COLORS.lime} rotate={-6}>
-                {STYLE_COUNTS.mg + STYLE_COUNTS.huashu + STYLE_COUNTS.original} STYLES ·{" "}
+                {STYLE_COUNTS.huashu + STYLE_COUNTS.original} STYLES ·{" "}
                 {STYLE_COUNTS.grammars} GRAMMARS
               </Sticker>
             </div>
@@ -197,7 +204,7 @@ export const StyleLab: FC = () => {
       </Sequence>
 
       <Sequence from={104} durationInFrames={108}>
-        <PackagingBackground tone="ink" index="02" label="MG / 15">
+        <PackagingBackground tone="ink" index="02" label="HUASHU / 36">
           <CameraRig
             move="pan-right"
             amount={1.06}
@@ -205,7 +212,7 @@ export const StyleLab: FC = () => {
             durationInFrames={108}
             style={content}
           >
-            <Kicker background={BRAND_COLORS.lime}>MG STYLES / 15</Kicker>
+            <Kicker background={BRAND_COLORS.lime}>HUASHU STYLE CARDS / 36</Kicker>
             <Headline size="h1" style={{marginTop: 18}}>
               先选画法，再写画面。
             </Headline>
@@ -225,7 +232,7 @@ export const StyleLab: FC = () => {
                 gap: 8,
               }}
             >
-              {mgStyles.map((style) => (
+              {huashuStyles.map((style) => (
                 <StyleChip
                   key={style.id}
                   style={style}

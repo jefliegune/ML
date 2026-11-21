@@ -16,7 +16,9 @@
     "remotion": "4.0.545"
   },
   "devDependencies": {
+    "@remotion/bundler": "4.0.545",
     "@remotion/eslint-config-flat": "4.0.545",
+    "@remotion/renderer": "4.0.545",
     "@types/react": "19.3.0",
     "@types/web": "0.0.166",
     "eslint": "10.12.0",
@@ -30,12 +32,14 @@
     "upgrade": "remotion upgrade",
     "lint": "eslint src && tsc",
     "pack:check": "node scripts/pack-check.mjs",
-    "check": "npm run lint && npm run pack:check && npm run check:boundaries",
+    "check": "npm run lint && npm run pack:check && npm run check:boundaries && npm run library:check",
     "check:boundaries": "node scripts/check-boundaries.mjs",
     "check:timeline": "node scripts/check-timeline.mjs",
     "audio": "node scripts/generate-audio.mjs",
     "voice": "node scripts/generate-voiceover.mjs",
     "library:import": "node scripts/import-reference-libraries.mjs",
+    "library:huashu": "node scripts/import-huashu-library.mjs",
+    "library:check": "node scripts/check-huashu-library.mjs",
     "assets": "node studio/server.mjs",
     "render:packaging": "remotion render PackagingSystem local/out/packaging-system.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k",
     "master:packaging": "node scripts/master-video.mjs local/out/packaging-system.mp4 local/out/packaging-system-final.mp4 -16",
@@ -46,6 +50,9 @@
     "verify:stylelab": "node scripts/verify-video.mjs local/out/stylelab-final.mp4",
     "pipeline:stylelab": "node scripts/pipeline.mjs --project stylelab",
     "pipeline:pixel-arcade": "node scripts/pipeline.mjs --project pixel-arcade",
+    "preview:shots": "node scripts/preview-shots.mjs",
+    "preview:section": "node scripts/preview-section.mjs",
+    "check:composition": "node scripts/check-composition.mjs",
     "pipeline": "node scripts/pipeline.mjs"
   },
   "allowScripts": {

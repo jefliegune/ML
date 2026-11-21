@@ -1,6 +1,6 @@
 # 素材库清单
 
-素材库只收录会重复使用的视觉、动效和声音资产。一次性画出来的场景元素留在具体 Scene 中，不升级为公共资产。
+素材库收录会重复使用的视觉、动效、声音、参考文档和字体。一次性画出来的场景元素留在具体 Scene 中，不升级为公共资产。
 
 风格、色板和动画语法的索引在 [参考库与设计资产](REFERENCE_LIBRARY.md)；本文件只记录已经封装成组件的资产。导入资产和原创风格包分开登记，避免把上游方法说成本仓库原创。
 
@@ -69,6 +69,19 @@
 - 10 秒预览样张，用来在改动后快速验收。
 
 使用方式见 [像素街机 README](../src/packs/pixel-arcade/README.md)。
+
+## 参考文档与字体
+
+| 资产 | 位置 | 用途 |
+|---|---|---|
+| Huashu 完整风格卡 | `docs/reference/huashu/风格配方/` | 36 张实做风格卡，包含笔法、材质、运动与短板 |
+| Huashu 完整语法卡 | `docs/reference/huashu/动画语法/` | 9 种解说语法的镜头、节奏和信息结构 |
+| Huashu 方法文档 | `docs/reference/huashu/` | 拆解、机制、镜头语言、角色、长卷、风格迁移等方法 |
+| Huashu 色板说明 | `docs/reference/huashu/色板.md` | 8 套色板的完整角色色与适用题材 |
+| Huashu OFL 字体 | `public/fonts/huashu/` | 45 个 WOFF 文件；`HuashuFonts` 组件负责注册 @font-face |
+| 机器可读清单 | `src/library/huashu.json` | 卡路径、来源提交、字体 URL、许可和排除项 |
+
+这些是参考资产，不是已经封装的 React 组件。使用时先把选中的卡提炼成 `src/packs/` 或具体 Scene，再把通用部分沉淀为代码。
 
 ## 声音
 

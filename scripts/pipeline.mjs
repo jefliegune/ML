@@ -127,6 +127,15 @@ if (project.timelinePath) {
     ],
   });
 }
+steps.push({
+  label: "Composition check",
+  command: process.execPath,
+  args: [
+    path.join(root, "scripts", "check-composition.mjs"),
+    "--project",
+    project.manifestPath,
+  ],
+});
 if (!skipRender) {
   steps.push({ label: "Render", command: process.execPath, args: renderArgs });
 }
