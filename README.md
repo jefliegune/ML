@@ -54,7 +54,7 @@
 ```bash
 npm ci
 npm run dev          # 打开 Remotion Studio
-npm run assets       # 打开本地素材管理器 http://127.0.0.1:4321
+npm run assets       # 打开项目主页与素材工作台 http://127.0.0.1:4321
 ```
 
 渲染和母带输出统一写入 `local/out/`。该目录已被 `.gitignore` 忽略，不会进入仓库。

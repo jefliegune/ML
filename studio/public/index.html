@@ -1,45 +1,218 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="zh-CN" data-radius="soft" data-buttons="solid">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Video Asset Library</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#08090b" />
+    <meta
+      name="description"
+      content="代码驱动的视频制作系统：在本地浏览、预览、标注和取用视频素材、设计资产与许可信息。"
+    />
+    <meta name="page-type" content="software" />
+    <meta name="site-kind" content="software" />
+    <meta property="og:title" content="代码驱动视频制作系统" />
+    <meta property="og:description" content="从脚本、配音、字幕到包装、渲染、母带和质检，全部由代码驱动。" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image" content="/media/reel.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <title>代码驱动视频制作系统 · 素材工作台</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2308090b'/%3E%3Crect x='6' y='7' width='20' height='14' rx='2.5' fill='none' stroke='%23f7f5ef' stroke-width='1.6'/%3E%3Cpath d='M10 25h12' stroke='%23f7f5ef' stroke-width='1.6' stroke-linecap='round'/%3E%3Ccircle cx='24' cy='23' r='2.5' fill='%233355ff'/%3E%3C/svg%3E" />
     <link rel="stylesheet" href="/style.css" />
+    <script>
+      document.documentElement.classList.add("m-enter");
+      setTimeout(() => document.documentElement.classList.add("m-enter-done"), 800);
+    </script>
   </head>
   <body>
-    <header class="topbar">
-      <div class="brand">
-        <span class="brand-mark">VA</span>
-        <span class="brand-text">ASSET<br />LIBRARY</span>
-      </div>
-      <nav class="tabs" id="tabs">
-        <button class="tab is-active" data-tab="library">素材库</button>
-        <button class="tab" data-tab="styles">设计资产</button>
-        <button class="tab" data-tab="sources">来源与许可</button>
-      </nav>
-      <div class="top-actions">
-        <label class="search">
-          <span>⌕</span>
-          <input id="search" type="search" placeholder="搜索名称、路径、标签…（/）" autocomplete="off" />
-        </label>
-        <button class="icon-btn" id="refresh" title="重新扫描">↻</button>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+
+    <header class="appbar">
+      <div class="appbar__inner">
+        <a class="brand" href="/" aria-label="视频制作系统首页">
+          <span class="brand__mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="5" y="6" width="22" height="16" rx="3" stroke="currentColor" stroke-width="1.7" />
+              <path d="M10 26h12" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" />
+              <circle cx="25" cy="24" r="2.6" fill="var(--p-accent)" />
+            </svg>
+          </span>
+          <span class="brand__name">
+            <strong>VIDEO SYSTEM</strong>
+            <small>素材与设计资产</small>
+          </span>
+        </a>
+
+        <nav class="tabs" id="tabs" role="tablist" aria-label="主要视图">
+          <button class="tab is-active" type="button" role="tab" aria-selected="true" data-tab="library">
+            <span>素材库</span><span class="tab__count" id="tab-count-library">—</span>
+          </button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-tab="styles">
+            <span>设计资产</span><span class="tab__count" id="tab-count-styles">—</span>
+          </button>
+          <button class="tab" type="button" role="tab" aria-selected="false" data-tab="sources">
+            <span>来源与许可</span><span class="tab__count" id="tab-count-sources">—</span>
+          </button>
+        </nav>
+
+        <div class="appbar__actions">
+          <label class="search" for="search">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="7" /><path d="m20 20-3.4-3.4" />
+            </svg>
+            <input id="search" type="search" placeholder="搜索名称、路径或标签" autocomplete="off" />
+          </label>
+          <button class="icon-btn" id="refresh" type="button" aria-label="重新扫描素材" title="重新扫描素材">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 11a8 8 0 1 0-2.3 5.7" /><path d="M20 4v7h-7" />
+            </svg>
+          </button>
+          <button
+            class="icon-btn menu-btn"
+            id="menu-toggle"
+            type="button"
+            aria-label="打开导航菜单"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+          >
+            <svg class="icon icon--menu" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 7h16M4 12h16M4 17h16" />
+            </svg>
+            <svg class="icon icon--close" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m6 6 12 12M18 6 6 18" />
+            </svg>
+          </button>
+        </div>
       </div>
     </header>
 
-    <div class="layout">
-      <aside class="sidebar" id="sidebar"></aside>
-      <main id="main">
-        <div class="skeletons" id="skeleton">
-          <div class="sk-card"></div>
-          <div class="sk-card"></div>
-          <div class="sk-card"></div>
-          <div class="sk-card"></div>
-        </div>
-      </main>
+    <div class="mobile-menu" id="mobile-menu" hidden>
+      <nav class="mobile-menu__nav" aria-label="移动端主要视图">
+        <button class="mobile-menu__tab is-active" type="button" data-tab="library">
+          <span>素材库</span><small id="mobile-count-library">—</small>
+        </button>
+        <button class="mobile-menu__tab" type="button" data-tab="styles">
+          <span>设计资产</span><small id="mobile-count-styles">—</small>
+        </button>
+        <button class="mobile-menu__tab" type="button" data-tab="sources">
+          <span>来源与许可</span><small id="mobile-count-sources">—</small>
+        </button>
+      </nav>
+      <div class="mobile-menu__foot">
+        <p class="t-label">LOCAL WORKSPACE</p>
+        <p>索引、收藏和备注只写入本机目录。</p>
+        <button class="btn btn--secondary" id="mobile-refresh" type="button">重新扫描素材</button>
+      </div>
     </div>
 
+    <main id="main">
+      <section class="hero" aria-labelledby="page-title">
+        <div class="hero__inner">
+          <div class="hero__copy">
+            <p class="hero__kicker">
+              <span class="live-dot" aria-hidden="true"></span>
+              <span>CODE-DRIVEN VIDEO SYSTEM</span>
+              <span class="hero__kicker-meta">LOCAL / 2026</span>
+            </p>
+            <h1 id="page-title">
+              <span>代码驱动的</span>
+              <span class="hero__h1-line">视频制作系统</span>
+            </h1>
+            <p class="hero__lead">从脚本、配音、字幕到包装、渲染、母带和质检，一条时间轴贯穿。</p>
+            <div class="hero__actions">
+              <button class="btn btn--primary" type="button" data-jump="library">
+                打开素材库
+                <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+              </button>
+              <button class="btn btn--secondary" type="button" data-jump="library" data-filter-type="video">查看成片</button>
+            </div>
+            <dl class="hero__facts" aria-label="素材库概览">
+              <div class="hero__fact">
+                <dt>素材</dt>
+                <dd><strong id="stat-assets">—</strong><span>个文件</span></dd>
+              </div>
+              <div class="hero__fact">
+                <dt>占用</dt>
+                <dd><strong id="stat-size">—</strong><span>本地索引</span></dd>
+              </div>
+              <div class="hero__fact">
+                <dt>收藏</dt>
+                <dd><strong id="stat-favorites">—</strong><span>快速取用</span></dd>
+              </div>
+              <div class="hero__fact">
+                <dt>目录</dt>
+                <dd><strong id="stat-groups">—</strong><span>个分类</span></dd>
+              </div>
+            </dl>
+            <p class="hero__scan" id="scan-stamp">正在读取索引</p>
+          </div>
+
+          <div class="hero__stage">
+            <div class="hero__stage-tag">
+              <span>REAL RENDER</span>
+              <span>LOCAL PREVIEW</span>
+            </div>
+            <div class="reel">
+              <video
+                id="hero-reel"
+                muted
+                loop
+                playsinline
+                autoplay
+                preload="metadata"
+                poster="/media/reel.jpg"
+                aria-label="项目渲染样张"
+              >
+                <source src="/media/hero-reel.mp4" type="video/mp4" />
+              </video>
+              <div class="reel__chrome reel__chrome--top">
+                <span>SELECTED OUTPUT / 001</span>
+                <span>1920×1080 · 30 FPS</span>
+              </div>
+              <div class="reel__chrome reel__chrome--bottom">
+                <span id="reel-time">00:00:00</span>
+                <button class="reel__toggle" id="reel-toggle" type="button" aria-label="暂停放映">
+                  <svg class="icon icon--pause" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14" /></svg>
+                  <svg class="icon icon--play" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 9 6-9 6Z" /></svg>
+                </button>
+                <span>FINAL CUT</span>
+              </div>
+              <div class="reel__progress" aria-hidden="true"><i id="reel-progress"></i></div>
+            </div>
+            <figure class="hero__phone">
+              <img src="/media/hook.jpg" alt="竖屏知识视频渲染样张" />
+            </figure>
+          </div>
+        </div>
+
+        <ol class="hero__pipeline" aria-label="制作链路">
+          <li><span>01</span>SCRIPT</li>
+          <li><span>02</span>VOICE</li>
+          <li><span>03</span>CAPTION</li>
+          <li><span>04</span>PACKAGE</li>
+          <li><span>05</span>RENDER</li>
+          <li><span>06</span>MASTER</li>
+          <li><span>07</span>QC</li>
+        </ol>
+      </section>
+
+      <div class="workspace">
+        <aside class="sidebar" id="sidebar" aria-label="素材筛选"></aside>
+        <section class="view" id="view" aria-labelledby="view-title">
+          <div class="skeletons" id="skeleton" aria-hidden="true">
+            <div class="sk-card"></div>
+            <div class="sk-card"></div>
+            <div class="sk-card"></div>
+            <div class="sk-card"></div>
+            <div class="sk-card"></div>
+            <div class="sk-card"></div>
+          </div>
+          <div id="view-root"></div>
+        </section>
+      </div>
+    </main>
+
     <div id="drawer-root"></div>
-    <div class="toast" id="toast" role="status"></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script type="module" src="/app.js"></script>
   </body>
 </html>
