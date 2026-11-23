@@ -52,6 +52,7 @@
     "pipeline:pixel-arcade": "node scripts/pipeline.mjs --project pixel-arcade",
     "preview:shots": "node scripts/preview-shots.mjs",
     "preview:section": "node scripts/preview-section.mjs",
+    "cover": "node scripts/render-cover.mjs",
     "check:composition": "node scripts/check-composition.mjs",
     "pipeline": "node scripts/pipeline.mjs"
   },

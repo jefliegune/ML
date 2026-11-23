@@ -40,6 +40,27 @@
       "type": "string",
       "description": "Mastered MP4 under local/out/ or out/."
     },
+    "cover": {
+      "type": "object",
+      "description": "4:3 cover rendered after video QC. The cover composition must be 1440x1080.",
+      "additionalProperties": false,
+      "required": ["composition"],
+      "properties": {
+        "composition": {
+          "type": "string",
+          "description": "Registered 4:3 Remotion Still composition ID."
+        },
+        "output": {
+          "type": "string",
+          "description": "PNG under local/out/ or out/. Defaults to <output>-cover-4x3.png."
+        },
+        "frame": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 0
+        }
+      }
+    },
     "video": {
       "type": "object",
       "additionalProperties": false,

@@ -8,6 +8,9 @@ export const root = path.resolve(
   "..",
 );
 
+export const COVER_WIDTH = 1440;
+export const COVER_HEIGHT = 1080;
+
 export const toPosix = (value) => value.split(path.sep).join("/");
 
 export const relativeToRoot = (value) => toPosix(path.relative(root, value));
@@ -199,6 +202,52 @@ export const loadVideoProject = (selector) => {
     errors.push("master must be different from output");
   }
 
+  let cover = null;
+  if (manifest.cover != null) {
+    if (
+      typeof manifest.cover !== "object" ||
+      Array.isArray(manifest.cover)
+    ) {
+      errors.push("cover must be an object when provided");
+    } else {
+      if (
+        typeof manifest.cover.composition !== "string" ||
+        manifest.cover.composition.trim() === ""
+      ) {
+        errors.push("cover.composition must be a non-empty string");
+      }
+
+      const frame = manifest.cover.frame ?? 0;
+      if (!Number.isInteger(frame) || frame < 0) {
+        errors.push("cover.frame must be a non-negative integer");
+      }
+
+      const coverValue =
+        manifest.cover.output ??
+        manifest.output.replace(/\.mp4$/i, "-cover-4x3.png");
+      const coverPath = path.resolve(root, coverValue);
+      if (!/\.png$/i.test(coverValue)) {
+        errors.push("cover.output must use the .png extension");
+      }
+      if (!isInside(root, coverPath)) {
+        errors.push("cover.output must stay inside the repository");
+      }
+      if (
+        !outputRoots.some((outputRoot) => isInside(outputRoot, coverPath))
+      ) {
+        errors.push("cover.output must be under local/out/ or out/");
+      }
+
+      cover = {
+        composition: manifest.cover.composition,
+        frame,
+        outputPath: coverPath,
+        width: COVER_WIDTH,
+        height: COVER_HEIGHT,
+      };
+    }
+  }
+
   const render = {
     codec: manifest.render?.codec ?? "h264",
     crf: manifest.render?.crf ?? 18,
@@ -252,6 +301,7 @@ export const loadVideoProject = (selector) => {
     timelineTypesPath,
     outputPath,
     masterPath,
+    cover,
     publicRoot: path.join(root, "public"),
     configPath: path.join(root, "remotion.config.ts"),
     render,

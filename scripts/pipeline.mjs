@@ -13,12 +13,13 @@ const selector = args.values.get("project") ?? args.positionals[0];
 const skipRender = args.flags.has("skip-render");
 const skipMaster = args.flags.has("skip-master");
 const skipVerify = args.flags.has("skip-verify");
+const skipCover = args.flags.has("skip-cover");
 const dryRun = args.flags.has("dry-run");
 const partialRender = args.values.has("frames");
 
 if (!selector) {
   console.error(
-    "Usage: npm run pipeline -- --project <id|path> [--skip-render] [--skip-master] [--skip-verify] [--dry-run]",
+    "Usage: npm run pipeline -- --project <id|path> [--skip-render] [--skip-master] [--skip-verify] [--skip-cover] [--dry-run]",
   );
   process.exit(1);
 }
@@ -154,12 +155,35 @@ if (!skipMaster) {
 if (!skipVerify) {
   steps.push({ label: "Verify", command: process.execPath, args: verifyArgs });
 }
+if (project.cover && !skipCover && !partialRender) {
+  steps.push({
+    label: "Cover",
+    command: process.execPath,
+    args: [
+      path.join(root, "scripts", "render-cover.mjs"),
+      "--project",
+      project.manifestPath,
+    ],
+  });
+}
 
 console.log(`PROJECT PIPELINE / ${project.manifest.id}`);
 console.log(`entry:      ${relativeToRoot(project.entryPath)}`);
 console.log(`composition:${project.manifest.composition}`);
 console.log(`output:     ${relativeToRoot(project.outputPath)}`);
 console.log(`master:     ${relativeToRoot(project.masterPath)}`);
+console.log(
+  `cover:      ${
+    project.cover
+      ? relativeToRoot(project.cover.outputPath)
+      : "not configured"
+  }`,
+);
+if (!project.cover) {
+  console.warn(
+    "WARN: cover is not configured; no 4:3 cover will be generated.",
+  );
+}
 
 if (dryRun) {
   console.log("\nDRY RUN\n");
@@ -173,6 +197,9 @@ if (dryRun) {
 
 fs.mkdirSync(path.dirname(project.outputPath), { recursive: true });
 fs.mkdirSync(path.dirname(project.masterPath), { recursive: true });
+if (project.cover) {
+  fs.mkdirSync(path.dirname(project.cover.outputPath), { recursive: true });
+}
 
 for (const step of steps) {
   try {
@@ -185,3 +212,6 @@ for (const step of steps) {
 
 console.log("\nPIPELINE PASS");
 console.log("master: " + relativeToRoot(project.masterPath));
+if (project.cover && !skipCover && !partialRender) {
+  console.log("cover:  " + relativeToRoot(project.cover.outputPath));
+}

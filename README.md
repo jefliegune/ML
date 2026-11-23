@@ -147,9 +147,12 @@ npm run preview:shots -- --project <id|path> --section <section-id>
 # 单个段落草稿：确认动效、转场和音画同步
 npm run preview:section -- --project <id|path> --section <section-id> --draft
 
-# 完整流水线：检查 → 渲染 → 母带 → 质检
+# 完整流水线：检查 → 渲染 → 母带 → 质检 → 4:3 封面
 npm run pipeline -- --project <id|path>
 npm run pipeline -- --project <id|path> --dry-run
+
+# 单独重新生成 4:3 封面
+npm run cover -- --project <id|path>
 
 # 分步执行公共样张
 npm run render:packaging
