@@ -193,6 +193,10 @@ npm run library:check       # 校验完整卡、字体、许可与排除项
 
 设计资产索引位于 `src/library/catalog.json`，原创风格包登记在 `src/library/original-packs.json`。
 
+色板以 6 个种子色为入口，运行时由 [Palette v2](src/color-system.ts) 展开为中性色阶、表面层级、文字层级、线条、强调深浅、状态色和材质 token。场景优先使用语义 token，不直接堆高饱和色。
+
+![Palette v2 包装样张](docs/assets/palette-v2.png)
+
 | 类别 | 数量 | 来源 |
 |---|---:|---|
 | 色板 | 9 | Huashu Art Motion（8）+ 本仓库（1） |
@@ -237,6 +241,7 @@ npm run library:check       # 校验完整卡、字体、许可与排除项
 .
 ├─ src/
 │  ├─ Composition.tsx             通用 Composition 注册
+│  ├─ color-system.ts              Palette v2 色阶与语义 token
 │  ├─ theme.ts                     基础色板与字体
 │  ├─ audio/                       默认旁白音色配置
 │  ├─ components/                  背景、字幕、通用视觉组件

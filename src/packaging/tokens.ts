@@ -1,10 +1,40 @@
 import type {CSSProperties} from "react";
-import {COLORS, FONT, MONO} from "../theme";
+import {COLORS, EDITORIAL_TOKENS, FONT, MONO} from "../theme";
 
 export type BrandTone = "paper" | "ink" | "signal";
 
+export const BRAND_TOKENS = {
+  ...EDITORIAL_TOKENS,
+  signal: COLORS.lime,
+  info: COLORS.cyan,
+} as const;
+
 export const BRAND_COLORS = {
   ...COLORS,
+  bg: EDITORIAL_TOKENS.bg.base,
+  bgSubtle: EDITORIAL_TOKENS.bg.subtle,
+  bgSunken: EDITORIAL_TOKENS.bg.sunken,
+  surface: EDITORIAL_TOKENS.surface.base,
+  surfaceRaised: EDITORIAL_TOKENS.surface.raised,
+  surfaceSunken: EDITORIAL_TOKENS.surface.sunken,
+  surfaceOverlay: EDITORIAL_TOKENS.surface.overlay,
+  inkMuted: EDITORIAL_TOKENS.ink.secondary,
+  inkFaint: EDITORIAL_TOKENS.ink.tertiary,
+  line: EDITORIAL_TOKENS.line.subtle,
+  lineStrong: EDITORIAL_TOKENS.line.strong,
+  accent: EDITORIAL_TOKENS.accent.base,
+  accentSoft: EDITORIAL_TOKENS.accent.soft,
+  accentDeep: EDITORIAL_TOKENS.accent.deep,
+  support: EDITORIAL_TOKENS.support.base,
+  supportSoft: EDITORIAL_TOKENS.support.soft,
+  supportDeep: EDITORIAL_TOKENS.support.deep,
+  success: EDITORIAL_TOKENS.status.success,
+  warning: EDITORIAL_TOKENS.status.warning,
+  danger: EDITORIAL_TOKENS.status.danger,
+  shadowSoft: EDITORIAL_TOKENS.shadow.soft,
+  highlight: EDITORIAL_TOKENS.highlight,
+  signal: COLORS.lime,
+  info: COLORS.cyan,
   dim: "#2A2925",
   paperEdge: "#DED6C5",
   warmSignal: "#FF8A6B",
@@ -103,6 +133,8 @@ export const SHADOW = {
   card: `9px 10px 0 ${COLORS.ink}`,
   hero: `14px 15px 0 ${COLORS.ink}`,
   float: "0 18px 50px rgba(0,0,0,0.24)",
+  soft: `0 18px 48px ${EDITORIAL_TOKENS.shadow.soft}`,
+  tinted: `0 18px 52px ${EDITORIAL_TOKENS.shadow.soft}`,
 } as const;
 
 export const SAFE_AREA = {

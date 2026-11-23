@@ -1672,6 +1672,20 @@ body.menu-open .menu-btn .icon--close {
   min-width: 0;
 }
 
+.tone-scale {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 2px;
+  height: 14px;
+  overflow: hidden;
+  border-radius: 4px;
+}
+
+.tone-scale i {
+  display: block;
+  height: 100%;
+}
+
 .palette__note {
   margin: 0;
   color: var(--p-muted);

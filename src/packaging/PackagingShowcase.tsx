@@ -18,7 +18,7 @@ import {
   TapeStrip,
 } from "./primitives";
 import {ChapterOpener, EndSlate} from "./templates";
-import {BRAND_COLORS, STROKE, TYPE} from "./tokens";
+import {BRAND_TOKENS, STROKE, TYPE} from "./tokens";
 import {SectionWipe} from "./transitions";
 
 const AssetTile: React.FC<{
@@ -48,9 +48,9 @@ const AssetTile: React.FC<{
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            borderBottom: `${STROKE.base}px solid ${BRAND_COLORS.ink}22`,
+            borderBottom: `${STROKE.base}px solid ${BRAND_TOKENS.line.subtle}`,
             ...TYPE.micro,
-            color: BRAND_COLORS.muted,
+            color: BRAND_TOKENS.ink.secondary,
           }}
         >
           <span>{index}</span>
@@ -70,7 +70,7 @@ const AssetTile: React.FC<{
             display: "flex",
             alignItems: "center",
             justifyContent: "space-between",
-            borderTop: `${STROKE.base}px solid ${BRAND_COLORS.ink}22`,
+            borderTop: `${STROKE.base}px solid ${BRAND_TOKENS.line.subtle}`,
           }}
         >
           <span style={{...TYPE.label, fontSize: 14}}>{title}</span>
@@ -95,7 +95,7 @@ const AssetLibrary: React.FC = () => {
         >
           <div>
             <RiseIn delay={1}>
-              <Kicker background={BRAND_COLORS.coral}>ASSET LIBRARY / 06 TILES</Kicker>
+              <Kicker background={BRAND_TOKENS.support.base}>ASSET LIBRARY / 06 TILES</Kicker>
             </RiseIn>
             <RiseIn delay={5} distance={50}>
               <Headline
@@ -109,7 +109,7 @@ const AssetLibrary: React.FC = () => {
                 }}
               >
                 每个镜头，都从
-                <span style={{color: BRAND_COLORS.blue}}>素材库</span>
+                <span style={{color: BRAND_TOKENS.accent.base}}>素材库</span>
                 组合。
               </Headline>
             </RiseIn>
@@ -131,16 +131,16 @@ const AssetLibrary: React.FC = () => {
             index="01 / TEXTURE"
             title="PAPER / DOT GRID"
             subtitle="BACKGROUND"
-            accent={BRAND_COLORS.lime}
+            accent={BRAND_TOKENS.accent.base}
             delay={12}
           >
             <div
               style={{
                 position: "absolute",
                 inset: 0,
-                backgroundColor: BRAND_COLORS.cream,
+                backgroundColor: BRAND_TOKENS.surface.raised,
                 backgroundImage:
-                  "radial-gradient(rgba(21,21,21,0.2) 1.2px, transparent 1.4px)",
+                  `radial-gradient(${BRAND_TOKENS.line.strong} 1.2px, transparent 1.4px)`,
                 backgroundSize: "16px 16px",
               }}
             />
@@ -154,16 +154,16 @@ const AssetLibrary: React.FC = () => {
             index="02 / TEXTURE"
             title="HALFTONE / BURST"
             subtitle="ACCENT"
-            accent={BRAND_COLORS.blue}
+            accent={BRAND_TOKENS.accent.base}
             delay={16}
           >
             <div
               style={{
                 position: "absolute",
                 inset: 0,
-                backgroundColor: BRAND_COLORS.paper,
+                backgroundColor: BRAND_TOKENS.surface.base,
                 backgroundImage:
-                  "radial-gradient(rgba(51,85,255,0.55) 2.8px, transparent 3px)",
+                  `radial-gradient(${BRAND_TOKENS.accent.soft} 2.8px, transparent 3px)`,
                 backgroundSize: "15px 15px",
                 rotate: `${frame * 0.08}deg`,
                 scale: 1.14,
@@ -178,7 +178,7 @@ const AssetLibrary: React.FC = () => {
                 fontSize: 86,
                 lineHeight: 1,
                 fontWeight: 900,
-                color: BRAND_COLORS.ink,
+                color: BRAND_TOKENS.ink.primary,
                 opacity: 0.86,
               }}
             >
@@ -190,20 +190,20 @@ const AssetLibrary: React.FC = () => {
             index="03 / COMPONENT"
             title="STICKER / CALLOUT"
             subtitle="EMPHASIS"
-            accent={BRAND_COLORS.coral}
+            accent={BRAND_TOKENS.accent.base}
             delay={20}
           >
             <div
               style={{
                 position: "absolute",
                 inset: 0,
-                backgroundColor: BRAND_COLORS.lilac,
+                backgroundColor: BRAND_TOKENS.support.soft,
                 backgroundImage:
-                  "repeating-linear-gradient(135deg, transparent 0 24px, rgba(21,21,21,0.07) 24px 26px)",
+                  `repeating-linear-gradient(135deg, transparent 0 24px, ${BRAND_TOKENS.line.subtle} 24px 26px)`,
               }}
             />
             <Sticker
-              color={BRAND_COLORS.coral}
+              color={BRAND_TOKENS.accent.base}
               rotate={-5}
               style={{
                 position: "absolute",
@@ -220,14 +220,14 @@ const AssetLibrary: React.FC = () => {
             index="04 / SHAPE"
             title="IMPACT / STAR"
             subtitle="TRANSITION"
-            accent={BRAND_COLORS.cyan}
+            accent={BRAND_TOKENS.accent.base}
             delay={24}
           >
             <div
               style={{
                 position: "absolute",
                 inset: 0,
-                backgroundColor: BRAND_COLORS.ink,
+                backgroundColor: BRAND_TOKENS.ink.primary,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
@@ -235,7 +235,7 @@ const AssetLibrary: React.FC = () => {
             >
               <Burst
                 size={175}
-                color={BRAND_COLORS.lime}
+                color={BRAND_TOKENS.signal}
                 rotate={frame * 0.8}
               />
             </div>
@@ -245,14 +245,14 @@ const AssetLibrary: React.FC = () => {
             index="05 / TYPE"
             title="TYPE / SCALE"
             subtitle="HIERARCHY"
-            accent={BRAND_COLORS.lime}
+            accent={BRAND_TOKENS.accent.base}
             delay={28}
           >
             <div
               style={{
                 position: "absolute",
                 inset: 0,
-                backgroundColor: BRAND_COLORS.paper,
+                backgroundColor: BRAND_TOKENS.surface.raised,
                 padding: "22px 24px",
               }}
             >
@@ -279,21 +279,21 @@ const AssetLibrary: React.FC = () => {
             index="06 / MOTION"
             title="WIPE / SECTION"
             subtitle="TRANSITION"
-            accent={BRAND_COLORS.coral}
+            accent={BRAND_TOKENS.accent.base}
             delay={32}
           >
             <div
               style={{
                 position: "absolute",
                 inset: 0,
-                backgroundColor: BRAND_COLORS.ink,
+                backgroundColor: BRAND_TOKENS.ink.primary,
                 overflow: "hidden",
               }}
             >
               {[
-                {color: BRAND_COLORS.blue, top: 18, delay: 0},
-                {color: BRAND_COLORS.lime, top: 74, delay: 8},
-                {color: BRAND_COLORS.coral, top: 130, delay: 16},
+                {color: BRAND_TOKENS.accent.base, top: 18, delay: 0},
+                {color: BRAND_TOKENS.signal, top: 74, delay: 8},
+                {color: BRAND_TOKENS.support.base, top: 130, delay: 16},
               ].map((bar) => (
                 <div
                   key={bar.color}
@@ -315,8 +315,8 @@ const AssetLibrary: React.FC = () => {
                   top: 10,
                   padding: "5px 7px 4px",
                   borderRadius: 4,
-                  backgroundColor: BRAND_COLORS.ink,
-                  color: BRAND_COLORS.lime,
+                  backgroundColor: BRAND_TOKENS.ink.primary,
+                  color: BRAND_TOKENS.signal,
                   ...TYPE.micro,
                 }}
               >
@@ -336,7 +336,7 @@ const AssetLibrary: React.FC = () => {
 
 export const PackagingShowcase: React.FC = () => {
   return (
-    <AbsoluteFill style={{backgroundColor: BRAND_COLORS.cream}}>
+    <AbsoluteFill style={{backgroundColor: BRAND_TOKENS.bg.base}}>
       <Sequence durationInFrames={100}>
         <ChapterOpener
           index="01"
@@ -350,7 +350,7 @@ export const PackagingShowcase: React.FC = () => {
           }
           subtitle="把颜色、字体、图形、动效、声音和质检，做成可复用的生产工具。"
           sticker="SYSTEM / V1.0"
-          accent={BRAND_COLORS.lime}
+          accent={BRAND_TOKENS.signal}
         />
       </Sequence>
 
@@ -373,10 +373,10 @@ export const PackagingShowcase: React.FC = () => {
       </Sequence>
 
       <Sequence from={92} durationInFrames={16}>
-        <SectionWipe color={BRAND_COLORS.lime} />
+        <SectionWipe color={BRAND_TOKENS.signal} />
       </Sequence>
       <Sequence from={192} durationInFrames={16}>
-        <SectionWipe color={BRAND_COLORS.coral} direction={-1} />
+        <SectionWipe color={BRAND_TOKENS.support.base} direction={-1} />
       </Sequence>
 
       <Audio src={staticFile("audio/bgm-preview.wav")} volume={0.5} />

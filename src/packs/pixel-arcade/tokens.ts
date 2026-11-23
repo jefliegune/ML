@@ -1,3 +1,5 @@
+import {createPaletteV2} from "../../color-system";
+
 export const PIXEL_ARCADE = {
   id: "pixel-arcade",
   name: "像素街机",
@@ -29,6 +31,9 @@ export const PIXEL_ARCADE_PALETTE = {
   },
   source: "original/pixel-arcade",
 } as const;
+
+export const PIXEL_ARCADE_V2 = createPaletteV2(PIXEL_ARCADE_PALETTE.colors);
+export const PIXEL_ARCADE_TOKENS = PIXEL_ARCADE_V2.tokens;
 
 export const PIXEL_FONT =
   '"Microsoft YaHei", "Noto Sans SC", "PingFang SC", sans-serif';

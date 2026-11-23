@@ -1,6 +1,7 @@
 import catalogJson from "./catalog.json";
 import huashuJson from "./huashu.json";
 import originalPacksJson from "./original-packs.json";
+import {createPaletteV2, type PaletteTokens} from "../color-system";
 
 export * from "./HuashuFonts";
 
@@ -18,6 +19,7 @@ export interface LibraryPalette {
     accent: string;
     accent2: string;
   };
+  tokens?: PaletteTokens;
   docPath?: string;
   source: string;
 }
@@ -73,10 +75,15 @@ export interface LibraryPack {
 
 export const catalog = catalogJson;
 
+const withPaletteTokens = (palette: LibraryPalette): LibraryPalette => ({
+  ...palette,
+  tokens: palette.tokens ?? createPaletteV2(palette.colors).tokens,
+});
+
 export const PALETTES = [
   ...(catalogJson.palettes as LibraryPalette[]),
   ...(originalPacksJson.palettes as LibraryPalette[]),
-];
+].map(withPaletteTokens);
 export const STYLES = [
   ...(catalogJson.styles as LibraryStyle[]),
   ...(originalPacksJson.styles as LibraryStyle[]),

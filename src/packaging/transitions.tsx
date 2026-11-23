@@ -1,6 +1,6 @@
 import type {CSSProperties, ReactNode} from "react";
 import {interpolate, spring, useCurrentFrame, useVideoConfig} from "remotion";
-import {BRAND_COLORS, RADIUS, SHADOW, STROKE, TYPE} from "./tokens";
+import {BRAND_TOKENS, RADIUS, SHADOW, STROKE, TYPE} from "./tokens";
 
 export const SectionWipe: React.FC<{
   color?: string;
@@ -9,7 +9,7 @@ export const SectionWipe: React.FC<{
   angle?: number;
   label?: string;
 }> = ({
-  color = BRAND_COLORS.lime,
+  color = BRAND_TOKENS.signal,
   durationInFrames = 16,
   direction = 1,
   angle = -5.5,
@@ -43,8 +43,8 @@ export const SectionWipe: React.FC<{
           backgroundColor: color,
           rotate: `${angle}deg`,
           translate: `${interpolate(progress, [0, 1], [from, to])}% 0px`,
-          borderLeft: `20px solid ${BRAND_COLORS.ink}`,
-          borderRight: `20px solid ${BRAND_COLORS.ink}`,
+          borderLeft: `20px solid ${BRAND_TOKENS.ink.primary}`,
+          borderRight: `20px solid ${BRAND_TOKENS.ink.primary}`,
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
@@ -64,7 +64,7 @@ export const SectionWipe: React.FC<{
               position: "relative",
               ...TYPE.display,
               fontSize: 112,
-              color: BRAND_COLORS.ink,
+              color: BRAND_TOKENS.ink.primary,
               opacity: 0.88,
             }}
           >
@@ -82,7 +82,7 @@ export const ImpactStamp: React.FC<{
   color?: string;
   rotate?: number;
   style?: CSSProperties;
-}> = ({children, delay = 0, color = BRAND_COLORS.coral, rotate = -8, style}) => {
+}> = ({children, delay = 0, color = BRAND_TOKENS.support.base, rotate = -8, style}) => {
   const frame = useCurrentFrame();
   const {fps} = useVideoConfig();
   const enter = spring({
@@ -101,10 +101,10 @@ export const ImpactStamp: React.FC<{
         justifyContent: "center",
         width: "fit-content",
         padding: "16px 20px 15px",
-        border: `${STROKE.heavy}px solid ${BRAND_COLORS.ink}`,
+        border: `${STROKE.heavy}px solid ${BRAND_TOKENS.ink.primary}`,
         borderRadius: RADIUS.md,
         backgroundColor: color,
-        color: BRAND_COLORS.ink,
+        color: BRAND_TOKENS.ink.primary,
         boxShadow: SHADOW.card,
         rotate: `${rotate}deg`,
         opacity: interpolate(enter, [0, 1], [0, 1], {
@@ -127,7 +127,7 @@ export const ImpactStamp: React.FC<{
 export const CutFlash: React.FC<{
   color?: string;
   durationInFrames?: number;
-}> = ({color = BRAND_COLORS.white, durationInFrames = 8}) => {
+}> = ({color = "#FFFFFF", durationInFrames = 8}) => {
   const frame = useCurrentFrame();
   const opacity = interpolate(
     frame,

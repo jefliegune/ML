@@ -504,6 +504,14 @@ const renderStyles = () => {
                 )
                 .join("")}
             </div>
+            <div class="tone-scale" aria-hidden="true">
+              ${[6, 12, 20, 30, 42, 56, 72, 88]
+                .map(
+                  (step) =>
+                    `<i style="background:color-mix(in oklab, ${palette.colors.ink} ${step}%, ${palette.colors.bg})"></i>`,
+                )
+                .join("")}
+            </div>
             <p class="palette__note">${esc(palette.bestFor)}</p>
           </article>`,
           )

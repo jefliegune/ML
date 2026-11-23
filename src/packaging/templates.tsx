@@ -11,7 +11,7 @@ import {
   TapeStrip,
 } from "./primitives";
 import {
-  BRAND_COLORS,
+  BRAND_TOKENS,
   RADIUS,
   SHADOW,
   STROKE,
@@ -33,12 +33,13 @@ export const ChapterOpener: React.FC<{
   kicker,
   title,
   subtitle,
-  accent = BRAND_COLORS.coral,
+  accent = BRAND_TOKENS.support.base,
   tone = "paper",
   sticker,
   footer = "EDITORIAL MOTION SYSTEM",
 }) => {
-  const foreground = tone === "paper" ? BRAND_COLORS.ink : BRAND_COLORS.white;
+  const foreground =
+    tone === "paper" ? BRAND_TOKENS.ink.primary : BRAND_TOKENS.ink.inverse;
 
   return (
     <PackagingBackground tone={tone} index={index} accent={accent} label={footer}>
@@ -120,7 +121,7 @@ export const EndSlate: React.FC<{
   subtitle,
   footer = "VIDEO SYSTEM / V1",
   tags = ["SCRIPT", "MOTION", "SOUND"],
-  accent = BRAND_COLORS.lime,
+  accent = BRAND_TOKENS.signal,
   tone = "ink",
 }) => {
   return (
@@ -145,7 +146,7 @@ export const EndSlate: React.FC<{
                 justifyContent: "space-between",
               }}
             >
-              <Kicker background={BRAND_COLORS.ink} color={BRAND_COLORS.lime}>
+              <Kicker background={BRAND_TOKENS.ink.primary} color={BRAND_TOKENS.signal}>
                 {footer}
               </Kicker>
               <div style={{...TYPE.label, opacity: 0.45}}>FINAL FRAME</div>
@@ -164,7 +165,7 @@ export const EndSlate: React.FC<{
                 fontSize: 28,
                 lineHeight: 1.45,
                 fontWeight: 600,
-                color: BRAND_COLORS.muted,
+                color: BRAND_TOKENS.ink.secondary,
                 maxWidth: 1120,
               }}
             >
@@ -178,13 +179,13 @@ export const EndSlate: React.FC<{
                   style={{
                     padding: "9px 14px 8px",
                     borderRadius: RADIUS.pill,
-                    border: `${STROKE.base}px solid ${BRAND_COLORS.ink}`,
+                    border: `${STROKE.base}px solid ${BRAND_TOKENS.ink.primary}`,
                     backgroundColor:
                       index === 0
-                        ? BRAND_COLORS.lime
+                        ? BRAND_TOKENS.signal
                         : index === 1
-                          ? BRAND_COLORS.cyan
-                          : BRAND_COLORS.coral,
+                          ? BRAND_TOKENS.info
+                          : BRAND_TOKENS.support.base,
                     boxShadow: SHADOW.micro,
                     ...TYPE.label,
                   }}

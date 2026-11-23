@@ -2,6 +2,7 @@ import type {CSSProperties, ReactNode} from "react";
 import {AbsoluteFill, useCurrentFrame} from "remotion";
 import {
   BRAND_COLORS,
+  BRAND_TOKENS,
   RADIUS,
   SHADOW,
   STROKE,
@@ -56,13 +57,14 @@ export const PackagingBackground: React.FC<{
   const dark = tone === "ink";
   const signal = tone === "signal";
   const background = signal
-    ? BRAND_COLORS.blue
+    ? BRAND_TOKENS.accent.base
     : dark
-      ? BRAND_COLORS.ink
-      : BRAND_COLORS.cream;
-  const foreground = signal || dark ? BRAND_COLORS.white : BRAND_COLORS.ink;
+      ? BRAND_TOKENS.ink.primary
+      : BRAND_TOKENS.bg.base;
+  const foreground =
+    signal || dark ? BRAND_TOKENS.ink.inverse : BRAND_TOKENS.ink.primary;
   const accentColor =
-    accent ?? (dark || signal ? BRAND_COLORS.lime : BRAND_COLORS.coral);
+    accent ?? (dark || signal ? BRAND_TOKENS.signal : BRAND_TOKENS.support.base);
   const gridColor =
     dark || signal ? BRAND_COLORS.gridDark : BRAND_COLORS.grid;
   const driftX = Math.sin(frame / 42) * 18;
@@ -99,9 +101,11 @@ export const PackagingBackground: React.FC<{
           width: 760,
           height: 760,
           borderRadius: "50%",
-          backgroundColor: signal ? BRAND_COLORS.lime : BRAND_COLORS.blue,
-          opacity: dark || signal ? 0.3 : 0.92,
-          filter: dark || signal ? "blur(58px)" : "none",
+          backgroundColor: signal
+            ? BRAND_TOKENS.signal
+            : BRAND_TOKENS.accent.soft,
+          opacity: dark || signal ? 0.22 : 0.92,
+          filter: "none",
         }}
       />
       <div
@@ -112,9 +116,9 @@ export const PackagingBackground: React.FC<{
           width: 680,
           height: 680,
           borderRadius: "50%",
-          backgroundColor: BRAND_COLORS.lime,
-          opacity: dark || signal ? 0.12 : 0.95,
-          filter: dark || signal ? "blur(68px)" : "none",
+          backgroundColor: BRAND_TOKENS.support.soft,
+          opacity: dark || signal ? 0.16 : 0.84,
+          filter: "none",
         }}
       />
 
@@ -144,10 +148,7 @@ export const PackagingBackground: React.FC<{
           fontWeight: 900,
           letterSpacing: -32,
           color: "transparent",
-          WebkitTextStroke:
-            dark || signal
-              ? "2px rgba(255,255,255,0.12)"
-              : "2px rgba(21,21,21,0.1)",
+          WebkitTextStroke: `2px ${BRAND_TOKENS.line.subtle}`,
           translate: `${driftX * 0.35}px 0px`,
           zIndex: Z.pattern,
         }}
@@ -199,8 +200,8 @@ export const Kicker: React.FC<{
   style?: CSSProperties;
 }> = ({
   children,
-  background = BRAND_COLORS.lime,
-  color = BRAND_COLORS.ink,
+  background = BRAND_TOKENS.signal,
+  color = BRAND_TOKENS.ink.primary,
   rotate = 0,
   style,
 }) => {
@@ -211,7 +212,7 @@ export const Kicker: React.FC<{
         alignItems: "center",
         width: "fit-content",
         padding: "10px 15px 9px",
-        border: `${STROKE.base}px solid ${BRAND_COLORS.ink}`,
+        border: `${STROKE.base}px solid ${BRAND_TOKENS.ink.primary}`,
         borderRadius: RADIUS.sm,
         backgroundColor: background,
         color,
@@ -244,14 +245,16 @@ export const PaperCard: React.FC<{
   return (
     <div
       style={{
-        border: `${STROKE.strong}px solid ${dark ? BRAND_COLORS.white : BRAND_COLORS.ink}`,
+        border: `${STROKE.strong}px solid ${
+          dark ? BRAND_TOKENS.ink.inverse : BRAND_TOKENS.ink.primary
+        }`,
         borderRadius: RADIUS.lg,
         backgroundColor: dark
-          ? BRAND_COLORS.ink
+          ? BRAND_TOKENS.ink.primary
           : tone === "clear"
-            ? "rgba(255,253,244,0.82)"
-            : BRAND_COLORS.paper,
-        color: dark ? BRAND_COLORS.white : BRAND_COLORS.ink,
+            ? BRAND_TOKENS.surface.overlay
+            : BRAND_TOKENS.surface.raised,
+        color: dark ? BRAND_TOKENS.ink.inverse : BRAND_TOKENS.ink.primary,
         boxShadow: `10px 11px 0 ${accent}`,
         ...style,
       }}
@@ -266,7 +269,7 @@ export const Sticker: React.FC<{
   color?: string;
   rotate?: number;
   style?: CSSProperties;
-}> = ({children, color = BRAND_COLORS.coral, rotate = -4, style}) => {
+}> = ({children, color = BRAND_TOKENS.support.base, rotate = -4, style}) => {
   return (
     <div
       style={{
@@ -274,10 +277,10 @@ export const Sticker: React.FC<{
         alignItems: "center",
         width: "fit-content",
         padding: "9px 13px 8px",
-        border: `${STROKE.strong}px solid ${BRAND_COLORS.ink}`,
+        border: `${STROKE.strong}px solid ${BRAND_TOKENS.ink.primary}`,
         borderRadius: RADIUS.sm,
         backgroundColor: color,
-        color: BRAND_COLORS.ink,
+        color: BRAND_TOKENS.ink.primary,
         boxShadow: SHADOW.micro,
         rotate: `${rotate}deg`,
         ...TYPE.label,
