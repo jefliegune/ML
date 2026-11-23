@@ -25,6 +25,20 @@
         "accent2": "#3DDC97"
       },
       "source": "original/pixel-arcade"
+    },
+    {
+      "id": "bright-drafting",
+      "name": "明亮制图台",
+      "bestFor": "系统解释、流程、编排、结构说明",
+      "colors": {
+        "bg": "#E9EEF0",
+        "surface": "#FFFFFF",
+        "ink": "#10181D",
+        "sub": "#53666F",
+        "accent": "#D9482B",
+        "accent2": "#2F6F7E"
+      },
+      "source": "original/bright-drafting"
     }
   ],
   "styles": [
@@ -42,9 +56,40 @@
       "source": "src/packs/pixel-arcade/pack.json",
       "summary": "面向教程、产品演示和技术流程的完整像素风组件包。",
       "visual": "深海军蓝底、暖白正文、黄色强调、薄荷绿成功状态。",
-      "techniques": ["像素边框", "CRT 扫描线", "终端进度条", "像素讲解员", "故障转场"],
+      "techniques": [
+        "像素边框",
+        "CRT 扫描线",
+        "终端进度条",
+        "像素讲解员",
+        "故障转场"
+      ],
       "original": "Original / code-driven-video-system",
       "demo": "PixelArcadeShowcase"
+    },
+    {
+      "id": "pack-bright-drafting",
+      "name": "明亮制图台",
+      "english": "Bright Drafting Board",
+      "family": "original",
+      "quality": 3,
+      "palette": "bright-drafting",
+      "technique": "冷白网格、粗黑描边、正交路由线与结构形变。",
+      "motion": "固定镜头、路径流动、抽屉展开、令牌移动与遮罩擦除。",
+      "transition": "斜切色带 + 半透明闪层。",
+      "weakness": "浅色背景需要控制描边密度；大面积纯白面板容易退化成表格。",
+      "source": "src/packs/bright-drafting/pack.json",
+      "summary": "面向系统解释、流程和编排话题的明亮制图台组件包。",
+      "visual": "冷白网格底、墨黑正文、朱红与钢青强调、芥黄高亮。",
+      "techniques": [
+        "网格舞台",
+        "正交路由",
+        "流动点",
+        "令牌移动",
+        "词级字幕",
+        "固定镜头"
+      ],
+      "original": "Original / code-driven-video-system",
+      "demo": "BrightDraftingShowcase"
     }
   ],
   "grammars": [],
@@ -56,6 +101,15 @@
       "manifest": "src/packs/pixel-arcade/pack.json",
       "previewComposition": "PixelArcadeShowcase",
       "palette": "pixel-arcade",
+      "status": "stable"
+    },
+    {
+      "id": "bright-drafting",
+      "name": "明亮制图台",
+      "entry": "src/packs/bright-drafting/index.ts",
+      "manifest": "src/packs/bright-drafting/pack.json",
+      "previewComposition": "BrightDraftingShowcase",
+      "palette": "bright-drafting",
       "status": "stable"
     }
   ]

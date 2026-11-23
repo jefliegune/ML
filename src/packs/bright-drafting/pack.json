@@ -1,0 +1,31 @@
+{
+  "id": "bright-drafting",
+  "name": "明亮制图台",
+  "version": "1.0.2",
+  "status": "stable",
+  "entry": "./index.ts",
+  "previewComposition": "BrightDraftingShowcase",
+  "palette": "bright-drafting",
+  "description": "明亮制图台风格：冷白网格、粗黑描边、正交路由、固定镜头与词级字幕。",
+  "bestFor": "系统解释、流程、编排、结构说明、横板知识视频",
+  "tags": ["bright", "grid", "diagram", "flow", "caption", "landscape"],
+  "components": [
+    "DraftingStage",
+    "DraftingCamera",
+    "DraftingRoute",
+    "DraftingFlowDots",
+    "DraftingToken",
+    "DraftingChip",
+    "DraftingPanel",
+    "DraftingGlyph",
+    "DraftingSectionTag",
+    "WordCaptionBar",
+    "BrightDraftingShowcase"
+  ],
+  "privateContent": [
+    "具体文案",
+    "TTS 配音与词级时间戳",
+    "项目时间轴",
+    "成片与抽帧"
+  ]
+}

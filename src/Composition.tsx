@@ -3,6 +3,7 @@ import {SceneBackground} from "./components/Design";
 import {StyleLab} from "./library/StyleLab";
 import {PackagingShowcase} from "./packaging/PackagingShowcase";
 import {PixelArcadeShowcase} from "./packs/pixel-arcade";
+import {BrightDraftingShowcase} from "./packs/bright-drafting";
 
 export const MyComposition: React.FC = () => {
   return (
@@ -34,6 +35,14 @@ export const MyComposition: React.FC = () => {
       <Composition
         id="PixelArcadeShowcase"
         component={PixelArcadeShowcase}
+        durationInFrames={300}
+        fps={30}
+        width={1920}
+        height={1080}
+      />
+      <Composition
+        id="BrightDraftingShowcase"
+        component={BrightDraftingShowcase}
         durationInFrames={300}
         fps={30}
         width={1920}
