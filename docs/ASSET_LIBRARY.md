@@ -59,7 +59,7 @@
 | 风格包 | 入口 | 预览 Composition | 提供什么 |
 |---|---|---|---|
 | 像素街机 `pixel-arcade` | `src/packs/pixel-arcade/index.ts` | `PixelArcadeShowcase` | `PixelStage`、`PixelHud`、`PixelCaptionBar`、`PixelGuideActor`、`PixelHookScene`、`PixelWorkflowScene`、`PixelPipelineScene`、`PixelGlitch` |
-| 明亮制图台 `bright-drafting` | `src/packs/bright-drafting/index.ts` | `BrightDraftingShowcase` | `DraftingStage`、`DraftingCamera`、`DraftingRoute`、`DraftingFlowDots`、`DraftingToken`、`DraftingChip`、`DraftingPanel`、`DraftingGlyph`、`DraftingSectionTag`、`WordCaptionBar` |
+| 暖阳制图台 `bright-drafting` | `src/packs/bright-drafting/index.ts` | `BrightDraftingShowcase` | `DraftingStage`、`DraftingCamera`、`DraftingRoute`、`DraftingFlowDots`、`DraftingToken`、`DraftingChip`、`DraftingPanel`、`DraftingGlyph`、`DraftingSectionTag`、`WordCaptionBar` |
 
 像素街机包的核心能力：
 
@@ -71,15 +71,15 @@
 
 使用方式见 [像素街机 README](../src/packs/pixel-arcade/README.md)。
 
-明亮制图台包的核心能力：
+暖阳制图台包的核心能力：
 
-- 冷白网格舞台、粗黑描边、朱红/钢青/芥黄强调。
+- 暖纸黄网格舞台、粗黑描边、珊瑚/青/蓝/紫/绿五层语义色。
 - 正交路由线、流动点、令牌、标签、面板和线性图标。
 - 镜头保持固定，不做整体位移；运动交给路由线、流动点、令牌、展开和遮罩。
 - 词级字幕 `WordCaptionBar`：读取句子起止帧和词偏移，逐词推进、关键词变色，不画下划线。
 - 10 秒预览样张，用来验收舞台、字幕和镜头稳定性。
 
-使用方式见 [明亮制图台 README](../src/packs/bright-drafting/README.md)。
+使用方式见 [暖阳制图台 README](../src/packs/bright-drafting/README.md)。
 
 ## 参考文档与字体
 

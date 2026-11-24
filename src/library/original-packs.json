@@ -28,15 +28,15 @@
     },
     {
       "id": "bright-drafting",
-      "name": "明亮制图台",
+      "name": "暖阳制图台",
       "bestFor": "系统解释、流程、编排、结构说明",
       "colors": {
-        "bg": "#E9EEF0",
-        "surface": "#FFFFFF",
-        "ink": "#10181D",
-        "sub": "#53666F",
-        "accent": "#D9482B",
-        "accent2": "#2F6F7E"
+        "bg": "#F2E3B6",
+        "surface": "#FFFDF7",
+        "ink": "#1B1710",
+        "sub": "#5F5644",
+        "accent": "#D94A33",
+        "accent2": "#2357D9"
       },
       "source": "original/bright-drafting"
     }
@@ -68,23 +68,24 @@
     },
     {
       "id": "pack-bright-drafting",
-      "name": "明亮制图台",
-      "english": "Bright Drafting Board",
+      "name": "暖阳制图台",
+      "english": "Sunlit Drafting Board",
       "family": "original",
       "quality": 3,
       "palette": "bright-drafting",
-      "technique": "冷白网格、粗黑描边、正交路由线与结构形变。",
-      "motion": "固定镜头、路径流动、抽屉展开、令牌移动与遮罩擦除。",
+      "technique": "暖纸黄网格、粗黑描边、五层语义色、正交路由线与结构形变。",
+      "motion": "固定镜头、路径流动、层带展开、令牌移动、失败分支与遮罩擦除。",
       "transition": "斜切色带 + 半透明闪层。",
-      "weakness": "浅色背景需要控制描边密度；大面积纯白面板容易退化成表格。",
+      "weakness": "暖黄背景需要控制色彩面积；大面积面板要靠层级色和留白避免退化成表格。",
       "source": "src/packs/bright-drafting/pack.json",
-      "summary": "面向系统解释、流程和编排话题的明亮制图台组件包。",
-      "visual": "冷白网格底、墨黑正文、朱红与钢青强调、芥黄高亮。",
+      "summary": "面向系统解释、流程和编排话题的暖阳制图台组件包。",
+      "visual": "暖纸黄网格底、暖白面板、珊瑚/青/蓝/紫/绿五层语义色。",
       "techniques": [
         "网格舞台",
         "正交路由",
         "流动点",
         "令牌移动",
+        "语义色层带",
         "词级字幕",
         "固定镜头"
       ],
@@ -105,7 +106,7 @@
     },
     {
       "id": "bright-drafting",
-      "name": "明亮制图台",
+      "name": "暖阳制图台",
       "entry": "src/packs/bright-drafting/index.ts",
       "manifest": "src/packs/bright-drafting/pack.json",
       "previewComposition": "BrightDraftingShowcase",

@@ -1,14 +1,14 @@
 {
   "id": "bright-drafting",
-  "name": "明亮制图台",
-  "version": "1.0.2",
+  "name": "暖阳制图台",
+  "version": "2.0.0",
   "status": "stable",
   "entry": "./index.ts",
   "previewComposition": "BrightDraftingShowcase",
   "palette": "bright-drafting",
-  "description": "明亮制图台风格：冷白网格、粗黑描边、正交路由、固定镜头与词级字幕。",
+  "description": "暖阳制图台风格：暖纸黄网格、粗黑描边、五层语义色、正交路由、固定镜头与词级字幕。",
   "bestFor": "系统解释、流程、编排、结构说明、横板知识视频",
-  "tags": ["bright", "grid", "diagram", "flow", "caption", "landscape"],
+  "tags": ["bright", "warm", "grid", "diagram", "flow", "caption", "landscape"],
   "components": [
     "DraftingStage",
     "DraftingCamera",

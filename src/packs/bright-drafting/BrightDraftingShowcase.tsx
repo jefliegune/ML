@@ -90,8 +90,8 @@ export const BrightDraftingShowcase: FC = () => {
   const [tokenX, tokenY] = pointAlong(tokenPath, tokenProgress);
 
   return (
-    <DraftingStage accent={C.teal}>
-      <DraftingSectionTag label="明亮制图台" accent={C.teal} />
+    <DraftingStage accent={C.blue}>
+      <DraftingSectionTag label="暖阳制图台" accent={C.coral} />
       <DraftingCamera scale={1.03}>
         <div
           style={{
@@ -102,7 +102,7 @@ export const BrightDraftingShowcase: FC = () => {
             fontWeight: 900,
             lineHeight: 0.8,
             color: "transparent",
-            WebkitTextStroke: "2px rgba(16,24,29,0.055)",
+            WebkitTextStroke: `2px ${C.hair}`,
           }}
         >
           图
@@ -136,7 +136,7 @@ export const BrightDraftingShowcase: FC = () => {
                 [node.x, node.y],
               ]}
               progress={routeProgress}
-              color={C.teal}
+              color={C.blue}
               width={5}
             />
           ))}
@@ -153,7 +153,7 @@ export const BrightDraftingShowcase: FC = () => {
             count={1}
             phase={node.label === "拆解" ? 0 : node.label === "交付" ? 0.35 : 0.68}
             speed={0.006}
-            color={C.teal}
+            color={C.blue}
             size={7}
             progress={routeProgress}
           />
@@ -190,13 +190,63 @@ export const BrightDraftingShowcase: FC = () => {
               transform: `scale(${springIn(frame, 8 + index * 4, 18)})`,
             }}
           >
-            <DraftingChip tone={index === 2 ? "gold" : "paper"} size={40}>
+            <DraftingChip
+              tone={index === 0 ? "coral" : index === 1 ? "blue" : "green"}
+              size={40}
+            >
               {node.label}
             </DraftingChip>
           </div>
         ))}
 
-        <DraftingToken x={tokenX} y={tokenY} size={50} />
+        <DraftingToken x={tokenX} y={tokenY - 38} size={36} color={C.amber} />
+
+        <div
+          style={{
+            position: "absolute",
+            left: 330,
+            top: 786,
+            display: "flex",
+            gap: 18,
+            alignItems: "center",
+          }}
+        >
+          {[
+            ["Task", C.coral],
+            ["Trace", C.teal],
+            ["Metrics", C.blue],
+            ["Judges", C.violet],
+            ["Experiment", C.green],
+          ].map(([label, color], index) => (
+            <div
+              key={label}
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                padding: "10px 18px",
+                background: C.paper,
+                border: `3px solid ${color}`,
+                borderRadius: 8,
+                fontSize: 25,
+                fontWeight: 800,
+                color: C.ink,
+                opacity: clamp01((frame - 70 - index * 8) / 14),
+                transform: `translateY(${(1 - clamp01((frame - 70 - index * 8) / 14)) * 12}px)`,
+              }}
+            >
+              <span
+                style={{
+                  width: 14,
+                  height: 14,
+                  borderRadius: 3,
+                  background: color,
+                }}
+              />
+              {label}
+            </div>
+          ))}
+        </div>
       </DraftingCamera>
 
       <WordCaptionBar lines={LINES} accent={C.red} />

@@ -1,6 +1,7 @@
 import type {FC} from "react";
 import {useCurrentFrame, useVideoConfig} from "remotion";
 import {BRIGHT_DRAFTING as C} from "./tokens";
+import {alphaHex} from "../../color-system";
 
 export const WORD_CAPTION_HEIGHT = 186;
 
@@ -164,7 +165,7 @@ export const WordCaptionBar: FC<{
         zIndex: 40,
         pointerEvents: "none",
         background:
-          "linear-gradient(to top, rgba(233,238,240,0.985) 0%, rgba(233,238,240,0.94) 52%, rgba(233,238,240,0.55) 82%, rgba(233,238,240,0) 100%)",
+          `linear-gradient(to top, ${alphaHex(C.bg, 0.985)} 0%, ${alphaHex(C.bg, 0.94)} 52%, ${alphaHex(C.bg, 0.55)} 82%, ${alphaHex(C.bg, 0)} 100%)`,
       }}
     >
       <div
@@ -196,7 +197,7 @@ export const WordCaptionBar: FC<{
             fontWeight: 500,
             letterSpacing: 1,
             color: C.ink,
-            textShadow: "0 1px 0 rgba(233,238,240,0.9)",
+            textShadow: `0 1px 0 ${alphaHex(C.surface, 0.9)}`,
           }}
         >
           {chars.map((char, index) => {
@@ -238,7 +239,7 @@ export const WordCaptionBar: FC<{
             right: 0,
             bottom: 0,
             height: 4,
-            background: "rgba(16,24,29,0.07)",
+            background: alphaHex(C.ink, 0.07),
           }}
         >
           <div

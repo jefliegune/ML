@@ -142,9 +142,16 @@ export const DraftingStage: FC<{
     <AbsoluteFill
       style={{
         backgroundImage:
-          "linear-gradient(rgba(16,24,29,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(16,24,29,0.07) 1px, transparent 1px)",
+          `linear-gradient(${C.grid} 1px, transparent 1px), linear-gradient(90deg, ${C.grid} 1px, transparent 1px)`,
         backgroundSize: `${gridSize}px ${gridSize}px`,
         opacity: 0.62,
+      }}
+    />
+    <AbsoluteFill
+      style={{
+        background:
+          "linear-gradient(118deg, rgba(255,253,247,0.26) 0%, rgba(255,253,247,0) 42%, rgba(232,212,156,0.22) 100%)",
+        opacity: 0.72,
       }}
     />
     <div
@@ -296,7 +303,18 @@ export const DraftingToken: FC<{
 
 export const DraftingChip: FC<{
   children: ReactNode;
-  tone?: "paper" | "red" | "teal" | "gold" | "ink";
+  tone?:
+    | "paper"
+    | "red"
+    | "coral"
+    | "teal"
+    | "blue"
+    | "violet"
+    | "green"
+    | "pink"
+    | "amber"
+    | "gold"
+    | "ink";
   size?: number;
   style?: CSSProperties;
   dashed?: boolean;
@@ -304,7 +322,13 @@ export const DraftingChip: FC<{
   const tones: Record<string, {bg: string; fg: string; border: string}> = {
     paper: {bg: C.paper, fg: C.ink, border: C.ink},
     red: {bg: C.redSoft, fg: C.redDeep, border: C.red},
+    coral: {bg: C.coralSoft, fg: C.coralDeep, border: C.coral},
     teal: {bg: C.tealSoft, fg: C.tealDeep, border: C.teal},
+    blue: {bg: C.blueSoft, fg: C.blueDeep, border: C.blue},
+    violet: {bg: C.violetSoft, fg: C.violetDeep, border: C.violet},
+    green: {bg: C.greenSoft, fg: C.greenDeep, border: C.green},
+    pink: {bg: C.pinkSoft, fg: C.pinkDeep, border: C.pink},
+    amber: {bg: C.amberSoft, fg: C.amberDeep, border: C.amber},
     gold: {bg: C.goldSoft, fg: C.ink, border: C.ink},
     ink: {bg: C.ink, fg: C.paper, border: C.ink},
   };
@@ -338,14 +362,17 @@ export const DraftingPanel: FC<{
   children: ReactNode;
   style?: CSSProperties;
   accent?: string;
-}> = ({children, style, accent = C.ink}) => (
+  fill?: string;
+  shadow?: boolean;
+}> = ({children, style, accent = C.ink, fill = C.paper, shadow = true}) => (
   <div
     style={{
       position: "relative",
-      background: C.paper,
+      background: fill,
       border: `4px solid ${accent}`,
       borderRadius: 10,
       overflow: "hidden",
+      boxShadow: shadow ? `0 8px 0 ${C.hair}` : undefined,
       ...style,
     }}
   >
