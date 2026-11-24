@@ -96,7 +96,7 @@ npm run pipeline -- --project <id|path>
 ```
 
 - [ ] `video.project.json` 的入口、Composition、输出路径和视频规格正确
-- [ ] `video.project.json` 已配置 `cover`，封面 `Still` 为 `1440×1080`（4:3）
+- [ ] `video.project.json` 已配置 `cover`，封面 `Still` 为 `1080×1440`（3:4）
 - [ ] 时间轴 section 连续，字幕窗口无重叠，旁白文件全部存在
 - [ ] 1920×1080
 - [ ] 30fps
@@ -110,7 +110,7 @@ npm run pipeline -- --project <id|path>
 ## J. 交付
 
 - [ ] 最终文件命名包含 `-final`。
-- [ ] 保留流水线生成的 4:3 封面图。
+- [ ] 保留流水线生成的 3:4 封面图。
 - [ ] 保留可重渲染工程。
 - [ ] 中间渲染文件与缓存可清理。
 - [ ] 发布前确认字幕在手机端可读。

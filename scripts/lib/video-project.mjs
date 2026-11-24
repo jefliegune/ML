@@ -8,8 +8,8 @@ export const root = path.resolve(
   "..",
 );
 
-export const COVER_WIDTH = 1440;
-export const COVER_HEIGHT = 1080;
+export const COVER_WIDTH = 1080;
+export const COVER_HEIGHT = 1440;
 
 export const toPosix = (value) => value.split(path.sep).join("/");
 
@@ -224,7 +224,7 @@ export const loadVideoProject = (selector) => {
 
       const coverValue =
         manifest.cover.output ??
-        manifest.output.replace(/\.mp4$/i, "-cover-4x3.png");
+        manifest.output.replace(/\.mp4$/i, "-cover-3x4.png");
       const coverPath = path.resolve(root, coverValue);
       if (!/\.png$/i.test(coverValue)) {
         errors.push("cover.output must use the .png extension");

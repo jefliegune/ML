@@ -42,17 +42,17 @@
     },
     "cover": {
       "type": "object",
-      "description": "4:3 cover rendered after video QC. The cover composition must be 1440x1080.",
+      "description": "3:4 cover rendered after video QC. The cover composition must be 1080x1440.",
       "additionalProperties": false,
       "required": ["composition"],
       "properties": {
         "composition": {
           "type": "string",
-          "description": "Registered 4:3 Remotion Still composition ID."
+          "description": "Registered 3:4 Remotion Still composition ID (1080x1440)."
         },
         "output": {
           "type": "string",
-          "description": "PNG under local/out/ or out/. Defaults to <output>-cover-4x3.png."
+          "description": "PNG under local/out/ or out/. Defaults to <output>-cover-3x4.png."
         },
         "frame": {
           "type": "integer",

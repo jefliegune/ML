@@ -30,7 +30,7 @@ local/projects/<project-name>/
 ├─ timeline.generated.json     # 脚本生成的精确时间轴，私有
 ├─ timeline.generated.ts       # 场景读取的时间轴，私有
 ├─ video.project.json          # 入口、Composition、输出与质检规格，私有
-├─ Cover.tsx                   # 固定 1440×1080 的 4:3 封面 Composition
+├─ Cover.tsx                   # 固定 1080×1440 的 3:4 封面 Composition
 ├─ SceneXxx.tsx                # 这一条片专用的场景，私有
 ├─ Root.tsx                    # 这一条片的 Composition 入口，私有
 └─ README.md                   # 项目说明，可选
@@ -201,7 +201,7 @@ npm run preview:section -- --project local/projects/<project-name> --section <se
 
 ## 8. 渲染、母带和质检
 
-先在 `video.project.json` 声明项目规格和 4:3 封面 Composition，再运行统一流水线：
+先在 `video.project.json` 声明项目规格和 3:4 封面 Composition，再运行统一流水线：
 
 ```bash
 npm run check:timeline -- --project local/projects/<project-name>
@@ -209,9 +209,9 @@ npm run pipeline -- --project local/projects/<project-name> --dry-run
 npm run pipeline -- --project local/projects/<project-name>
 ```
 
-流水线会先检查公共目录边界和时间轴，再依次执行渲染、母带、质检和 4:3 封面。字段说明见 [项目清单与统一流水线](PROJECT_MANIFEST.md)。
+流水线会先检查公共目录边界和时间轴，再依次执行渲染、母带、质检和 3:4 封面。字段说明见 [项目清单与统一流水线](PROJECT_MANIFEST.md)。
 
-封面 Composition 必须是 `1440×1080`，并在清单中通过 `cover.composition` 注册。默认输出为 `local/out/<project-name>-cover-4x3.png`；也可以单独执行：
+封面 Composition 必须是 `1080×1440`（3:4），并在清单中通过 `cover.composition` 注册。默认输出为 `local/out/<project-name>-cover-3x4.png`；也可以单独执行：
 
 ```bash
 npm run cover -- --project <id|path>
@@ -224,6 +224,14 @@ npx remotion render local/projects/<project-name>/Root.tsx <CompositionId> local
 node scripts/master-video.mjs local/out/<project-name>.mp4 local/out/<project-name>-final.mp4 -15.5
 node scripts/verify-video.mjs local/out/<project-name>-final.mp4
 ```
+
+如果某台机器上的 `remotion render` CLI 在解析 `remotion.config.ts` 时失败，可改用项目清单驱动的 Renderer API：
+
+```powershell
+node scripts/render-project.mjs --project local/projects/<project-name>/video.project.json
+```
+
+流水线默认已经走这条路径，仍以 `video.project.json` 为唯一参数来源。
 
 母带目标：
 
@@ -238,7 +246,7 @@ node scripts/verify-video.mjs local/out/<project-name>-final.mp4
 最终保留：
 
 - `local/out/<project-name>-final.mp4`
-- `local/out/<project-name>-cover-4x3.png`
+- `local/out/<project-name>-cover-3x4.png`
 - 私有项目源码与配置
 
 可删除：

@@ -28,7 +28,7 @@ try {
 
 if (!project.cover) {
   console.error(
-    "Project has no cover configuration. Add a cover object with a 4:3 cover composition.",
+    "Project has no cover configuration. Add a cover object with a 3:4 cover composition.",
   );
   process.exit(1);
 }
@@ -56,7 +56,11 @@ if (
   composition.height !== COVER_HEIGHT
 ) {
   console.error(
-    "Cover composition must be 1440x1080. Found " +
+    "Cover composition must be " +
+      COVER_WIDTH +
+      "x" +
+      COVER_HEIGHT +
+      " (3:4). Found " +
       composition.width +
       "x" +
       composition.height +

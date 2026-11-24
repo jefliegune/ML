@@ -1,6 +1,6 @@
 # 视频项目清单与统一流水线
 
-每条视频用一个 `video.project.json` 描述入口、Composition、输出路径、4:3 封面和质检规格。渲染、母带、质检、封面与时间轴检查都读取同一份清单，避免在多个命令里重复手写参数。
+每条视频用一个 `video.project.json` 描述入口、Composition、输出路径、3:4 封面和质检规格。渲染、母带、质检、封面与时间轴检查都读取同一份清单，避免在多个命令里重复手写参数。
 
 ## 清单位置
 
@@ -38,7 +38,7 @@ local/projects/my-video/video.project.json
   "master": "local/out/my-video-final.mp4",
   "cover": {
     "composition": "MyVideoCover",
-    "output": "local/out/my-video-cover-4x3.png",
+    "output": "local/out/my-video-cover-3x4.png",
     "frame": 0
   },
   "video": {
@@ -62,20 +62,20 @@ local/projects/my-video/video.project.json
 - `root` 相对仓库根目录。
 - `entry`、`timeline`、`timelineTypes` 相对 `root`。
 - `output`、`master` 相对仓库根目录，并限制在 `local/out/` 或 `out/` 下。
-- `cover.output` 相对仓库根目录，并限制在 `local/out/` 或 `out/` 下；省略时默认输出 `<output>-cover-4x3.png`。
+- `cover.output` 相对仓库根目录，并限制在 `local/out/` 或 `out/` 下；省略时默认输出 `<output>-cover-3x4.png`。
 - `entry` 必须是调用 `registerRoot()` 的文件。
 
 完整字段定义见 `schemas/video.project.schema.json`。
 
-## 4:3 封面
+## 3:4 封面
 
 完整流水线在母带和成片质检之后自动渲染封面。封面必须注册为独立的 Remotion `Still` Composition，并固定为：
 
 ```text
-1440 × 1080（4:3）
+1080 × 1440（3:4）
 ```
 
-项目清单通过 `cover.composition` 指向该 Composition。`render-cover.mjs` 会检查实际 Composition 尺寸，尺寸不是 `1440×1080` 时直接失败。
+项目清单通过 `cover.composition` 指向该 Composition。`render-cover.mjs` 会检查实际 Composition 尺寸，尺寸不是 `1080×1440` 时直接失败。
 
 也可以单独重渲封面：
 
@@ -101,7 +101,7 @@ npm run check:timeline -- --project my-video
 # 查看将执行的完整命令，不真正渲染
 npm run pipeline -- --project my-video --dry-run
 
-# 检查 → 渲染 → 母带 → 质检 → 4:3 封面
+# 检查 → 渲染 → 母带 → 质检 → 3:4 封面
 npm run pipeline -- --project my-video
 ```
 
@@ -118,6 +118,8 @@ npm run pipeline -- --project my-video --skip-cover
 ```bash
 npm run pipeline -- --project my-video --frames=0-120 --skip-master --skip-verify
 ```
+
+流水线内部通过 `scripts/render-project.mjs` 调用 Remotion Renderer API。它仍然读取同一份 `video.project.json`，支持 `--frames`、`--scale`、`--crf` 和 `--concurrency`，可以避开部分机器上 `remotion render` CLI 的配置文件解析问题。
 
 ## 时间轴检查
 

@@ -55,43 +55,15 @@ const run = (label, command, commandArgs) =>
     });
   });
 
-const remotionCli = path.join(
-  root,
-  "node_modules",
-  "@remotion",
-  "cli",
-  "remotion-cli.js",
-);
-if (!fs.existsSync(remotionCli)) {
-  console.error("Remotion CLI not found. Run npm ci first: " + remotionCli);
-  process.exit(1);
-}
-
 const renderArgs = [
-  remotionCli,
-  "render",
-  project.entryPath,
-  project.manifest.composition,
-  project.outputPath,
-  "--config",
-  project.configPath,
-  "--codec",
-  project.render.codec,
-  "--crf",
-  String(project.render.crf),
-  "--pixel-format",
-  project.render.pixelFormat,
-  "--audio-codec",
-  project.render.audioCodec,
-  "--audio-bitrate",
-  project.render.audioBitrate,
-  "--concurrency",
-  String(project.render.concurrency),
+  path.join(root, "scripts", "render-project.mjs"),
+  "--project",
+  project.manifestPath,
 ];
 if (args.values.has("frames"))
-  renderArgs.push("--frames=" + args.values.get("frames"));
+  renderArgs.push("--frames", args.values.get("frames"));
 if (args.values.has("scale"))
-  renderArgs.push("--scale=" + args.values.get("scale"));
+  renderArgs.push("--scale", args.values.get("scale"));
 
 const verifyArgs = [
   path.join(root, "scripts", "verify-video.mjs"),
@@ -181,7 +153,7 @@ console.log(
 );
 if (!project.cover) {
   console.warn(
-    "WARN: cover is not configured; no 4:3 cover will be generated.",
+    "WARN: cover is not configured; no 3:4 cover will be generated.",
   );
 }
 
