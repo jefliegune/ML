@@ -15,7 +15,7 @@ const sectionId = args.values.get("section") ?? args.positionals[1];
 
 if (!selector || !sectionId) {
   console.error(
-    "Usage: node scripts/preview-section.mjs --project <id|path> --section <id> [--draft] [--scale 0.5] [--crf 28]",
+    "Usage: node scripts/preview-section.mjs --project <id|path> --section <id> [--draft] [--scale 0.5] [--crf 20]",
   );
   process.exit(1);
 }
@@ -46,8 +46,22 @@ if (!section) {
 }
 
 const draft = args.flags.has("draft");
-const scale = Number(args.values.get("scale") ?? (draft ? 0.5 : 1));
-const crf = Number(args.values.get("crf") ?? (draft ? 28 : project.render.crf));
+const scale = Number(
+  args.values.get("scale") ?? (draft ? project.preview.scale : 1),
+);
+const crf = Number(
+  args.values.get("crf") ?? (draft ? project.preview.crf : project.render.crf),
+);
+const imageFormat =
+  args.values.get("image-format") ??
+  (draft ? project.preview.imageFormat : project.render.imageFormat);
+const jpegQuality = Number(
+  args.values.get("jpeg-quality") ??
+    (draft ? project.preview.jpegQuality : project.render.jpegQuality),
+);
+const audioBitrate = draft
+  ? project.preview.audioBitrate
+  : project.render.audioBitrate;
 
 if (!Number.isFinite(scale) || scale <= 0 || scale > 1) {
   console.error("--scale must be greater than 0 and at most 1.");
@@ -55,6 +69,14 @@ if (!Number.isFinite(scale) || scale <= 0 || scale > 1) {
 }
 if (!Number.isInteger(crf) || crf < 0 || crf > 51) {
   console.error("--crf must be an integer from 0 to 51.");
+  process.exit(1);
+}
+if (imageFormat !== "jpeg" && imageFormat !== "png") {
+  console.error("--image-format must be jpeg or png.");
+  process.exit(1);
+}
+if (!Number.isInteger(jpegQuality) || jpegQuality < 1 || jpegQuality > 100) {
+  console.error("--jpeg-quality must be an integer from 1 to 100.");
   process.exit(1);
 }
 
@@ -80,7 +102,15 @@ console.log(
   "range:       " + section.startFrame + "–" + (section.endFrame - 1) +
     " (" + (section.endFrame - section.startFrame) + " frames)",
 );
-console.log("scale:       " + scale + " · crf " + crf);
+console.log(
+  "profile:     " +
+    imageFormat +
+    " / crf " +
+    crf +
+    " / audio " +
+    audioBitrate,
+);
+console.log("scale:       " + scale);
 console.log("output:      " + relativeToRoot(outputPath));
 
 const startedAt = Date.now();
@@ -114,11 +144,14 @@ await renderMedia({
   codec: "h264",
   outputLocation: outputPath,
   crf,
+  imageFormat,
+  jpegQuality,
   pixelFormat: "yuv420p",
   audioCodec: "aac",
-  audioBitrate: "192k",
+  audioBitrate,
   concurrency: Number(
-    args.values.get("concurrency") ?? project.render.concurrency,
+    args.values.get("concurrency") ??
+      (draft ? project.preview.concurrency : project.render.concurrency),
   ),
   scale,
   overwrite: true,

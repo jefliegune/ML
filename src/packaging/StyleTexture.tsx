@@ -23,7 +23,7 @@ export interface StyleTextureProps {
 
 export const StyleTexture: FC<StyleTextureProps> = ({
   variant,
-  opacity = 0.35,
+  opacity = 0.14,
   color = "#151515",
   accent = "#FF5B48",
   scale = 7,

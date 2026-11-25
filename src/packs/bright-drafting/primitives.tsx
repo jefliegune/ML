@@ -142,16 +142,16 @@ export const DraftingStage: FC<{
     <AbsoluteFill
       style={{
         backgroundImage:
-          `linear-gradient(${C.grid} 1px, transparent 1px), linear-gradient(90deg, ${C.grid} 1px, transparent 1px)`,
+          `linear-gradient(${C.grid} 2px, transparent 2px), linear-gradient(90deg, ${C.grid} 2px, transparent 2px)`,
         backgroundSize: `${gridSize}px ${gridSize}px`,
-        opacity: 0.62,
+        opacity: 0.55,
       }}
     />
     <AbsoluteFill
       style={{
         background:
           "linear-gradient(118deg, rgba(255,253,247,0.26) 0%, rgba(255,253,247,0) 42%, rgba(232,212,156,0.22) 100%)",
-        opacity: 0.72,
+        opacity: 0.55,
       }}
     />
     <div
@@ -203,7 +203,7 @@ export const DraftingRoute: FC<{
   points,
   progress,
   color = C.ink,
-  width = 5,
+  width = 4,
   opacity = 1,
   dashed = false,
 }) => (
@@ -257,7 +257,7 @@ export const DraftingFlowDots: FC<{
               height: size,
               borderRadius: "50%",
               background: color,
-              boxShadow: "0 0 0 4px rgba(255,255,255,0.55)",
+              boxShadow: `0 0 0 2px ${C.paper}`,
             }}
           />
         );
@@ -283,7 +283,7 @@ export const DraftingToken: FC<{
       border: `3px solid ${C.ink}`,
       borderRadius: 8,
       transform: "rotate(45deg)",
-      boxShadow: "0 0 0 6px rgba(255,255,255,0.55)",
+      boxShadow: `0 0 0 4px ${C.paper}`,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
@@ -372,7 +372,7 @@ export const DraftingPanel: FC<{
       border: `4px solid ${accent}`,
       borderRadius: 10,
       overflow: "hidden",
-      boxShadow: shadow ? `0 8px 0 ${C.hair}` : undefined,
+      boxShadow: shadow ? `0 5px 0 ${C.hair}` : undefined,
       ...style,
     }}
   >
@@ -418,7 +418,7 @@ export const DraftingGlyph: FC<{
   const common = {
     fill: "none",
     stroke: color,
-    strokeWidth: 5,
+    strokeWidth: 4,
     strokeLinecap: "round" as const,
     strokeLinejoin: "round" as const,
   };

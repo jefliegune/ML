@@ -8,9 +8,12 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const inputArg = process.argv[2];
 const outputArg = process.argv[3];
 const targetArg = process.argv[4] ?? "-16";
+const audioBitrateArg = process.argv[5] ?? "320k";
 
 if (!inputArg || !outputArg) {
-  console.error("Usage: node scripts/master-video.mjs <input> <output> [integratedLUFS]");
+  console.error(
+    "Usage: node scripts/master-video.mjs <input> <output> [integratedLUFS] [audioBitrate]",
+  );
   process.exit(1);
 }
 
@@ -27,6 +30,10 @@ if (!fs.existsSync(input)) {
 
 if (!Number.isFinite(target) || target < -24 || target > -10) {
   console.error(`Invalid loudness target: ${targetArg}`);
+  process.exit(1);
+}
+if (!/^\d+(?:\.\d+)?k$/i.test(audioBitrateArg)) {
+  console.error(`Invalid audio bitrate: ${audioBitrateArg}`);
   process.exit(1);
 }
 
@@ -111,7 +118,7 @@ const result = spawnSync(
     "-c:a",
     "aac",
     "-b:a",
-    "192k",
+    audioBitrateArg,
     "-movflags",
     "+faststart",
     "-t",
@@ -132,4 +139,5 @@ const summary = result.stderr
   .join("\n");
 
 console.log(summary);
+console.log(`Audio bitrate: ${audioBitrateArg}`);
 console.log(`\nMastered: ${output}`);

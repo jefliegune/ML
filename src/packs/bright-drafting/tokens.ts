@@ -41,9 +41,9 @@ export const BRIGHT_DRAFTING = {
   amberSoft: "#F5E4B8",
   gold: "#C68A12",
   goldSoft: "#F6E7BC",
-  line: "rgba(27,23,16,0.16)",
-  hair: "rgba(27,23,16,0.08)",
-  grid: "rgba(27,23,16,0.075)",
+  line: "rgba(27,23,16,0.28)",
+  hair: "rgba(27,23,16,0.12)",
+  grid: "rgba(27,23,16,0.11)",
   font: '"Microsoft YaHei", "Noto Sans SC", "PingFang SC", sans-serif',
 } as const;
 

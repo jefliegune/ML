@@ -220,10 +220,12 @@ npm run cover -- --project <id|path>
 需要单独调试时，三步仍可手动执行，后一步依赖前一步：
 
 ```bash
-npx remotion render local/projects/<project-name>/Root.tsx <CompositionId> local/out/<project-name>.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p --audio-codec=aac --audio-bitrate=192k
+npx remotion render local/projects/<project-name>/Root.tsx <CompositionId> local/out/<project-name>.mp4 --codec=h264 --crf=14 --pixel-format=yuv420p --color-space=bt709 --audio-codec=aac --audio-bitrate=320k
 node scripts/master-video.mjs local/out/<project-name>.mp4 local/out/<project-name>-final.mp4 -15.5
 node scripts/verify-video.mjs local/out/<project-name>-final.mp4
 ```
+
+手工命令也必须保持满分辨率；不要把 `--scale 0.5` 或草稿文件当成交付源。项目清单驱动的成片流水线会直接拒绝 `scale < 1`。参数分工和 A/B 方法见 [视频清晰度与成片质检](VIDEO_QUALITY.md)。
 
 如果某台机器上的 `remotion render` CLI 在解析 `remotion.config.ts` 时失败，可改用项目清单驱动的 Renderer API：
 
@@ -350,7 +352,7 @@ npm run lint
 最后渲染 10 秒预览并抽两帧确认：
 
 ```bash
-npx remotion render <Pack>Showcase local/out/<pack-id>-showcase.mp4 --codec=h264 --crf=18 --pixel-format=yuv420p
+npx remotion render <Pack>Showcase local/out/<pack-id>-showcase.mp4 --codec=h264 --crf=20 --pixel-format=yuv420p
 ```
 
 ### 10.5 提交边界

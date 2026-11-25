@@ -323,9 +323,18 @@ Remotion render
 |---|---|---|
 | 渲染 | 逐帧执行 React 组件，编码 H.264 + AAC | `local/out/*.mp4` |
 | 母带 | 两遍 `loudnorm`，把响度拉到约 -16 LUFS，视频流直接复制 | `local/out/*-final.mp4` |
-| 质检 | 检查编码、分辨率、帧数、音频参数、响度和 True Peak | 终端 PASS/FAIL 报告 |
+| 质检 | 检查编码、真实分辨率、像素格式、帧数、音频参数、响度和 True Peak | 终端 PASS/FAIL 报告 |
 
-最终交付默认检查：1920×1080、30fps、H.264、AAC、48kHz stereo、响度约 -16 LUFS、True Peak ≤ -1.0 dBTP。
+成片与草稿严格分流：
+
+| 场景 | CRF | scale | 中间帧 | 音频 |
+|---|---:|---:|---|---|
+| 段落草稿 | 20–23 | 0.5 可用 | JPEG 85 | 192k |
+| 最终成片 | 14–16 | **必须为 1** | JPEG 95 或 PNG | 320k |
+
+最终交付默认检查：项目声明分辨率（横板通常为 1920×1080）、30fps、H.264、`yuv420p`、AAC 48kHz stereo、响度约 -16 LUFS、True Peak ≤ -1.0 dBTP。
+
+`pipeline.mjs` 默认拒绝 `scale < 1` 的成片任务。确需临时小样时必须显式加 `--allow-draft-scale`；若仍执行质检，分辨率检查会按预期失败。
 
 调画面时不要直接重渲整片。按三层预览依次确认：
 
@@ -342,11 +351,12 @@ npm run pipeline -- --project <id|path>
 
 关键帧画廊写入 `local/preview/<id>/index.html`，带字幕安全区参考线。段落视频写入 `local/preview/<id>/sections/`。两者都在 Git 忽略范围内。
 
-更完整的制作规范见 [新视频操作手册](docs/NEW_VIDEO_PLAYBOOK.md) 和 [生产检查表](docs/PRODUCTION_CHECKLIST.md)。
+更完整的制作规范见 [新视频操作手册](docs/NEW_VIDEO_PLAYBOOK.md)、[视频清晰度与成片质检](docs/VIDEO_QUALITY.md) 和 [生产检查表](docs/PRODUCTION_CHECKLIST.md)。
 
 ## 文档
 
 - [新视频操作手册](docs/NEW_VIDEO_PLAYBOOK.md)
+- [视频清晰度与成片质检](docs/VIDEO_QUALITY.md)
 - [项目清单与统一流水线](docs/PROJECT_MANIFEST.md)
 - [旁白与语音指南](docs/VOICE_GUIDE.md)
 - [素材库清单](docs/ASSET_LIBRARY.md)

@@ -14,7 +14,7 @@ const selector = args.values.get("project") ?? args.positionals[0];
 
 if (!selector) {
   console.error(
-    "Usage: node scripts/render-project.mjs --project <id|path> [--frames 0-120] [--scale 0.5] [--out path]",
+    "Usage: node scripts/render-project.mjs --project <id|path> [--frames 0-120] [--out path] [--image-format jpeg|png] [--allow-draft-scale]",
   );
   process.exit(1);
 }
@@ -33,16 +33,57 @@ const outputPath = args.values.has("out")
 const frames = args.values.get("frames");
 const scale = Number(args.values.get("scale") ?? 1);
 const crf = Number(args.values.get("crf") ?? project.render.crf);
+const imageFormat =
+  args.values.get("image-format") ?? project.render.imageFormat;
+const jpegQuality = Number(
+  args.values.get("jpeg-quality") ?? project.render.jpegQuality,
+);
+const x264Preset =
+  args.values.get("x264-preset") ?? project.render.x264Preset;
+const colorSpace = project.render.colorSpace;
 const concurrency = Number(
   args.values.get("concurrency") ?? project.render.concurrency,
 );
+const allowDraftScale = args.flags.has("allow-draft-scale");
 
 if (!Number.isFinite(scale) || scale <= 0 || scale > 1) {
   console.error("--scale must be greater than 0 and at most 1.");
   process.exit(1);
 }
+if (scale < 1 && !allowDraftScale) {
+  console.error(
+    "Refusing to render below full resolution for delivery.\n" +
+      "Use the preview scripts for drafts, or add --allow-draft-scale for a temporary QC clip.",
+  );
+  process.exit(1);
+}
 if (!Number.isInteger(crf) || crf < 0 || crf > 51) {
   console.error("--crf must be an integer from 0 to 51.");
+  process.exit(1);
+}
+if (imageFormat !== "jpeg" && imageFormat !== "png") {
+  console.error("--image-format must be jpeg or png.");
+  process.exit(1);
+}
+if (!Number.isInteger(jpegQuality) || jpegQuality < 1 || jpegQuality > 100) {
+  console.error("--jpeg-quality must be an integer from 1 to 100.");
+  process.exit(1);
+}
+if (
+  ![
+    "ultrafast",
+    "superfast",
+    "veryfast",
+    "faster",
+    "fast",
+    "medium",
+    "slow",
+    "slower",
+    "veryslow",
+    "placebo",
+  ].includes(x264Preset)
+) {
+  console.error("--x264-preset is not a supported x264 preset.");
   process.exit(1);
 }
 
@@ -65,7 +106,24 @@ console.log("output:      " + relativeToRoot(outputPath));
 if (frameRange) {
   console.log("frames:      " + frameRange[0] + "-" + frameRange[1]);
 }
-console.log("scale:       " + scale + " · crf " + crf);
+console.log(
+  "profile:     " +
+    imageFormat +
+    " / crf " +
+    crf +
+    " / x264 " +
+    x264Preset +
+    " / " +
+    colorSpace,
+);
+console.log("scale:       " + scale);
+if (scale < 1) {
+  console.warn(
+    "\nWARN: DRAFT RESOLUTION " +
+      scale +
+      "x - not for final delivery.\n",
+  );
+}
 
 const startedAt = Date.now();
 console.log("\n== Bundle ==");
@@ -83,6 +141,25 @@ const composition = await selectComposition({
   inputProps: {},
 });
 
+if (
+  project.video &&
+  (composition.width !== project.video.width ||
+    composition.height !== project.video.height)
+) {
+  console.error(
+    "\nComposition size does not match video.project.json.\n" +
+      "composition: " +
+      composition.width +
+      "x" +
+      composition.height +
+      "\nmanifest:    " +
+      project.video.width +
+      "x" +
+      project.video.height,
+  );
+  process.exit(1);
+}
+
 let lastReported = -1;
 console.log("\n== Render ==");
 await renderMedia({
@@ -91,6 +168,10 @@ await renderMedia({
   codec: project.render.codec,
   outputLocation: outputPath,
   crf,
+  imageFormat,
+  jpegQuality,
+  x264Preset,
+  colorSpace,
   pixelFormat: project.render.pixelFormat,
   audioCodec: project.render.audioCodec,
   audioBitrate: project.render.audioBitrate,

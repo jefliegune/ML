@@ -81,14 +81,98 @@
     },
     "render": {
       "type": "object",
+      "description": "Delivery render settings. These are never used for draft previews.",
       "additionalProperties": false,
       "properties": {
         "codec": { "type": "string" },
-        "crf": { "type": "integer", "minimum": 0, "maximum": 51 },
+        "crf": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 51,
+          "description": "Delivery default is 14. Motion graphics usually look best from 14 to 16."
+        },
         "pixelFormat": { "type": "string" },
         "audioCodec": { "type": "string" },
-        "audioBitrate": { "type": "string" },
-        "concurrency": { "type": "integer", "minimum": 1 }
+        "audioBitrate": {
+          "type": "string",
+          "pattern": "^[0-9]+(?:\\.[0-9]+)?k$"
+        },
+        "concurrency": { "type": "integer", "minimum": 1 },
+        "imageFormat": {
+          "type": "string",
+          "enum": ["jpeg", "png"],
+          "description": "Intermediate frame format. PNG sharpens fine lines but costs substantially more render time and disk."
+        },
+        "jpegQuality": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        },
+        "x264Preset": {
+          "type": "string",
+          "enum": [
+            "ultrafast",
+            "superfast",
+            "veryfast",
+            "faster",
+            "fast",
+            "medium",
+            "slow",
+            "slower",
+            "veryslow",
+            "placebo"
+          ]
+        },
+        "colorSpace": {
+          "type": "string",
+          "enum": [
+            "bt601",
+            "bt709",
+            "bt2020-ncl",
+            "bt2020-cl",
+            "fcc",
+            "bt470bg",
+            "smpte170m",
+            "smpte240m",
+            "ycgco",
+            "smpte2085",
+            "chroma-derived-ncl",
+            "chroma-derived-cl",
+            "ictcp"
+          ],
+          "description": "Delivery defaults to bt709 with limited range so the encoded stream is standard yuv420p."
+        }
+      }
+    },
+    "preview": {
+      "type": "object",
+      "description": "Draft settings used only by preview-section.",
+      "additionalProperties": false,
+      "properties": {
+        "crf": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 51
+        },
+        "scale": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        },
+        "audioBitrate": {
+          "type": "string",
+          "pattern": "^[0-9]+(?:\\.[0-9]+)?k$"
+        },
+        "concurrency": { "type": "integer", "minimum": 1 },
+        "imageFormat": {
+          "type": "string",
+          "enum": ["jpeg", "png"]
+        },
+        "jpegQuality": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 100
+        }
       }
     }
   }

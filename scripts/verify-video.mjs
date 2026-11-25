@@ -23,6 +23,12 @@ const expected = {
   fps: readNumber("fps"),
   frames: readNumber("frames"),
 };
+const targetPixelFormat = readOption("pixel-format") ?? "yuv420p";
+const targetColorSpace = readOption("color-space") ?? "bt709";
+const targetAudioBitrateArg = readOption("audio-bitrate");
+const targetAudioBitrate = targetAudioBitrateArg
+  ? Number(String(targetAudioBitrateArg).replace(/k$/i, "")) * 1000
+  : null;
 const relativeFile =
   args.find((arg) => !arg.startsWith("--")) ??
   "local/out/video-project-final.mp4";
@@ -50,7 +56,7 @@ const probe = run(ffprobe, [
   "-show_entries",
   "format=duration,size",
   "-show_entries",
-  "stream=index,codec_name,codec_type,width,height,r_frame_rate,sample_rate,channels,nb_read_frames",
+  "stream=index,codec_name,codec_type,profile,pix_fmt,color_range,color_space,color_primaries,color_transfer,width,height,r_frame_rate,avg_frame_rate,sample_rate,channels,bit_rate,nb_read_frames",
   "-of",
   "json",
   filePath,
@@ -92,6 +98,21 @@ check(
   `${video?.width ?? 0}x${video?.height ?? 0} / expected ${targetWidth}x${targetHeight}`,
 );
 check(
+  "Pixel format",
+  video?.pix_fmt === targetPixelFormat,
+  `${video?.pix_fmt ?? "missing"} / expected ${targetPixelFormat}`,
+);
+check(
+  "Color range",
+  video?.color_range === "tv",
+  `${video?.color_range ?? "missing"} / expected tv`,
+);
+check(
+  "Color space",
+  video?.color_space === targetColorSpace,
+  `${video?.color_space ?? "missing"} / expected ${targetColorSpace}`,
+);
+check(
   "Frame rate",
   Math.abs(fps - targetFps) < 0.001,
   `${fps.toFixed(3)} fps / expected ${targetFps}`,
@@ -111,6 +132,18 @@ check(
   Number(audio?.channels) === 2,
   `${audio?.channels ?? 0} channels`,
 );
+if (targetAudioBitrate) {
+  const actualAudioBitrate = Number(audio?.bit_rate);
+  const audioBitrateOk =
+    Number.isFinite(actualAudioBitrate) &&
+    actualAudioBitrate >= targetAudioBitrate * 0.7 &&
+    actualAudioBitrate <= targetAudioBitrate * 1.15;
+  check(
+    "Audio bitrate",
+    audioBitrateOk,
+    `${Number.isFinite(actualAudioBitrate) ? Math.round(actualAudioBitrate / 1000) + "k" : "missing"} / target ${targetAudioBitrateArg}`,
+  );
+}
 
 if (video?.nb_read_frames) {
   const expectedFrames = expected.frames ?? Math.round(duration * targetFps);

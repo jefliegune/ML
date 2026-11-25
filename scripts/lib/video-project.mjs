@@ -87,6 +87,63 @@ const requireString = (manifest, field, errors) => {
 };
 
 const positiveInteger = (value) => Number.isInteger(value) && value > 0;
+const VIDEO_IMAGE_FORMATS = new Set(["jpeg", "png"]);
+const X264_PRESETS = new Set([
+  "ultrafast",
+  "superfast",
+  "veryfast",
+  "faster",
+  "fast",
+  "medium",
+  "slow",
+  "slower",
+  "veryslow",
+  "placebo",
+]);
+const BITRATE_PATTERN = /^\d+(?:\.\d+)?k$/i;
+const COLOR_SPACES = new Set([
+  "bt601",
+  "bt709",
+  "bt2020-ncl",
+  "bt2020-cl",
+  "fcc",
+  "bt470bg",
+  "smpte170m",
+  "smpte240m",
+  "ycgco",
+  "smpte2085",
+  "chroma-derived-ncl",
+  "chroma-derived-cl",
+  "ictcp",
+]);
+
+const readImageFormat = (value, field, errors) => {
+  const imageFormat = value ?? "jpeg";
+  if (!VIDEO_IMAGE_FORMATS.has(imageFormat)) {
+    errors.push(field + ' must be "jpeg" or "png"');
+  }
+  return imageFormat;
+};
+
+const readJpegQuality = (value, field, errors, fallback = 95) => {
+  const jpegQuality = value ?? fallback;
+  if (
+    !Number.isInteger(jpegQuality) ||
+    jpegQuality < 1 ||
+    jpegQuality > 100
+  ) {
+    errors.push(field + " must be an integer from 1 to 100");
+  }
+  return jpegQuality;
+};
+
+const readBitrate = (value, field, errors, fallback) => {
+  const bitrate = value ?? fallback;
+  if (typeof bitrate !== "string" || !BITRATE_PATTERN.test(bitrate)) {
+    errors.push(field + ' must look like "320k"');
+  }
+  return bitrate;
+};
 
 export const loadVideoProject = (selector) => {
   if (!selector) {
@@ -250,17 +307,72 @@ export const loadVideoProject = (selector) => {
 
   const render = {
     codec: manifest.render?.codec ?? "h264",
-    crf: manifest.render?.crf ?? 18,
+    crf: manifest.render?.crf ?? 14,
     pixelFormat: manifest.render?.pixelFormat ?? "yuv420p",
     audioCodec: manifest.render?.audioCodec ?? "aac",
-    audioBitrate: manifest.render?.audioBitrate ?? "192k",
-    concurrency: manifest.render?.concurrency ?? 8,
+    audioBitrate: readBitrate(
+      manifest.render?.audioBitrate,
+      "render.audioBitrate",
+      errors,
+      "320k",
+    ),
+    concurrency: manifest.render?.concurrency ?? 4,
+    imageFormat: readImageFormat(
+      manifest.render?.imageFormat,
+      "render.imageFormat",
+      errors,
+    ),
+    jpegQuality: readJpegQuality(
+      manifest.render?.jpegQuality,
+      "render.jpegQuality",
+      errors,
+    ),
+    x264Preset: manifest.render?.x264Preset ?? "medium",
+    colorSpace: manifest.render?.colorSpace ?? "bt709",
   };
   if (!Number.isInteger(render.crf) || render.crf < 0 || render.crf > 51) {
     errors.push("render.crf must be an integer from 0 to 51");
   }
   if (!positiveInteger(render.concurrency)) {
     errors.push("render.concurrency must be a positive integer");
+  }
+  if (!X264_PRESETS.has(render.x264Preset)) {
+    errors.push("render.x264Preset is not a supported x264 preset");
+  }
+  if (!COLOR_SPACES.has(render.colorSpace)) {
+    errors.push("render.colorSpace is not a supported color space");
+  }
+
+  const preview = {
+    crf: manifest.preview?.crf ?? 20,
+    scale: manifest.preview?.scale ?? 0.5,
+    audioBitrate: readBitrate(
+      manifest.preview?.audioBitrate,
+      "preview.audioBitrate",
+      errors,
+      "192k",
+    ),
+    concurrency: manifest.preview?.concurrency ?? render.concurrency,
+    imageFormat: readImageFormat(
+      manifest.preview?.imageFormat,
+      "preview.imageFormat",
+      errors,
+    ),
+    jpegQuality: readJpegQuality(
+      manifest.preview?.jpegQuality,
+      "preview.jpegQuality",
+      errors,
+      85,
+    ),
+  };
+  if (!Number.isInteger(preview.crf) || preview.crf < 0 || preview.crf > 51) {
+    errors.push("preview.crf must be an integer from 0 to 51");
+  }
+  if (!Number.isFinite(preview.scale) || preview.scale <= 0 || preview.scale > 1) {
+    errors.push("preview.scale must be greater than 0 and at most 1");
+  }
+  if (!positiveInteger(preview.concurrency)) {
+    errors.push("preview.concurrency must be a positive integer");
   }
 
   const targetLufs = manifest.audio?.targetLufs ?? -16;
@@ -305,6 +417,7 @@ export const loadVideoProject = (selector) => {
     publicRoot: path.join(root, "public"),
     configPath: path.join(root, "remotion.config.ts"),
     render,
+    preview,
     audio: { targetLufs },
     video,
   };

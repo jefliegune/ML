@@ -51,11 +51,30 @@ local/projects/my-video/video.project.json
     "targetLufs": -16
   },
   "render": {
-    "crf": 18,
-    "concurrency": 8
+    "codec": "h264",
+    "crf": 14,
+    "pixelFormat": "yuv420p",
+    "audioCodec": "aac",
+    "audioBitrate": "320k",
+    "concurrency": 4,
+    "imageFormat": "jpeg",
+    "jpegQuality": 95,
+    "x264Preset": "medium",
+    "colorSpace": "bt709"
+  },
+  "preview": {
+    "crf": 20,
+    "scale": 0.5,
+    "audioBitrate": "192k",
+    "imageFormat": "jpeg",
+    "jpegQuality": 85
   }
 }
 ```
+
+`render` 只用于成片，默认 `CRF 14 / AAC 320k / scale 1 / BT.709`。`preview` 只供 `preview:section --draft` 使用，不能作为交付参数。
+
+需要进一步压榨细线和小字清晰度时，可以把某个项目的 `render.imageFormat` 改为 `"png"`。PNG 中间帧会增加渲染时间与磁盘占用，因此不设为全局默认。
 
 路径规则：
 
@@ -119,7 +138,9 @@ npm run pipeline -- --project my-video --skip-cover
 npm run pipeline -- --project my-video --frames=0-120 --skip-master --skip-verify
 ```
 
-流水线内部通过 `scripts/render-project.mjs` 调用 Remotion Renderer API。它仍然读取同一份 `video.project.json`，支持 `--frames`、`--scale`、`--crf` 和 `--concurrency`，可以避开部分机器上 `remotion render` CLI 的配置文件解析问题。
+流水线内部通过 `scripts/render-project.mjs` 调用 Remotion Renderer API。它仍然读取同一份 `video.project.json`，支持 `--frames`、`--crf`、`--image-format`、`--jpeg-quality`、`--x264-preset` 和 `--concurrency`，可以避开部分机器上 `remotion render` CLI 的配置文件解析问题。
+
+成片默认禁止 `scale < 1`。临时 QC 小样必须显式加 `--allow-draft-scale`；单段草稿应改用 `preview:section --draft`。母带会保留 `render.audioBitrate` 指定的 AAC 码率，默认 320k。
 
 ## 时间轴检查
 

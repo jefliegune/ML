@@ -16,7 +16,15 @@
     "targetLufs": -16
   },
   "render": {
-    "crf": 18,
-    "concurrency": 8
+    "codec": "h264",
+    "crf": 14,
+    "pixelFormat": "yuv420p",
+    "audioCodec": "aac",
+    "audioBitrate": "320k",
+    "concurrency": 8,
+    "imageFormat": "jpeg",
+    "jpegQuality": 95,
+    "x264Preset": "medium",
+    "colorSpace": "bt709"
   }
 }

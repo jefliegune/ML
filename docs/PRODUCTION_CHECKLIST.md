@@ -82,6 +82,10 @@ npm run pipeline -- --project <id|path>
 
 - [ ] 关键帧无叠字、残影、空镜、元素越界。
 - [ ] 正文最小字号 ≥ 36px，单帧文本块 ≤ 10。
+- [ ] still 源帧在 100% 像素下锐利，不依赖后期锐化补救。
+- [ ] 明亮风结构线 ≥ 2px，关键路径优先 4px。
+- [ ] 全屏 grain / paper / scanlines 透明度在 0.12–0.18。
+- [ ] 字幕保持既有浅色地面效果，没有被改成独立硬底板。
 - [ ] 无 `REC`、页码、录制时长等无关英文。
 - [ ] 画廊 `local/preview/<id>/index.html` 已逐段看过。
 - [ ] 只改了某段时，没有重渲整片。
@@ -97,10 +101,13 @@ npm run pipeline -- --project <id|path>
 
 - [ ] `video.project.json` 的入口、Composition、输出路径和视频规格正确
 - [ ] `video.project.json` 已配置 `cover`，封面 `Still` 为 `1080×1440`（3:4）
+- [ ] `render.crf` 为 14–16，`render.audioBitrate` 为 320k
+- [ ] 成片没有使用 `--scale 0.5` 或其他草稿分辨率
 - [ ] 时间轴 section 连续，字幕窗口无重叠，旁白文件全部存在
-- [ ] 1920×1080
+- [ ] 实际分辨率为项目声明值（横板通常为 1920×1080）
 - [ ] 30fps
 - [ ] H.264
+- [ ] `yuv420p`
 - [ ] AAC / 48kHz / stereo
 - [ ] 帧数 = 时长 × 30
 - [ ] 响度约 -16 LUFS（允许 ±1.5）

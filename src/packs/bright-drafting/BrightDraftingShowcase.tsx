@@ -137,7 +137,7 @@ export const BrightDraftingShowcase: FC = () => {
               ]}
               progress={routeProgress}
               color={C.blue}
-              width={5}
+              width={4}
             />
           ))}
         </svg>
@@ -154,7 +154,7 @@ export const BrightDraftingShowcase: FC = () => {
             phase={node.label === "拆解" ? 0 : node.label === "交付" ? 0.35 : 0.68}
             speed={0.006}
             color={C.blue}
-            size={7}
+            size={8}
             progress={routeProgress}
           />
         ))}

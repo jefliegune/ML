@@ -16,10 +16,30 @@ const skipVerify = args.flags.has("skip-verify");
 const skipCover = args.flags.has("skip-cover");
 const dryRun = args.flags.has("dry-run");
 const partialRender = args.values.has("frames");
+const allowDraftScale = args.flags.has("allow-draft-scale");
+const requestedScale = Number(args.values.get("scale") ?? 1);
 
 if (!selector) {
   console.error(
-    "Usage: npm run pipeline -- --project <id|path> [--skip-render] [--skip-master] [--skip-verify] [--skip-cover] [--dry-run]",
+    "Usage: npm run pipeline -- --project <id|path> [--skip-render] [--skip-master] [--skip-verify] [--skip-cover] [--dry-run] [--allow-draft-scale]",
+  );
+  process.exit(1);
+}
+
+if (
+  !Number.isFinite(requestedScale) ||
+  requestedScale <= 0 ||
+  requestedScale > 1
+) {
+  console.error("--scale must be greater than 0 and at most 1.");
+  process.exit(1);
+}
+
+if (requestedScale < 1 && !allowDraftScale) {
+  console.error(
+    "Refusing to run a delivery pipeline with --scale " +
+      requestedScale +
+      ".\nUse preview:section for drafts, or add --allow-draft-scale and --skip-verify for a temporary QC run.",
   );
   process.exit(1);
 }
@@ -64,6 +84,19 @@ if (args.values.has("frames"))
   renderArgs.push("--frames", args.values.get("frames"));
 if (args.values.has("scale"))
   renderArgs.push("--scale", args.values.get("scale"));
+if (args.values.has("crf"))
+  renderArgs.push("--crf", args.values.get("crf"));
+if (args.values.has("image-format"))
+  renderArgs.push("--image-format", args.values.get("image-format"));
+if (args.values.has("jpeg-quality"))
+  renderArgs.push("--jpeg-quality", args.values.get("jpeg-quality"));
+if (args.values.has("x264-preset"))
+  renderArgs.push("--x264-preset", args.values.get("x264-preset"));
+if (args.values.has("concurrency"))
+  renderArgs.push("--concurrency", args.values.get("concurrency"));
+if (requestedScale < 1 && allowDraftScale) {
+  renderArgs.push("--allow-draft-scale");
+}
 
 const verifyArgs = [
   path.join(root, "scripts", "verify-video.mjs"),
@@ -79,6 +112,12 @@ if (project.video) {
     String(project.video.fps),
     "--frames",
     String(project.video.durationInFrames),
+    "--pixel-format",
+    project.render.pixelFormat,
+    "--color-space",
+    project.render.colorSpace,
+    "--audio-bitrate",
+    project.render.audioBitrate,
   );
 }
 
@@ -121,6 +160,7 @@ if (!skipMaster) {
       project.outputPath,
       project.masterPath,
       String(project.audio.targetLufs),
+      project.render.audioBitrate,
     ],
   });
 }
@@ -144,6 +184,9 @@ console.log(`entry:      ${relativeToRoot(project.entryPath)}`);
 console.log(`composition:${project.manifest.composition}`);
 console.log(`output:     ${relativeToRoot(project.outputPath)}`);
 console.log(`master:     ${relativeToRoot(project.masterPath)}`);
+console.log(
+  `delivery:   ${project.render.imageFormat} / crf ${project.render.crf} / audio ${project.render.audioBitrate}`,
+);
 console.log(
   `cover:      ${
     project.cover

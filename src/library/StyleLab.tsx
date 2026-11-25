@@ -199,7 +199,7 @@ export const StyleLab: FC = () => {
               </Sticker>
             </div>
           </CameraRig>
-          <StyleTexture variant="grain" opacity={0.22} />
+          <StyleTexture variant="grain" opacity={0.16} />
         </PackagingBackground>
       </Sequence>
 
